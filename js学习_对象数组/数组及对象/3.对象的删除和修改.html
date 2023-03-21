@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            关键词:
+                -增加:add insert
+                -删除:delete remove
+                -修改:update
+                -查询:get find
+        */
+        // 删除:delete
+        let obj = {
+            myname:'张三',
+            age:20,
+            height:'180cm'
+        }
+        // 删除前的值
+        console.log(obj);
+        delete obj.height
+        delete obj.age
+        // 删除后的值
+        console.log(obj);
+        
+
+        // 对象的修改:
+        // 直接修改,在原来对象的基础上修改
+        // 对象.键名 = 键值
+        // 对象[键名] = 键值
+        let obj2 = {
+            myname:'张三',
+            age:20,
+            height:'178cm'
+        }
+        // 修改
+        obj2.myname = '李四'
+        // 如果没有这个属性,会在对象上面追加属性
+        obj2.myhobby = '洗脚'
+        obj2['age'] = 30
+        let myheight = 'height'
+        obj2[myheight] = '180cm'
+        console.log(obj2);
+
+        // 覆盖修改
+        let obj3 = {
+            name:'张三'
+        }
+
+        obj3 = {
+            name:'李四'
+        }
+        console.log(obj3);
+    </script>
+</body>
+</html>

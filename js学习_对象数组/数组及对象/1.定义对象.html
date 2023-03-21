@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 普通建造对象
+        let obj = {
+            name:'张三',
+            age:20,
+            score:89,
+            getScore:function(){
+                return '姓名'+this.name+'分数'+this.score
+            }
+        }
+        console.log(obj);
+        console.log(obj.getScore());
+
+        // 构造函数创建对象
+        let obj2 = new Object({
+            name : '张三',
+            age : 20,
+            score : 89
+        })
+        console.log(obj2);
+
+        // 通过工厂模式创建对象
+        function zhangsan(){
+            let obj3 = {}
+            obj3.name = '张三'
+            obj3.age = 20
+            obj3.score = 89
+            return obj3
+        }
+        let obj3 = zhangsan()
+        console.log(obj3);
+        // 自定义构造函数创建对象
+        function Zhangsan(){
+            this.name = '张三'
+            this.age = 20
+            this.score = 89
+        }
+        let obj4 = new Zhangsan()
+        console.log(obj4);
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 通过对象.键名
+        let obj = {
+            myname:'张三',
+            age:20,
+            fn:function(){
+                console.log("fn");
+                return 'hello'
+            }
+        }
+        console.log(obj.myname);
+        console.log(obj.fn());
+
+        let obj2 = {
+            myname:'张三',
+            age:20,
+            fn:function(){
+                console.log("fn");
+                return "hello"
+            }
+        }
+        // obj2.myname 等同于 obj2['myname']
+        console.log(obj2['myname']);
+        obj2['fn']()
+
+
+
+        // 中括号可以解析变量,   .语法不能解析变量
+        let str = 'myname'
+        let obj3 = {
+            myname:'张三',
+            age:20
+        }
+        console.log(obj3.str);//undefined
+        console.log(obj3[str]);//张三
+    </script>
+</body>
+</html>
