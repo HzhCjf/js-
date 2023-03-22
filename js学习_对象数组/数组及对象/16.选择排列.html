@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            选择排序:
+                思路:假设数组的第一项是最小值,记录最小值的索引值,利用第一项和数组其他数的比较,如果有值比第一项小,那么记录这个值的索引值,把最小值放在最左边
+        */
+       let arr = [5,1,9,4,3,2,6,8,7]
+        // 控制有多少次调换的循环
+        for(i = 0;i < arr.length-1;i++){
+            // 假设第一项是最小值
+            let minNum = i
+            // 遍历数组的循环
+            for(j = i+1;j < arr.length;j++){
+                // 如果后面的值小于第一项,则记录这个值的索引值
+                if(arr[minNum] > arr[j]){
+                    // 把这个值的索引值赋给minNum
+                    minNum = j
+                }
+            }
+            // 把这个小的值放在左边
+            let temp = arr[i]
+            arr[i] = arr[minNum]
+            arr[minNum] = temp
+        }
+        console.log(arr);
+    </script>
+</body>
+</html>

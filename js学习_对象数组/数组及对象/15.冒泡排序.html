@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [7,5,3,9,1,2,4,8,6]
+        for(i = 0;i < arr.length-1;i++){
+            // 遍历数组,-j是因为后面已经排列好的已经不需要在比较了
+            for(j = 0;j < arr.length - i;j++){
+                // 如果当前的数大于后面一位数则交换位置
+                if(arr[j] > arr[j+1]){
+                    let temp = arr[j]
+                    arr[j] = arr[j+1]
+                    arr[j+1] = temp
+                }
+            }
+        }
+        console.log(arr);
+    </script>
+</body>
+</html>

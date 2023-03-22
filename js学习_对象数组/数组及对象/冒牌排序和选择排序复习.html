@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            冒泡排序:
+        */
+       /*  let arr = [7,5,3,9,1,2,6,8,4]
+        // i循环控制有多少轮排序
+        for(i = 0; i < arr.length-1; i++){
+            // j循环遍历数组,并进行调换位置,j<数组长度-1,是因为后面已经排了的不需要再次比较
+            for(j = 0;j <arr.length - i;j++){
+                if(arr[j] > arr[j+1]){
+                    let temp = arr[j]
+                    arr[j] = arr[j+1]
+                    arr[j+1] = temp
+                }
+            }
+            
+        }
+        console.log(arr); */
+
+
+        /* 选择排序 */
+        let arr = [7,5,3,9,1,2,6,8,4]
+        // i循环是控制有多少次调换位置
+        // debugger
+        for(i = 0;i < arr.length;i++){
+            // 设置假如一个数为最小的值
+            let minNum = i
+            // 控制遍历数组
+            for(j = i+1;j < arr.length;j++){
+                // 比较大小,如果第一个大于第二个
+                if(arr[minNum] > arr[j]){
+                    // 把小的值的索引值给这个假如最小的身上
+                    minNum = j
+                }
+            }
+            // 设置一个空的存储存大的值
+            let temp = arr[i]
+            // 把小的值给前面
+            arr[i] = arr[minNum]
+            // 把大的值给后面,进行调换位置
+            arr[minNum] = temp 
+        }
+        console.log(arr);
+    </script>
+</body>
+</html>
