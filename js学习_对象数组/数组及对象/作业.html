@@ -67,6 +67,26 @@
         console.log(arr);
 
 
+        // 方法2:
+        let arr1 = []
+        let temp = []
+        let res = []
+        for(i = 1;i <= 25;i++){
+            arr1.push(i)   
+        }
+        for(j = 0;j < arr1.length; j++){
+            temp.push(arr1[j])
+            if(arr1[j] % 5 === 0){
+                res.push(temp)
+                temp = []
+            }
+        }
+        
+        console.log(res);
+
+        
+
+
 
 
         /* 
@@ -93,6 +113,29 @@
 
         }
         console.log(has(arr2,60));
+
+
+
+
+        console.log('==================================');
+        // 练习:1-60之间的数组,每5个取平均值,放在一个新数组里
+        {
+            let arr4 = []
+            for(i = 1; i <= 60;i++){
+                arr4.push(i)
+            }
+            let temp2 = 0
+            let res2 = []
+            for(j = 0;j <arr4.length;j++){
+                temp2 += arr4[j]
+                if(arr4[j] % 5 === 0){
+                    let res1 = temp2 /5
+                    res2.push(res1)
+                    temp = 0
+                }
+            }
+            console.log(res2);
+        }
     </script>
 </body>
 </html>
