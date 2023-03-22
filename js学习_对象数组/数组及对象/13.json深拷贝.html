@@ -25,7 +25,7 @@
         let arr2 = arr1;
         arr2[2] = 5;
         // 会把arr1数组造成修改,因为复杂数据类型赋值是把值的地址进行赋予,当两个变量值的地址一样的时候,只要一方
-        // 有了修改,就都会进行修改
+        // 有一个修改了,就都会进行修改
         console.log(arr1);//arr1[1,2,5,4]
 
 
@@ -39,11 +39,13 @@
 
         // 这个是自定义的json拷贝
         let arr = [1,2,3]
+        // 创建json要在外边加双引号
         let jsonArr = "[1,2,3]";
         let obj = {
             name:"张三"
         }
         console.log(obj);
+        // 对象json里面的键名也要加双引号""
         let jsonObj = '{"name":"张三"}';
         console.log(jsonObj);
 
