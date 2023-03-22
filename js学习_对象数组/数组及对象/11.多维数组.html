@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // typeof 可以区分的类型: 简单的数据类型 函数
+        // 判断是否是一个数组:Array.isArray([])
+        // 多维数组,几维数组,就是几层数组
+        // 多维数组的降维:
+        // 递归函数:自己调用自己
+        var arr = [1, 2, 3]; // 一维数组
+        var arr2 = [1, 2, 3, [4, 5]] // 二维数组
+        var arr3 = [1, 2, 3, [4, 5, [6, 7]]] // 三维数组 
+        let resarr = []
+        function flatArr(arr3){
+            for(i = 0;i < arr3.length;i++){
+                if(Array.isArray(arr3[i])){
+                    // 是数组
+                    flatArr(arr3[i])
+                }else{
+                    // 不是数组
+                    resarr.push(arr3[i])
+                }
+            }
+        }
+        flatArr(arr3)
+        console.log(resarr);
+
+
+        // 方式2: 降维,数组的扁平化flat
+        // 先转换为字符串
+        let res = arr3.toString()
+        // 然后用,隔开
+        let resarr2 = res.split(',')
+        console.log(resarr);
+    </script>
+</body>
+</html>

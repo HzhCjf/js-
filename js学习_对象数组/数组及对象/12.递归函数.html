@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            递归函数,递归循环:函数自身调用自身;
+            递归和循环可以通用,能用循环就不要用递归
+        */
+       
+        // 函数的内部可以调用其他函数
+        function fn(){
+            console.log('1');
+        }
+        function fn2(){
+            console.log('2');
+            fn()
+        }
+        fn2()
+        // 函数自身可以调用自身
+
+        // 这样基本都是死循环
+        // function fn3(){
+        //     console.log("fn3");
+        //     fn3
+        // }
+
+        // 可以给一个用判断给一个出口
+        let num = 0
+        function fn3() {
+            console.log('fn3');
+            num++
+            if(num < 5){
+                fn3()
+            }
+        }
+
+
+
+        // 递归案例:
+        // 第一个:数学中阶乘的问题
+        // !3 = 3*2*1
+        function jc(num){
+            // 如果*1了就返回1,结束函数
+            if(num == 1){
+                return 1
+            }
+            // 返回这个数乘以数字-1的值
+            return num * jc(num-1)
+        }
+        console.log(jc(5));
+
+        // 第二个:斐波那契额数列: 后一项等于前两项的和;初识的两项为1
+        // 1  1  2  3  5  8  13
+        function fn4(num){
+            if(num === 1 || num ===2){
+                return 1
+            }
+            return fn4(num-1) + fn4(num-2)
+        }
+        console.log(fn4(20));
+    </script>
+</body>
+</html>
