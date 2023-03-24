@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         // 边界符 ： 在正则里表示边界的符号 ；
+        // 1. 开头 边界 ， 以某某作为开头  ^ ；
+        // var str = "adbbbbbcdefg";
+        // var reg = /^adb{2,5}/;
+        // console.log(reg.test(str));
+
+        // 2. 以某某作为结尾  $ 
+        // var str = "afdafsdab";
+        // var reg = /^a\w+b$/;
+        // console.log(reg.test(str));
+
+        // var str = "a797898798b";
+        // var reg = /^a\d+b$/;
+        // console.log(reg.test(str));
+
+
+        // 3. \b  非 \w(数字、字母 、下划线) 没有任意内容也是边界 的就是 \b;
+
+        // var str = "this a book is";
+        // // 匹配 是否有 is 单词；
+        // var reg = /\bis\b/;
+        // console.log(reg.test(str));
+
+        // var className = "active mybox box";
+        // var reg = /\bbox\b/;
+        // console.log(reg.test(className));
+
+
+        // 匹配 一个字符 是否是qq号 ： 所有都是数字 最少 6 为 最大 11；
+        var str = prompt("请输入qq号码");
+        let reg = /^[1-9]\d{5,10}$/
+        
+        if(reg.test(str)){
+            alert('QQ号正确')
+        }else{
+            alert('QQ号错误')
+        }
+    </script>
+</body>
+</html>

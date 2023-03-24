@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         // 正则里的特殊符号 
+        // 一、 或者   | 
+        // var str = "abd";
+        // var reg = /ab|cd/;   // abd  acd
+        // console.log(reg.test(str));
+
+        // 二 、() 分组  避免歧义 
+        // var str = "abcfg"
+        // var reg = /^a(bc)|(df)fg$/;
+        // console.log(reg.test(str));
+
+        // 三 、()分组可以获取 分组里的内容
+        // var str = "fdsaf21323fdafddfsa123123dfas";
+        // var  reg = /^[a-z]+(\d+)[a-z]+(\d+)dfas$/;
+        // console.log(reg.test(str));
+        // // reg.test(str);
+        // console.log(RegExp.$1);  // 可以获取 第一个分组里的内容；
+        // console.log(RegExp.$2);  // 可以获取 第一个分组里的内容；
+
+        // 四、[] 集合  里面自带或者关系 
+        // 一个集合 代表一个字符 ；
+        // var str = "accbd";
+        // var reg = /^a[bcfh]{2}d$/;
+        // console.log(reg.test(str));
+
+        // 中括号里的 ^ 非的意思 
+        // var str = "afc";
+        // var reg = /^a[^bcd]c$/;
+        // console.log(reg.test(str));
+
+        // 中括号 里的 - 代表范围 
+        // - 范围 如何定义 ； 通过 连续的 assci 排序 ； 
+        // \d ---->[0-9]  
+        // \w ----> [0-9a-zA-Z_];  [a-Z]
+        // var str = "123dfdas";
+        // var reg = /^[1-9]\d{2}[a-z]{5}$/;
+        // console.log(reg.test(str));
+
+        // 
+        // var reg = /[1-20]/;  // 1到 2  或者  0；
+
+        // 匹配 0-255之间的数字 ；使用正则 ；
+        /* 
+            一位 ： 0-9
+            二位 ： [1-9][0-9]
+            三位 ： 1[0-9][0-9]
+                    2[0-4][0-9]
+                    25[0-5]   
+        */
+       let str = +prompt('请输入0-255的数')
+       let reg = /^([01]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/
+       console.log(reg.test(str));
+    </script>
+</body>
+</html>
