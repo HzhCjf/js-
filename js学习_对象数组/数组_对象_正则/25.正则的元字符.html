@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            元字符:正则里面特殊函数的字符
+        */
+        // 一、 . 代表 除了换行之外的任意字符；\n 
+        // var str = "fdsafda\nfdsafd";
+        // console.log(str);
+        // var  str ="afds\nf";
+        // var reg = /./;
+        // console.log(reg.test(str));
+
+        // 二、 \ 转义字符 
+        // var str = "fdsaf\"你好\"dsa"
+        // console.log(str);
+
+        // var str = "fdafdcom";
+        // var reg = /\./;  // 匹配是否  有 . 字符 
+        // console.log(reg.test(str));
+
+        // 三 、 \s  匹配一个空格 
+        // var str = "fdsafdasfafd asf";
+        // var reg = /\s/;
+        // console.log(reg.test(str));
+
+        // 四、 \S 匹配非空格；
+        // var str = "     ";
+        // var reg = /\S/;
+        // console.log(reg.test(str));
+
+
+        // 五、\d 匹配一个数字 
+        // var str = "fdafdsafdsafd";
+        // var reg = /\d/;
+        // console.log(reg.test(str));
+
+        // 六 \D 匹配一个非数字 
+        // var  str = "3242343";
+        // var reg = /\D/;
+        // console.log(reg.test(str));
+
+        // 七 、 \w  匹配 数字 、字母 或者下划线；
+        // var str = "_";
+        // var reg = /\w/;
+        // console.log(reg.test(str));
+
+        // 八 \W 匹配 非 数字 字母 和下划线 
+        // var str = "_";
+        // var reg = /\W/;
+        // console.log(reg.test(str));
+
+    </script>
+</body>
+</html>

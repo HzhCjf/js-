@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            every循环:如果在循环过程中,回调函数返回的都是true,那么every最终的结果就是true,否则就是false
+        */
+        /* let arr = [true,true,false,false,false]
+        let arr2 = arr.every(function(item,key,arr){
+            return item
+        })
+        console.log(arr2); */
+
+
+        // 实现一个every
+        /* let arr = [true,true,false,false,true]
+        function Every(arr,cb){
+            // 先设置他一开始就是true
+            let flag = true
+            for(i = 0;i<arr.length;i++){
+                // 用&&判断,如果都是true就一起返回
+                flag = flag && cb(arr[i],i,arr)
+            }
+            return flag
+        }
+        let arr2 = Every(arr,function(item,i,arr){
+            return item
+        })
+        console.log(arr2); */
+
+
+
+
+
+
+        /* 
+            some循环:循环过程中如果回调函数里出现一个true,最终结果就是true,否则就是false
+        */
+        /* let arr = [false,false,true,false,false]
+        let arr2 = arr.some(function(item,key,arr){
+            return item
+        })
+        console.log(arr2); */
+
+
+        // 实现一个some
+        let arr = [false,false,true,false,false]
+        function Some(arr,cb){
+            let flag = false
+            for(i = 0;i<arr.length;i++){
+                flag = flag || cb(arr[i],i,arr)
+            }
+            return flag
+        }
+        let arr2 = Some(arr,function(item,key,arr){
+            return item
+        })
+        console.log(arr2);
+
+
+        var str = "fdsaf21312fdsafda1231fda12321fda12333";
+        /* let str2 = []
+        let res = ''
+        for(i = 0;i<str.length;i++){
+            // 如果是数字的话就放入res里面
+            if(!isNaN(str[i])){
+                res += str[i]
+                
+            }else{
+                // 不是数字的话,就把res里面的数字放入str数组
+                if(res != ''){
+                    str2.push(res)
+                }
+                // 并且重置
+                res = ''
+            }
+            
+        }
+        // 解决最后为数字时无法放入的问题
+        if(res !=''){
+            str2.push(res)
+        }
+        console.log(str2); */
+
+
+        // 通过正则获取连续的数字
+        let reg = /\d+/g;
+        let str2 = str.match(reg)
+        console.log(str2);
+    </script>
+</body>
+</html>

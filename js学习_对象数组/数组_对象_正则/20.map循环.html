@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            map循环:映射
+            map的返回值是回调函数里的返回值
+            不支持break continue
+        */
+
+        /* let arr = [1,2,3,4,5]
+        let arr2= arr.map(function(item,key,arr){
+            return item + 10
+        })
+        console.log(arr2); */
+
+
+
+
+        // 实现一个map循环
+       /*  let arr = [1,2,3,4,5]
+        function Map(arr,cb){
+            let res = []
+            for(i = 0;i < arr.length;i++){
+                res.push(cb(arr[i],i,arr))
+            }
+            return res
+        }
+        let arr2 = Map(arr,function(item,key,arr){
+            return item+10
+        })
+        console.log(arr2); */
+
+
+
+
+        /*  
+            练习：
+            var arr = [{name:"张三",money:1000},{name:"李四",money:3000},{name:"王五",money:2000}];
+            需要通过map 映射 出一个新的数组，所有的money 都加上 $1000 
+        */
+        // 方法1:
+        /* var arr = [{name:"张三",money:1000},{name:"李四",money:3000},{name:"王五",money:2000}];
+        function Map(arr,cb){
+            let res = []
+            for(i = 0;i < arr.length;i++){
+                res.push(cb(arr[i],i,arr))
+            }
+            return res
+        }
+        let arr2 = Map(arr,function(item,key,arr){
+            item.money = '$'+item.money
+            return item
+        })
+        console.log(arr2); */
+
+        // 方法2:
+        var arr = [{name:"张三",money:1000},{name:"李四",money:3000},{name:"王五",money:2000}];
+        let arr2 = arr.map(function(item,key,arr){
+            item.money = '$'+ item.money
+            return item
+        })
+        console.log(arr2);
+    </script>
+</body>
+</html>

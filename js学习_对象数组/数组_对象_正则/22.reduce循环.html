@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            reduce循环,基本都是用来做累加的操作
+            例:
+                let arr = [1,2,3,4,5]
+                arr.reduce(fucntion(当前的累加值,键值,原本的数组){},初始值)
+        */
+        /* let arr = [1,2,3,4,5]
+        let arr2 = arr.reduce(function(current,item,key,arr){
+            return current + item
+        },0)
+        console.log(arr2); */
+
+        // 数组的reduce:数组的去重
+        /* let arr = [1,1,1,2,1,1,1,3,3,3,4,5,5,5]
+        let arr2 = arr.reduce(function(current,item){
+            if(current.indexOf(item) === -1){
+                current.push(item)
+            }
+            return current
+        },[])
+        console.log(arr2); */
+
+
+        // 对象的累加
+        /* let arr = ["a","b","c","d"]
+        let arr2 = arr.reduce(function(current,item){
+            current[item] = 1
+            return current
+        },{})
+        console.log(arr2); */
+
+
+
+        // 实现reduce函数
+        // initValue是初始值
+        /* function Reduce(arr,cb,initValue){
+            for(i = 0 ;i < arr.length;i++){
+                initValue = cb(initValue,arr[i],i,arr)
+            }
+            return initValue
+        }
+        let arr = [1,2,3,4,5]
+        let arr2 = Reduce(arr,function(current,item){
+            return current + item
+        },0)
+        console.log(arr2); */
+
+
+
+        
+        // var arr = ["a","a","b","c","c"]  ----> 生成一个对象 {a:2,b:1,c:2}
+        var arr = ["a","a","b","c","c"]
+        /* let obj = {}//用来存储字符的次数
+        arr.forEach(function(item){
+            // 如果字母在obj里面没有则赋初始值
+            if(typeof obj[item] === "undefined"){
+                obj[item] = 1;
+            }
+            else{
+                // 检测到有则加1
+                obj[item]++
+            }
+        })
+        console.log(obj); */
+
+
+
+        let arr2 = arr.reduce(function(current,item){
+            if(typeof current[item] === 'undefined'){
+                current[item] = 1
+            }else{
+                current[item]++
+            }
+            return current
+        },{})
+        console.log(arr2);
+    </script>
+</body>
+</html>

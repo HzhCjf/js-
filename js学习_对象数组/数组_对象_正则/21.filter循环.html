@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            filter循环:过滤循环
+            根据回调函数的返回值过滤芯,如果回调函数的返回值是true,那么就收集item的值,如果是false,那么就不收集值
+            不支持break,continue
+        */
+        /* let arr = [1,2,3,4,5]
+        let arr2 = arr.filter(function(item,key,arr){
+            return item>3    
+        })
+        console.log(arr2); */
+
+
+        // 实现filter函数
+        /* let arr = [1,2,3,4,5]
+        function Filter(arr,cb){
+            let res = []
+            for(i = 0;i < arr.length;i++){
+                let res2 = cb(arr[i],i,arr)
+                if(res2){
+                    res.push(arr[i])
+                }
+            }
+            return res
+        }
+        let arr2 = Filter(arr,function(item,key,arr){
+            return item>3
+        })
+        console.log(arr2); */
+
+
+
+        // 过滤对象数组
+        /* let arr = [{ name: "张三", age: 20 }, { name: "李四", age: 25 }, { name: "王五", age: 32 }];
+        let arr2 = arr.filter(function(item){
+            return item.age < 30
+        })
+        console.log(arr2); */
+
+
+
+        /* 
+            var arr = [{ name: "张三", age: 20, score: 90, gender: "男" }, { name: "李四", age: 25, score: 92, gender: "男" },
+             { name: "王五", age: 32, score: 89, gender: "男" }, { name: "王五2", age: 28, score: 88, gender: "女" }];
+            要求 ： 1.所有的名字 前加上 名字是张三  2. 过滤年龄小于30 岁 ； 3.分数正序排列 ；
+        */
+        let arr = [{ name: "张三", age: 20, score: 90, gender: "男" }, { name: "李四", age: 25, score: 92, gender: "男" },
+        { name: "王五", age: 32, score: 89, gender: "男" }, { name: "王五2", age: 28, score: 88, gender: "女" }];
+        /* let arr2 = arr.map(function(item,key,arr){
+            item.name = '名字是'+item.name
+            return item
+        })
+        arr2 = arr2.filter(function(item){
+            return item.age < 30
+        })
+        arr2 = arr2.sort(function(a,b){
+            return a.score - b.score
+        })
+        console.log(arr2); */
+
+
+        // 写法2 ,管道pipe:
+        /* let arr2 = arr.map(function(item,key,arr){
+            item.name = '名字是'+item.name
+            return item
+        }).filter(function(item){
+            return item.age < 30
+        }).sort(function(a,b){
+            return a.score - b.score
+        })
+        console.log(arr2); */
+
+
+        // 写法3:ES6的箭头函数:
+        var arr2 = arr.map(item=>{item.name="名字是" + item.name ;return item}).filter(item=>item.age<30).sort((a,b)=>a.score-b.score);
+        console.log(res);
+    </script>
+</body>
+</html>

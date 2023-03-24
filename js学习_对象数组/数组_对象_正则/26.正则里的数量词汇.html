@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 正则里的数量词汇:代表数量
+        // 1.  *代表0到无限次
+        let str ='fdddaaaas'
+        // let reg = /a*/;
+        // console.log((reg.test(str)));
+
+        // 2.   ?代表出现0次或者1次
+        // let reg = /a?/
+        // console.log((reg.test(str)));
+
+        // 3.   +代表出现1次到无限次
+        // let reg = /a+/
+        // console.log((reg.test(str)));
+
+        // 4.执行字符出现的范围区间,{最少出现的次数,最多出现的次数}
+        // let reg = /a{2,3}/
+        // // 如果要只能出现两次,要紧跟条件
+        // let reg2 = /da{2,3}s/
+        // console.log((reg.test(str)));
+        // console.log((reg2.test(str)));
+
+        // 5.指定的次数
+        // let reg = /a{2}/
+        // // 如果要只能出现两次,要紧跟条件
+        // let reg2 = /da{2}s/
+        // console.log((reg.test(str)));
+        // console.log((reg2.test(str)));
+
+        // 6.出现最少次数到无限次
+        let reg = /da{2,}s/
+        console.log(reg.test(str));
+    </script>
+</body>
+</html>
