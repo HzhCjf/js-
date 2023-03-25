@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // DOM : document Object model 文档对象模型；
+        // dom的操作 ： 增、删 、改、 查
+
+        // DOM里的获取 ；获取标签元素 ；
+        // 一、通过id 获取 ；直接通过html里的id 获取元素； (野路子)
+        // console.log(mydiv);
+
+        // 二、通过id 获取元素；
+        // get 获取  element 元素  by 通过 id
+        // var mydivEle = document.getElementById("mydiv");
+        // console.dir(mydivEle);
+        // console.log(mydivEle);
+
+
+        // 三、通过类名获取元素
+        // elements 带s的 获取的是 伪数组；
+        // var mydivEles = document.getElementsByClassName("myclass");
+        // console.log(mydivEles);
+
+        // 四、通过标签名称获取元素
+        // tag ： 标签；
+        // var eles = document.getElementsByTagName("div");
+        // console.log(eles);
+
+
+        // 五、通过css 选择器获取一个元素
+        // var ele = document.querySelector("#mydiv") ;
+        // var ele = document.querySelector(".myclass") ;
+        // console.log(ele);
+
+
+        // 前面的document可以算是个范围,是可以换的
+        // var  boxEle = document.querySelector(".box");
+        // console.log(boxEle);
+        // var container2Ele = document.querySelector(".container2");
+        // var box2 = container2Ele.querySelector(".box");
+        // console.log(box2);
+
+
+        // 六 、通过css选择器获取多个元素 ；
+        var eles = document.querySelectorAll(".box");
+        console.log(eles);
+    </script>
+</body>
+</html>

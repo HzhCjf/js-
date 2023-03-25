@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="container">
+        
+    </ul>
+    <button>点击</button>
+    <script>
+        /* 
+            操作dom里的文本
+            一:获取或者设置dom元素里的文本
+            1.获取标签的文本内容
+            2.设置标签里的文本内容;替换操作,会覆盖之前的内容
+            先获取元素,再操作元素
+            替换文本,不会解析标签,超文本
+            元素.innerText = ''
+            设置dom元素的超文本内容
+            元素.innerHTML = ''
+        */
+        // 练习： 添加li元素；里面是姓名；
+            var ulELe = document.querySelector(".container");
+            var btn = document.querySelector("button");
+            var num = 0;
+            btn.onclick = function(){
+                num++;
+                ulELe.innerHTML += "<li>张三"+num+"</li>";
+            }
+    </script>
+</body>
+</html>

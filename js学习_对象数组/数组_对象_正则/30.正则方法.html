@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 正则方法:正则底下的方法
+
+        // 一:test方法
+        // let reg = /\d+/
+        // console.log(reg.test('fafasadw5'));
+
+
+        // 深层打印
+        // console.dir(reg)
+
+        // 二:exec正则方法
+        // 可以获取匹配到的字符结果,默认获取结果是惰性匹配,只要匹配到一个就停了,
+        // 全局的模式修饰符g可以全局匹配
+        // 模式修饰符i忽略大小写
+        var reg = /\d+/g;
+        var reg = /[a-z]+/gi;
+        var str = "fdsafds2131dsafd123ABCD1234";
+        console.log( reg.exec(str));
+        console.log( reg.exec(str));
+        console.log( reg.exec(str));
+        console.log( reg.exec(str));
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" style="left:0px">我是div</div>
+    <script>
+        // dom的样式操作
+        // 元素.style.样式名称
+        // 一:获取元素的样式;(只能获取行内样式)
+        // var boxEle = document.querySelector(".box");
+        // console.log( boxEle.style.width);
+        // 如果是复合属性 2种方式获取  ： 1.通过 [] 获取 . 2把-去掉 之后把-后的首字符大写；
+        // console.log( boxEle.style.background-color);
+        //console.log( boxEle.style.backgroundColor);
+
+
+
+        // 二:设置元素的样式: 元素.style.样式名 = 样式值
+        // 设置只能设置行内样式
+        // var boxEle = document.querySelector(".box");
+        //boxEle.onclick = function () {
+        //boxEle.style.width = "100px";
+        //boxEle.style.height = "200px"
+        //// boxEle.style.backgroundColor
+        //boxEle.style['background-color'] = "red";
+        // }
+
+        var boxEle = document.querySelector(".box");
+        let left = 0
+        boxEle.onclick = function(){
+            setInterval(function(){
+                boxEle.style.left = left++ +'px'
+            },100)
+        }
+    </script>
+</body>
+</html>

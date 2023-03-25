@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 字符串里可以接收正则表达式的方法
+        // 字符串.方法名()
+
+        // 一:split可以通过正则来切割字符串
+        // let str = 'dawdag6564d3afa'
+        // let reg = /\d+/
+        // let arr = str.split(reg)
+        // console.log(arr);
+
+        // 二:replace替换可以接收正则表达式
+       /*  var str = "2313abcfd1231faf1231";
+        var res =   str.replace("abc","***");
+        var res = str.replace(/\d+/g,"**");
+        console.log(res);
+        敏感词过滤 
+        var str = "fdafdaFDSAfdafFDSAFDASdfsfdsDGASFDSAfds";
+        // 所有大写字母是敏感词 ，替换成 *;
+        var reg = /[A-Z]+/g
+        var res =  str.replace(reg,"*");
+        var res = str.replace(reg,function(arg){
+            console.log(arg);
+            return "*".repeat(arg.length);
+        })
+        console.log(res); */
+
+
+        // 三:match获取匹配到的内容
+        // match会受到全局和非全局的影响
+        // let str = 'dajf654fwa44wa4wadwa'
+        // let reg = /\d+/g
+        // let res = str.match(reg)
+        // console.log(res);
+
+
+        // 四:通过正则查找某个字符首次出现的索引
+        // 如果没有找到就返回-1
+        let str = 'dwafa54546qwgqqwd'
+        let reg = /\d+/
+        let index = str.search(reg)
+        console.log(index);
+    </script>
+</body>
+</html>
