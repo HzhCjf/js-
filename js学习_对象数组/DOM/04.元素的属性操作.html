@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="div1">div1</div>
+    <div class="div2">div2</div>
+    <div class="div3">div3</div>
+    <script>
+        //  标签元素的属性操作 ：
+        // 1.根据属性名获取属性值； 元素.getAttribute("属性名");
+        // var ele = document.querySelector(".myclass");
+        // // 1.事件源  2.事件类型 3.事件函数
+        // ele.onclick = function () {
+        //     // console.log(this);
+        //     // var w = this.getAttribute("w");
+        //     // console.log(w);
+        //     var myc = this.getAttribute("class");
+        //     console.log(myc);
+        // }
+
+
+        // 2.设置属性 名和 属性值； 元素.setAttribute("属性名","属性值");
+        // var btn = document.querySelector("button");
+        // var ele = document.querySelector(".myclass");
+        // btn.onclick = function(){
+        //     ele.setAttribute("style","background-color:red");
+        // }
+
+        // 3.移除属性 ； 元素.removeAttribute("属性名");
+        // var btn = document.querySelector("button");
+        // var ele = document.querySelector(".myclass");
+
+        // btn.onclick = function(){
+        //     ele.removeAttribute("myattr"); // 移除自定义属性 myattr
+        //     ele.removeAttribute("id"); // 移除id属性
+            
+        // }
+
+
+        // 小练习
+        // var arr = [{w:"100px",h:"200px",b:"red"},{w:"200px",h:"200px",b:"blue"},{w:"100px",h:"100px",b:"yellow"}];
+        // 1.有三个div div1 div2  div3 把 arr里的属性 分别设置给 div  2.点击 div的时候 ，需要把 这些属性设置成 宽  高 和 background ；
+        var arr = [{w:"100px",h:"200px",b:"red"},{w:"200px",h:"200px",b:"blue"},{w:"100px",h:"100px",b:"yellow"}];
+        let oDiv = document.querySelectorAll('div')
+        for(let i = 0;i <oDiv.length ;i++){
+            oDiv[i].onclick = function(){
+                    this.style.width = arr[i].w
+                    this.style.height = arr[i].h
+                    this.style.backgroundColor = arr[i].b
+            }
+        }
+
+        /* oDiv.forEach(function(div,key){
+            div.setAttribute("w",arr[key].w);
+            div.setAttribute("h",arr[key].h);
+            div.setAttribute("b",arr[key].b);
+            div.onclick = function(){
+                this.style.width = this.getAttribute("w");
+                this.style.height = this.getAttribute("h");
+                this.style.backgroundColor = this.getAttribute("b");
+            }
+        }) */
+
+
+
+
+
+        // key 值 不对的问题 
+        // var eles = document.querySelectorAll("div");
+
+        // 一、通过 for 循环 来绑定事件 ，会导致 key 值不对 ；
+        // 1.全局作用域  2. 局部作用域 ：函数作用域；
+        // for(var i=0;i<eles.length;i++){
+        //     // console.log(eles[i]);
+        //     eles[i].onclick = function(){
+        //         console.log(i);
+        //     }
+        // }
+        // console.log(i);
+
+        // 方式一 ： 利用  es6里的let  块级作用域  {}
+        // for(let i=0;i<eles.length;i++){
+        //     // console.log(eles[i]);
+        //     eles[i].onclick = function(){
+        //         console.log(i);
+        //     }
+        // }
+
+        // 方式二 ： 创建函数作用域 ；
+
+        // for (var i = 0; i < eles.length; i++) {
+        //     // console.log(eles[i]);
+        //     (function (i) {
+        //         eles[i].onclick = function () {
+        //             console.log(i);
+        //         }
+        //     })(i);
+        // }
+
+        // 方式三 ： 
+
+        // for (var i = 0; i < eles.length; i++) {
+        //         eles[i].index = i; // 自定义 对象属性名；
+        //         eles[i].onclick = function () {
+        //             // console.dir(this);
+        //             console.log(this.index);
+        //         }
+        //         console.dir(eles[i]);
+        // }
+
+        // var  obj1 = {
+        //     index:1
+
+        // }
+        // var obj2 = {
+        //     index:2
+        // }
+
+        // 方式四 ： 利用有回调函数的 循环；
+        // eles.forEach(function (div, key) {
+        //     div.onclick = function () {
+        //         console.log(key);
+        //     }
+        // })
+    </script>
+</body>
+</html>

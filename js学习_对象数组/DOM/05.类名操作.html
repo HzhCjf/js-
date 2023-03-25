@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            background-color: red;
+        }
+        .mydiv{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="mydiv myactive">我是div</div>
+    <script>
+        // 类名操作 ：  操作 标签元素的类名；
+        // 一、元素.className 获取或者设置类名 
+        // 1.获取 元素的类名  
+        // 获取类名的字符串 ，且是获取所有类名
+        // var ele = document.querySelector(".mydiv");
+        // document.onclick = function(){
+        //     console.log(ele.className);
+        // }
+
+
+        // 2.设置类名  ： 元素.className = "类名";
+        // var ele = document.querySelector(".mydiv");
+        // document.onclick = function(){
+        //     // ele.className = "box";
+        //     ele.className += " box"
+        // }
+
+        // 二、操作 类名对象 来操作 类名
+        // 元素.classList
+        // 1. 添加类名 ： 元素.classList.add("类名");
+        // var ele = document.querySelector(".mydiv");
+        // document.onclick = function(){
+        // //    console.log(  ele.classList);
+        //     ele.classList.add("box");
+        // }
+
+        // 2. 删除类名  : 元素.classList.remove();
+        // var ele = document.querySelector(".mydiv");
+        // document.onclick = function(){
+        //     ele.classList.remove("active");
+        // }
+
+        // 3.判断元素是否 包含某个类名 ； 元素.classList.contains("active")
+        // 判断是否有 active 类名 
+        // var ele = document.querySelector(".mydiv");
+        // var className = ele.className
+        // var reg = /\bactive\b/g;
+        // if(reg.test(className)){
+        //     console.log("有active类名")
+        // }else{
+        //     console.log("没有active类名");
+        // }
+
+
+        // var ele = document.querySelector(".mydiv");
+        // if( ele.classList.contains("active")){
+        //     console.log("有active 类名")
+        // }else{
+        //     console.log("没有active类名");
+        // }
+
+
+        // 4.切换类名 ： 如果元素有这个类名 那么就删除，如果没有这个类名就添加这个类名  元素.classList.toggle(“类名”)
+        var ele = document.querySelector(".mydiv");
+        document.onclick =  function(){
+            ele.classList.toggle("mybox");
+        }
+    </script>
+</body>
+</html>
