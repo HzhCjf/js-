@@ -25,21 +25,60 @@
         </tr>
     </table>
     <script>
+        // 作业 ： 1.复习 2. 听写 数字 、字符串 、正则 相关内容；
+        // 3. 根据数据 显示表格 
+        // var users = [{name:"张安",age:20,gender:"男"},{name:"李四",age:21,gender:"男"},{name:"王五",age:22,gender:"男"},{name:"王小六",age:23,gender:"女"}];
+
+        /* 
+        1.根据数据生成一个表格 
+        |   姓名 | 年龄   |  性别   |
+        |  张三  |  20   |  男     |  // 红色 
+        |  张三  |  20   |  男     |  // 蓝色 
+        |  张三  |  20   |  男     |  // 红色
+        2.需要实现 隔行变色；
+        
+        
+        */
+
+
+
 
         var users = [{name:"张安",age:20,gender:"男"},{name:"李四",age:21,gender:"男"},
         {name:"王五",age:22,gender:"男"},{name:"王小六",age:23,gender:"女"}];
+        // 获取表格元素
         let oTable = document.querySelector('table')
-        users.forEach(function(user,index) {
+        users.forEach(function(user) {
+            // 一次写好一行内容放入html页面的table里面进行循环
             oTable.innerHTML += `<tr><td>${user.name}</td><td>${user.age}</td><td>${user.gender}</td></tr>`;
          });
+        //  获取所有的行
          let tr = document.querySelectorAll('tr')
-         for(i = 0;i < tr.length;i++){
+         for(i = 1;i < tr.length;i++){
             if(i % 2 ==0){
                 tr[i].style.backgroundColor = 'blue'
             }else{
                 tr[i].style.backgroundColor = 'red'
             }
          }
+
+
+
+
+
+        //  方法2:
+        var htmlstr = "<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+        users.forEach(function (item, key) {
+            // console.log(key);
+            if (key % 2 === 0) {
+                htmlstr += "<tr style='background:red'><td>" + item.name + "</td><td>" + item.age + "</td><td>" + item.gender + "</td></tr>"
+
+            } else {
+                htmlstr += "<tr style='background:blue'><td>" + item.name + "</td><td>" + item.age + "</td><td>" + item.gender + "</td></tr>"
+            }
+        })
+        htmlstr += "</table>";
+        console.log(htmlstr);
+        document.querySelector(".container").innerHTML = htmlstr
     </script>
 </body>
 </html>
