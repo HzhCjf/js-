@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="username">
+    <script>
+        /* 
+            几个特殊的标签
+            js里获取标签的时候,有一些标签可以通过简写形式获取
+        */
+
+        // 1.head标签
+        let Head = document.head
+        console.log(Head);
+
+
+        // 2.html标签
+        let Html = document.documentElement
+        console.log(Html);
+
+
+        // 3.body标签
+        let Body = document.body
+        console.log(Body);
+
+
+        // 4.title标签
+        let oTitle = document.querySelector('title')
+        console.log(oTitle);
+        // 获取title标签里的内容
+        let TitleCon = document.title
+        console.log(TitleCon);
+        // 可以给title标签添加定时器
+        let count = 0
+        setInterval(function(){
+            count++
+            document.title = count
+        },1000)
+
+
+
+        // 5.通过名字(name)获取标签
+        // 一般是表单里的input
+        let userName = document.getElementsByName('username')
+        console.log(userName);
+    </script>
+</body>
+</html>

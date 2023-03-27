@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="students.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="title">学生系统</div>
+        <div id="form">
+            <p>姓名<input id="username" type="text" value="张三123" /></p>
+            <p>年龄<input id="age" type="text" value="21" /></p>
+            <p>性别
+                <select id="gender">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                    <option value="你猜">你猜</option>
+                </select>
+            </p>
+            <p>
+                <input type="button" value="添加" id="addBtn" />
+                <input type="button" value="排序" id="sortBtn" />
+            </p>
+        </div>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 获取姓名
+        let nameEle = document.getElementById('username')
+        // 获取年龄
+        let ageEle = document.getElementById('age')
+        // 获取性别
+        let sexEle = document.querySelector('select')
+        // 获取添加按钮
+        let addBtnEle = document.getElementById('addBtn')
+        // 获取排序按钮
+        let sortBtnEle = document.getElementById('sortBtn')
+        // 获取表格
+        let tableEle = document.querySelector('table')
+        // 获取表格的主体内容
+        let tbodyEle = document.querySelectorAll('tbody')
+        addBtnEle.onclick = function(){
+            let tr = document.createElement('tr')
+            let td1 = document.createElement('td')
+            let td2 = document.createElement('td')
+            let td3 = document.createElement('td')
+            let delBtn =document.createElement('button')
+            td1.innerHTML = nameEle.value
+            td2.innerHTML = ageEle.value
+            td3.innerHTML = sexEle.value
+            delBtn.innerHTML = '删除'
+            tr.appendChild(td1)
+            tr.appendChild(td2)
+            tr.appendChild(td3)
+            tr.appendChild(delBtn)
+            tr.style.textAlign = 'center'
+            tr.style.color = '#fff'
+            tableEle.appendChild(tr)
+            delBtn.onclick = function(){
+                this.parentElement.remove()
+            }
+        }
+        
+        // sortBtnEle.onclick = function(){
+        //     // 将表格中的所有行转化为数组
+        //     let rows = Array.from(document.querySelectorAll('tr'))
+        //     // 根据年龄进行排序
+        //     rows.sort(function(a, b){
+        //         return Number(a.childNodes[1].innerHTML) - Number(b.childNodes[1].innerHTML)
+        //     })
+        //     // 将排序后的结果重新添加到表格中
+        //     rows.forEach(function(row){
+        //         tbodyEle.appendChild(row)
+        //     })
+        // }
+    </script>
+</body>
+
+</html>

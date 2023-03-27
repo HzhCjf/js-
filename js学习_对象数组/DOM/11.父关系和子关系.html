@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <div class="box1"></div>
+    </div>
+    <script>
+        // 子关系
+        // 1.子元素 : 元素(标签)
+        // 元素.children
+        // let boxEle = document.querySelector('.box')
+        // console.log(boxEle.children);
+
+
+        // 2.子节点
+        // 元素.childNodes
+        let boxEle = document.querySelector('.box')
+        console.log(boxEle.childNodes);
+
+
+        // 父关系
+        // 1.父元素
+        // 元素.parentElement
+        // let box1Ele = document.querySelector('.box1')
+        // console.log(box1Ele.parentElement);
+
+
+        // 2.父节点
+        // 父节点也是父元素
+        // 元素.parentNode
+        let box1Ele =document.querySelector('.box1')
+        console.log(box1Ele.parentNode);
+    </script>
+</body>
+</html>

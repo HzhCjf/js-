@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 一、window.onload 方法 ；
+        // dom和资源加载完毕之后 在执行的预定义事件 window.onload事件 ，不会立刻执行 ；
+        // window.onload = function () {
+        //     console.log("dom结构和资源加载完毕了");
+        //     var box = document.querySelector(".box");
+        //     console.log(box);
+        //     box.onclick = function () {
+        //         console.log(111);
+        //     }
+
+        // }
+        // console.log("js代码执行了");
+
+
+
+        // 二、伪数组 ；
+        // 伪数组里只有部分 数组方法 ；
+        // function fn(){
+        //     // console.log(arguments);
+                // 没有forEach方法,伪数组只有少部分数组方法
+        //     arguments.forEach(function(item){
+        //         console.log(item);
+        //     })
+        // }
+
+
+
+        // 把伪数组转成数组；
+        // 1.方式一 ： Array.from("伪数组");
+         // var arr = Array.from(eles);
+        // console.log(arr);
+        // arr.forEach(function(item){
+        //     item.onclick = function(){
+        //         console.log(1111);
+        //     }
+        // })
+        
+
+
+        // 2.方式二 ： var 数组 = [...伪数组];
+        // var arr =  [...eles];
+        // console.log(arr);
+        // arr.forEach(function(item){
+        //     item.onclick = function(){
+        //         console.log(2222);
+        //     }
+        // })
+
+
+        // 写法二:
+        // var eles = document.getElementsByClassName("box");
+        // [...eles].forEach(function(item){
+        //     item.onclick = function(){
+        //         console.log(111);
+        //     }
+        // })
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box1"><span>1</span><span>2</span><span>3</span></div>
+    <div class="box2"><span>1</span></div>
+    <div class="box3">454</div>
+    <div class="box4"><!--注释--></div>
+    <div class="box5"><div mysx="sx"></div></div>
+    <script>
+        /* 
+            dom里的节点类型
+            dom结构是有节点(node)构成
+            节点一共12种,以下是其中常用四种:
+            1.元素节点
+            2.文本节点
+            3.属性节点
+            4.注释节点
+        */
+       
+        // 一:获取元素的所有子节点;元素.childNodes
+        let oBox1 = document.querySelector('.box1')
+        let nodes1 = oBox1.childNodes
+        console.log(nodes1);
+
+
+        // 二:节点类型,通过nodeType查看节点类型
+        // 1.元素节点的节点类型nodeType是 1
+        let oBox2 = document.querySelector('.box2')
+        let nodes2 = oBox2.childNodes
+        console.log(nodes2[0].nodeType);
+
+        // 2.文本节点的节点类型nodeType是 3
+        let oBox3 = document.querySelector('.box3')
+        let nodes3 = oBox3.childNodes
+        console.log(nodes3[0].nodeType);
+
+        // 3.注释节点的节点类型nodeType是 8
+        let oBox4 = document.querySelector('.box4')
+        let nodes4 = oBox4.childNodes
+        console.log(nodes4[0].nodeType);
+
+        // 4.属性节点的节点类型nodeType是 2
+        let oBox5 = document.querySelector('.box5')
+        // 子节点
+        let nodes5 = oBox5.childNodes
+        // 获取子节点的属性
+        let attrs = nodes5[0].attributes;
+        console.log(attrs[0].nodeType);
+    </script>
+</body>
+</html>

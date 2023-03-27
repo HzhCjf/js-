@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: 1px solid #000;
+            border-collapse: collapse;
+        }
+        tr,td,th{
+            border: 1px solid #000;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- <ul>
+        <li>454</li>
+    </ul> -->
+    <script>
+        /* // 元素的操作:
+        // 一.创建一个元素
+        // 1.创建一个空元素
+        let ele = document.createElement('div')
+        ele.innerHTML = '我添加的内容'
+        console.log(ele);
+
+        // 2.把创建的元素添加到指定位置(追加操作,不会覆盖之前的内容)
+        let Body = document.body
+        // Body.appendChild(ele)
+
+
+        // innerHTML和appendChild的区别
+        // 1.innerHTML会覆盖之前的内容,appendChild会在之前的基础上追加
+        // 2.appendChild里一定需要一个对象元素,innerHTML后一定需要字符串
+
+
+        // 二.删除元素
+        // 1.自身元素.remove()     把自己删除
+        let LI = document.querySelector('li')
+        // LI.remove()
+
+        // 2.父元素.removeChild(子元素)
+        let ulEle = document.querySelector('ul')
+        ulEle.removeChild(LI) */
+
+
+
+
+
+
+
+
+
+
+        // 练习:利用createElement创建一个表格
+        var users = [{ name: "张安", age: 20, gender: "男" }, { name: "李四", age: 21, gender: "男" },
+                    { name: "王五", age: 22, gender: "男" }, { name: "王小六", age: 23, gender: "女" },
+                    { name: "王小六", age: 23, gender: "女" }];
+        // 创建一个表格
+        let table = document.createElement('table')
+        // 创建行
+        let tr = document.createElement('tr')
+        // 创建三个表头
+        let th1 = document.createElement('th')
+        let th2 = document.createElement('th')
+        let th3 = document.createElement('th')
+        // 表头插入html内容
+        th1.innerHTML = '姓名'
+        th2.innerHTML = '年龄'
+        th3.innerHTML = '性别'
+        // 三个表头依次追加到tr里面
+        tr.appendChild(th1)
+        tr.appendChild(th2)
+        tr.appendChild(th3)
+        // tr追加到表格里面
+        table.appendChild(tr)
+        users.forEach(function(item,key){
+            // 对象数组循环到user里面
+            let user = users[key]
+            // 创建一行和三个单元格
+            let tr = document.createElement('tr')
+            let td1 = document.createElement('td')
+            let td2 = document.createElement('td')
+            let td3 = document.createElement('td')
+            // 把数组里对象的值一一赋予给td内容
+            td1.innerHTML = user.name
+            td2.innerHTML = user.age
+            td3.innerHTML = user.gender
+            // 三个单元格依次追加进tr里面
+            tr.appendChild(td1)
+            tr.appendChild(td2)
+            tr.appendChild(td3)
+            // tr追加到表格里面
+            table.appendChild(tr)
+           
+        })
+        // 获取body元素
+        let body = document.body
+        // 表格追加到body里面
+        body.appendChild(table)
+
+
+
+    </script>
+</body>
+</html>
+    </script>
+</body>
+</html>

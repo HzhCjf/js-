@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font: 30px / 90px "微软雅黑";
+        }
+        ul{
+            list-style: none;
+        }
+        .wrap{
+            width: 1000px;
+            height: 1000px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -500px;
+            margin-left: -500px;
+            background: url(menuImage/bg.jpg) no-repeat;
+        }
+        .menu{
+            width: 330px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 285px;
+            margin-left: 335px;
+            background: #f87a75;
+            box-shadow: 0 20px 50px rgba(248,122,117,.5);
+        }
+        .title{
+            height: 90px;
+            padding-left: 112px;
+            box-sizing: border-box;
+            color: #fff;
+            position: relative;
+        }
+        .title::after{
+            content: '';
+            position: absolute;
+            right: 36px;
+            top: 41px;
+            background: url(menuImage/ar.png) no-repeat ;
+            width: 28px;
+            height: 16px;
+        }
+        .list{
+            width: 316px;
+            padding-left:7px; 
+            padding-bottom: 5px;
+            display: none;
+        }
+         li{
+            height: 90px;
+            margin-bottom: 2px;
+            background:#fee4e3;
+            border-radius: 20px;
+            padding-left: 112px;
+            box-sizing: border-box;
+            background-position: 23px 24px;
+            background-repeat: no-repeat;
+
+        }
+         li:hover{
+            background-color: #fff;
+            box-shadow:0 0 50px rgba(248,122,117,0.93);
+            position: relative;
+        }
+         li:nth-of-type(1){
+            background-image: url(menuImage/icon1.png);
+        }
+         li:nth-of-type(2){
+            background-image: url(menuImage/icon2.png);
+        }
+         li:nth-of-type(3){
+            background-image: url(menuImage/icon3.png);
+        }
+         li:nth-of-type(4){
+            background-image: url(menuImage/icon4.png);
+        }
+         li:nth-of-type(5){
+            background-image: url(menuImage/icon5.png);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="menu">
+            <div class="title">菜单</div>
+            <ul class="list">
+                <li>微博</li>
+                <li>图片</li>
+                <li>博客</li>
+                <li>视频</li>
+                <li>更多>></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        // 获取ul
+        let listEle = document.querySelector('.list')
+        // 获取所有的li
+        let lisEle = document.querySelectorAll('li')
+        // 获取菜单
+        let titleEle = document.querySelector('.title')
+        // 设置一个开关,默认关闭
+        let open = false
+        // 菜单点击事件
+        titleEle.onclick = function(){
+            // 点击之后开关开启
+            open = !open
+            // 如果开关是开的则下拉列表显示,否则关闭
+            if(open){
+                listEle.style.display = 'block'
+                
+            }else{
+                listEle.style.display = 'none'
+            }
+        }
+        // 循环li
+        lisEle.forEach(function(li,key){
+            // 为li绑定点击事件
+            lisEle[key].onclick = function(){
+                // 被点击的li的内容替换掉菜单内容
+                titleEle.innerHTML = this.innerHTML
+            }
+        })
+        
+    </script>
+</body>
+</html>

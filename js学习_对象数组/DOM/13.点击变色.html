@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 点击按钮的时候 按钮所在的当前ul 需要改变背景颜色 ，当前点击按钮所在的li333也需要改变颜色 -->
+    <ul>
+        <li>111</li>
+        <li>222<button>点击我让333li改变背景颜色</button></li>
+        <li>333</li>
+    </ul>
+    <ul>
+        <li>111</li>
+        <li>222<button>点击我让333li改变背景颜色</button></li>
+        <li>333</li>
+    </ul>
+    <ul>
+        <li>111</li>
+        <li>222<button>点击我让333li改变背景颜色</button></li>
+        <li>333</li>
+    </ul>
+
+
+    <script>
+        // 获取所有的ul放在一个伪数组里面
+        let ulEles = document.querySelectorAll('ul')
+        // 循环这个伪数组
+        ulEles.forEach(function(ul,key){
+            // 获取ul1的第二个li
+            let twoLi = ul.firstElementChild.nextElementSibling
+            // 获取第二个li里面的按钮
+            let button = twoLi.lastElementChild
+            // 为按钮绑定点击事件
+            button.onclick = function(){
+            // 根据索引为三个ul添加不同的颜色
+                if(key === 0){
+                    ul.lastElementChild.style.backgroundColor = 'yellow'
+                    ul.style.backgroundColor = 'red'
+                }else if(key === 1){
+                    ul.lastElementChild.style.backgroundColor = 'red'
+                    ul.style.backgroundColor = 'blue'
+                }else{
+                    ul.lastElementChild.style.backgroundColor = 'blue'
+                    ul.style.backgroundColor = 'yellow'
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>
