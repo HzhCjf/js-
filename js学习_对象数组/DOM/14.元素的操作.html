@@ -17,6 +17,19 @@
     </style>
 </head>
 <body>
+    <!-- 方法2: -->
+    <div class="container">
+        <table>
+            <thead>
+                <th>姓名</th><th>年龄</th><th>性别</th>
+            </thead>
+            <tbody>
+                <!-- 根据数据 生成对应的tr 填充到 tbody里 -->
+
+
+            </tbody>
+        </table>
+    </div>
     <!-- <ul>
         <li>454</li>
     </ul> -->
@@ -60,7 +73,7 @@
         var users = [{ name: "张安", age: 20, gender: "男" }, { name: "李四", age: 21, gender: "男" },
                     { name: "王五", age: 22, gender: "男" }, { name: "王小六", age: 23, gender: "女" },
                     { name: "王小六", age: 23, gender: "女" }];
-        // 创建一个表格
+       /*  // 创建一个表格
         let table = document.createElement('table')
         // 创建行
         let tr = document.createElement('tr')
@@ -101,8 +114,32 @@
         // 获取body元素
         let body = document.body
         // 表格追加到body里面
-        body.appendChild(table)
+        body.appendChild(table) */
 
+
+
+
+
+
+
+
+        // 方法2:
+        var tbody = document.querySelector("tbody");
+        // 需要变动的数据 会动态生成 ，固定不变 可以写死；
+        users.forEach(function(user){
+            // 每一个用户对象 对应一个 tr 标签；
+            var trEle = document.createElement("tr");
+            // console.log(user);  // 每一个用户对象 
+            for(var key in user){  // 通过 for in 循环每一个用户对象 ；
+                // console.log("键名是",key,"键值是",user[key]);
+                var tdEle = document.createElement("td");
+                tdEle.innerHTML = user[key];
+                // console.log(tdEle);
+                trEle.appendChild(tdEle);
+            }
+            console.log(trEle);
+            tbody.appendChild(trEle);
+        })
 
 
     </script>

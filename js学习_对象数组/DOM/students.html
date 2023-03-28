@@ -56,41 +56,48 @@
         // 获取表格
         let tableEle = document.querySelector('table')
         // 获取表格的主体内容
-        let tbodyEle = document.querySelectorAll('tbody')
+        let tbodyEle = document.querySelector('tbody')
         addBtnEle.onclick = function(){
+            // 创建行和单元格
             let tr = document.createElement('tr')
             let td1 = document.createElement('td')
             let td2 = document.createElement('td')
             let td3 = document.createElement('td')
-            let delBtn =document.createElement('button')
+            let delBtn =document.createElement('td')
+            // 把姓名,年龄,性别的元素的值分别给到三个td
             td1.innerHTML = nameEle.value
             td2.innerHTML = ageEle.value
             td3.innerHTML = sexEle.value
             delBtn.innerHTML = '删除'
+            // 单元格全部追加在tr里面
             tr.appendChild(td1)
             tr.appendChild(td2)
             tr.appendChild(td3)
             tr.appendChild(delBtn)
+            // 为tr设置样式
             tr.style.textAlign = 'center'
-            tr.style.color = '#fff'
-            tableEle.appendChild(tr)
+            // tr追加到tbody里面
+            tbodyEle.appendChild(tr)
+            // 为删除做点击事件
             delBtn.onclick = function(){
+                // 删除被点击的行(tr)
                 this.parentElement.remove()
             }
         }
-        
-        // sortBtnEle.onclick = function(){
-        //     // 将表格中的所有行转化为数组
-        //     let rows = Array.from(document.querySelectorAll('tr'))
-        //     // 根据年龄进行排序
-        //     rows.sort(function(a, b){
-        //         return Number(a.childNodes[1].innerHTML) - Number(b.childNodes[1].innerHTML)
-        //     })
-        //     // 将排序后的结果重新添加到表格中
-        //     rows.forEach(function(row){
-        //         tbodyEle.appendChild(row)
-        //     })
-        // }
+        // 为排序按钮做点击事件
+        sortBtnEle.onclick = function(){
+            // 将表格中的tbody的行转化为数组
+            let rows = Array.from(document.querySelectorAll('tbody tr'))
+            
+            // 根据年龄进行排序
+            rows.sort(function(a, b){
+                return a.childNodes[1].innerHTML - b.childNodes[1].innerHTML
+            })
+            // 将排序后的结果重新添加到表格中
+            rows.forEach(function(row){
+                tbodyEle.appendChild(row)
+            })
+        }
     </script>
 </body>
 

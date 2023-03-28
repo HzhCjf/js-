@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mybox{
+            width:100px;
+            height:100px;
+            background-color: red;
+        }
+        .mybox::after{
+            content: "";
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mybox"></div>
+
+    <script>
+        // 一.获取非行间样式:   getComputedStyle(元素,伪类)[样式名称]
+        // 获取行间样式:    元素.style.样式名称
+        let mybox = document.querySelector('.mybox')
+        console.log(mybox.style.width);
+        // 直接获取样式
+        console.log(getComputedStyle(mybox)['height']);
+        // 获取伪类样式
+        console.log(getComputedStyle(mybox,'after')['width']);
+
+
+
+        // 二.兼容性问题,如果是IE8及以下不支持getComputedStyle
+        console.log(mybox.currentStyle['width']);
+
+
+        // 兼容性写法
+        function getStyle(ele,styleName){
+            if(window.getComputedStyle){
+                return getComputedStyle(ele,null)[styleName]
+            }else{
+                return ele.currentStyle[styleName]
+            }
+        }
+    </script>
+</body>
+</html>

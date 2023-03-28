@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>111</li>
+        <li class="active">222</li>
+        <li>333</li>
+    </ul>
+    <button>点击我替换222元素</button>
+
+    <script>
+        // 替换元素     父元素.replaceChild(新元素,旧元素)
+        // var ulEle = document.querySelector("ul");
+        // var myli = document.createElement("span");
+        // var activeEle = document.querySelector(".active");
+        // var btn = document.querySelector("button");
+        // myli.innerHTML = "我是内容";
+        // btn.onclick = function(){
+        //     ulEle.replaceChild(myli,activeEle);
+        // }
+        
+        // 2.克隆元素 
+        // 元素.cloneNode(false)： 默认false 不会克隆子内容，如果要克隆子内容  那么 需要配置 true 参数；
+        // var activeEle = document.querySelector(".active");
+        // var activeCopy = activeEle.cloneNode(true); // 默认不会复制子内容；
+        // console.log(activeCopy);
+        // var btn = document.querySelector("button");
+        // btn.onclick = function(){
+        //     document.body.appendChild(activeCopy);
+        // }
+
+
+        // 3.添加元素到指定位置 ；
+        // 添加到某个元素之前；
+        // var pEle = document.createElement("p");
+        // pEle.innerHTML = "我是内容";
+        // var ulEle = document.querySelector("ul");
+        // // ulEle.appendChild(pEle);
+        // var activeEle = document.querySelector(".active");
+        // ulEle.insertBefore(pEle,activeEle);
+    </script>
+</body>
+</html>
