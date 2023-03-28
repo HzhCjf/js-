@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        我是div
+    </div>
+    <script>
+        let str = window.location.search
+        let div = document.querySelector('div')
+        function sTo_o(str){
+            str = str.substr(1);
+            let arr = str.split('&')
+            let obj = {}
+            arr.forEach(function(item){
+                let arr2 = item.split('=')
+                obj[arr2[0]] = arr2[1]
+            })
+            div.style.width = obj.wid + 'px'
+            div.style.height = obj.hgt + 'px'
+            div.style.backgroundColor = obj.col
+            return obj
+        }
+        sTo_o(str)
+    </script>
+</body>
+</html>

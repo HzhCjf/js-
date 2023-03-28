@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="students.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="title">学生系统</div>
+        <div id="form">
+            <p>姓名<input id="username" type="text" value="张三123" /></p>
+            <p>年龄<input id="age" type="text" value="21" /></p>
+            <p>性别
+                <select id="gender">
+                    <option>男</option>
+                    <option>女</option>
+                    <option>你猜</option>
+                </select>
+            </p>
+            <p>
+                <input type="button" value="添加" id="addBtn" />
+                <input type="button" value="排序" id="sortBtn" />
+            </p>
+        </div>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+       //  第一步 操作数据 ；  第二步 渲染视图 ；
+        // 获取姓名
+        var  usernameEle = document.querySelector("#username");
+        // 获取年龄
+        var ageEle = document.querySelector("#age");
+        // 获取性别
+        var genderEle = document.querySelector("#gender");
+        // 获取添加按钮
+        var addBtnEle = document.querySelector("#addBtn");
+        // 获取主体内容
+        var tbodyEle = document.querySelector("tbody");
+        // 获取排序按钮
+        var sortBtn  = document.querySelector("#sortBtn");
+        // 创建一个空数组
+        var users = [];
+        // 为添加按钮绑定点击事件
+        addBtnEle.onclick = function(){
+            // 获取姓名的值
+            var username = usernameEle.value;
+            // 获取年龄的值
+            var age = ageEle.value;
+            // 获取性别的值
+            var gender = genderEle.value;
+            // 将这些添加到对象数组里面
+            users.push({username:username,age:age,gender:gender});
+            // 渲染到dom里面
+            renderDom(users);
+        }
+
+        sortBtn.onclick = function(){
+            // 数据排序 
+            users.sort(function(a,b){
+                return a.age - b.age;
+            })
+            // 渲染到dom里面
+            renderDom(users);
+        }
+        function renderDom(users){
+            tbodyEle.innerHTML = "";  // 把 tbody里原本的内容清空
+            users.forEach(function(user,key){
+                var trEle = document.createElement("tr");
+                trEle.innerHTML = "<td>"+user.username+"</td><td>"+user.age+"</td><td>"+user.gender+"</td><td class='del'>删除</td>";
+
+                // 获取删除 按钮 ，点击删除的时候 先删除数据，在渲染视图；
+                var delBtn = trEle.querySelector(".del");
+                delBtn.onclick = function(){
+                    users.splice(key,1);
+                    renderDom(users);
+                }
+
+                tbodyEle.appendChild(trEle);
+            })  
+        }
+    </script>
+</body>
+
+</html>

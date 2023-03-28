@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>我是a页面</h1>
+    <button>点击我跳转到b页面</button>
+    <script>
+
+        var data = {
+            a:10,
+            b:20
+        }
+        // 把 data 数据传输给 b页面
+        // 利用 querystring 参数把数据拼接到地址栏上；
+        var btn = document.querySelector("button");
+        btn.onclick = function(){
+            // 1.跳转到b.html页面  2. 携带 a 和b 参数；
+            window.location.href = "./b.html?a="+data.a+"&b="+data.b+"&c=30";
+        }
+
+    </script>
+</body>
+</html>

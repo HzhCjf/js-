@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            position: absolute;
+            left: 0px;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        // DOM : document object model  和 文档有关的内容 ，dom里有一个顶级对象 document 
+        // BOM : browser object model  浏览器对象模型 ，和浏览器操作有关的内容
+        // BOM 有一个全局的顶级对象 window
+        // console.log(window.document.documentElement)//html
+
+        // 1.获取浏览器的宽和高 window可以省略
+        // console.log("宽度:",window.innerWidth);  // 浏览器的宽度
+        // // console.log("高度:",window.innerHeight);
+
+        // // 2.innerWidth 和 innerHeight 都是包含滚动条的宽度；
+        // // 获取 不包含滚动条的宽度或者高度 ：document.documentElement.offsetWidth
+        // console.log("不包含：", document.documentElement.offsetWidth);
+
+
+
+
+
+
+        // 小练习 ： 一个方块 运动到最右边停止运动
+        // 获取div
+        let boxEle = document.querySelector('.box')
+        // 为div添加点击事件
+        boxEle.onclick =function(){
+            // 添加定时器
+            timer = setInterval(function(){
+                    // 获取div距离浏览器另外一边宽度的长度
+                    let con = innerWidth - boxEle.offsetWidth
+                    // 获取当前div的位置
+                    let leftnum =parseInt(getComputedStyle(boxEle)['left'])
+                // 要把位置的单位去除,看是否已经移到了浏览器的另一边
+                if(leftnum >= con){
+                    // 停止定时器
+                    clearTimeout(timer)
+                }else{
+                    boxEle.style.left = (leftnum+10) + 'px'
+                }
+            },10)
+        }
+
+        // 过渡方法:
+       /*  boxEle.onclick = function(){
+            // 设置过渡效果
+            this.style.transition = 'all 1s linear'
+            this.style.left = innerWidth - boxEle.offsetWidth + 'px'
+        } */
+        
+    </script>
+</body>
+</html>

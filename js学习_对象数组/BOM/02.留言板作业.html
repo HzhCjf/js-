@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<style>
+h2,
+p {
+    margin: 0;
+}    
+.box {
+    margin: 30px auto;
+    width: 300px;    
+}
+#user,
+#message {
+    box-sizing: border-box;
+    width: 300px;
+    border: 1px solid #000;
+    padding: 10px;
+    height: 100px;
+    resize: none;
+    display: block;
+}
+#user {
+    padding: 0 10px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+#btn {
+    display: block;
+    margin: 10px auto;
+    width: 60%;
+    height: 40px;
+}
+#list {
+    border-top: 1px solid #000;
+    padding: 10px 0 0;
+    margin: 0;
+    list-style: none;
+}
+#list li {
+    position: relative;
+    font: 14px/30px "宋体";
+    border-bottom: 1px solid #000;
+    padding: 0 15px;
+    overflow: hidden;
+}
+.clos {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    text-decoration: none;
+}
+.clos2 {
+    position: absolute;
+    right: 5px;
+    top: 30px;
+    text-decoration: none;
+}
+/* .replay{
+    position:absolute;
+    right: 5px;
+    top: 35px;
+} */
+.mask{
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    opacity: .3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+}
+.comfirm{
+    width: 200px;
+    height: 120px;
+    background: white;
+    color: #56beee;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    border-radius: 5px;
+    transform: translate(-50%,-50%);
+    overflow: hidden;
+    display: none;
+    
+}
+.comfirm button{
+    /* position: absolute; */
+    /* right: 10px; */
+    float:right;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+</style>
+</head>
+<body>
+<div class="box">
+    <input type="text" id="user" value="小明" />
+    <textarea id="message">我就是传说中的无敌小明</textarea>
+    <button id="btn">提交留言</button>
+    <ul id="list">
+        
+    </ul>
+    
+   
+</div>
+<script>
+    // 获取用户名
+    let user = document.getElementById('user')
+    // 获取留言框
+    let message = document.getElementById('message')
+    // 获取提交留言按钮
+    let btn = document.getElementById('btn')
+    // 获取ul
+    let ulEle = document.getElementById('list')
+    // 为提交按钮绑定点击事件
+    btn.onclick = function(){
+        // 创建一个li
+        let li = document.createElement('li')
+        // li里面填入内容
+        li.innerHTML = "<h2>"+user.value+"说:</h2><p>"+message.value+"</p><a href='#' class='clos'>删除</a><a a href='#' class='clos2'>回复</a>"
+        // 将li追加到ul里面
+        ulEle.appendChild(li)
+        // 获取所有的删除元素
+        let del = document.querySelectorAll('.clos')
+        // 为删除绑定点击事件
+        del.forEach(function(item,key){
+            del[key].onclick = function(){
+                // 删除点击按钮的父元素
+                this.parentElement.remove()
+            }
+        })
+        // 获取所有的回复
+        let reply = document.querySelectorAll('.clos2')
+        // 循环回复元素
+        reply.forEach(function(item,key){
+            // 每个回复元素绑定点击事件
+            reply[key].onclick = function(){
+                // 创建input回复框
+                let input = document.createElement('input')
+                // 创建提交回复按钮
+                let button = document.createElement('button')
+                // 提交按钮内容
+                button.innerHTML = '提交'
+                // 为按钮添加样式
+                button.style.marginLeft = 10 + 'px'
+                button.style.borderRadius = 20 +'px'
+                button.style.borderColor = '#56beee'
+                button.style.backgroundColor = '#56beee'
+                // 将回复框和提交按钮都追加到li(父元素)里面
+                this.parentElement.appendChild(input)
+                this.parentElement.appendChild(button)
+                // 获取当前li里面所有的input,并将其转换为数组
+                let ipts =Array.from(this.parentElement.getElementsByTagName('input'))
+                // 判断数组里面是否有一个以上的input
+                if(ipts.length > 1){
+                    // 如果有一个以上,则删除自身,且数组长度归0
+                    input.remove()
+                    button.remove()
+                    ipts.length = 0
+                    
+                }
+                // 为提交按钮添加点击事件
+                button.onclick = function(){  
+                    // 创建两个p元素
+                    let replay1 = document.createElement('p')
+                    let replay2 = document.createElement('p')
+                    replay1.innerHTML = '回复的内容:'
+                    // 将回复框内容给到p元素里面
+                    replay2.innerHTML = input.value
+                    // 将两个p元素追加到li(父元素)里面
+                    this.parentElement.appendChild(replay1)
+                    this.parentElement.appendChild(replay2)
+                    // 将回复框和提交按钮删除
+                    input.remove()
+                    button.remove()
+                }    
+            }
+        })
+    }
+
+
+
+</script>
+</body>
+</html>

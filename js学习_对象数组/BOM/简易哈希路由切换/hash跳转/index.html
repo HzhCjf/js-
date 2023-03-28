@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>跳转到产品页面</button>
+    <button>用户页面</button>
+    <button>购物车页面</button>
+    <div class="exchange"></div>
+    <script>
+        // 点击按钮的时候 改变hash值 
+        var btns = document.querySelectorAll("button");
+        var exchangeEle = document.querySelector(".exchange");
+        btns[0].onclick = function () {
+            window.location.hash = "product";
+            renderDom()
+        }
+
+        btns[1].onclick = function () {
+            window.location.hash = "users";
+            renderDom()
+        }
+
+        btns[2].onclick = function () {
+            window.location.hash = "cart";
+            renderDom()
+        }
+
+        function renderDom() {
+            // 获取hash值 
+            var hash = window.location.hash;
+            console.log(hash);
+            switch (hash) {
+                case "#product":
+                    exchangeEle.innerHTML = "<h1>产品页面</h1>";
+                    break;
+                case "#users":
+                    exchangeEle.innerHTML = "<h1>用户页面</h1>";
+                    break;
+                case "#cart":
+                    exchangeEle.innerHTML = "<h1>购物车页面</h1>";
+                    break;
+            }
+
+        }
+
+        // 作业 ： 1.复习  2.留言板 
+
+    </script>
+</body>
+
+</html>

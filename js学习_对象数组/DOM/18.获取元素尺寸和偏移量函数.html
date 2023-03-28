@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border: 5px solid;
+            padding: 10px;
+            margin: 20px;
+        }
+        .container{
+            width: 100px;
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <div class="box"></div>
+    <script>
+        // 获取元素 尺寸和偏移量的函数
+        // 元素.getBoundingClientRect
+        let boxEle = document.querySelector('.box')
+        console.log(boxEle.getBoundingClientRect);
+
+        /* 
+            1.width 和height: 和offsetWidth 及offsetHeight一样,也是自身+border+padding
+            2.x/left:相对于浏览器(视口)的左边偏移量     y/top:相对于浏览器的上边偏移量
+            3.rigth:相对于浏览器的右边偏移量(左边偏移量+width)  bottom:相对于浏览器上边偏移量+height
+        */
+    </script>
+</body>
+</html>
