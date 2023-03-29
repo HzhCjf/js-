@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn">点击我打开一个窗口</button>
+    <button class="btn2">点击我关闭窗口</button>
+    <script>
+        // 一.几个弹框
+        // alert('内容')
+        // window.alert(111)
+
+        // let res = alert('hello')
+        // console.log(res);//undefined
+
+        // let res = prompt('提示信息')
+        // console.log(res);
+
+        // confirm 询问框
+        // 返回值是true或者false
+        let res = confirm('确定吗?')
+
+
+
+
+
+        // 二.打开和关闭窗口
+        // 1.打开一个窗口:window.open("页面地址","_blank","配置项")
+        let btn = document.querySelector('.btn')
+        btn.onclick = function(){
+            // 跳转
+            window.location.href = '#'
+            // 直接打开
+            window.open('#')
+            // 第二个参数默认是_blank:打开一个新窗口._self在当前窗口打开页面
+            window.open('#','_self')
+            // 第三个参数是配置窗口大小和位置的,中间是逗号隔开
+            window.open('#',"_blank","width=300,height=300,left=200")
+        }
+
+
+
+        // 2.关闭一个窗口:window.close()
+        // window.close()可以关闭直接打开的页面和window.open打开的页面,不能关闭通过跳转打开的页面
+        let btn2 = document.querySelector('.btn2')
+        btn2.onclick = function () {  
+            window.close()
+        }
+
+
+    </script>
+</body>
+</html>

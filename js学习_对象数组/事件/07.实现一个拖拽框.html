@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        // 获取元素
+        let drag = document.querySelector('div')
+        // 为文档添加鼠标按下事件
+        document.onmousedown = function(event){
+            // 为拖拽框设置样式以及初始位置
+            drag.style.position = 'absolute'
+            drag.style.left = event.clientX + 'px'
+            drag.style.top = event.clientY + 'px'
+            drag.style.border = '1px dashed #000'
+            // 获取初始的位置
+            let downWid = event.clientX
+            let downHgt = event.clientY
+            // 为文档添加鼠标移动事件
+            document.onmousemove = function(event){
+                // 获取移动时的位置
+                 let moveWid = event.clientX
+                 let moveHgt = event.clientY
+                //  如果最终移动位置的长度和高度大于初始位置的长高,则用最终的减去初始的,且不用旋转
+                 if(moveWid > downWid && moveHgt > downHgt){
+                    drag.style.width = moveWid - downWid +'px'
+                    drag.style.height = moveHgt - downHgt + 'px'
+                    drag.style.transformOrigin = '0%'
+                    drag.style.transform = 'none'
+                    // 如果最终位置的长大于初始位置的长且最终位置的高小于初始位置的高,则用最终的长减去初始的长,初始的高减去最终的高,以元素上边为原点旋转180度
+                 }else if(moveWid > downWid && moveHgt < downHgt){
+                    drag.style.width = moveWid - downWid +'px'
+                    drag.style.height = downHgt - moveHgt + 'px'
+                    drag.style.transformOrigin = '50% top'
+                    drag.style.transform = 'rotateX(180deg)'
+                    // 如果最终位置的长小于初始位置的长且最终位置的高大于初始位置的高,则用最终的高减去初始的高,初始的长减去最终的长,则以元素左边为原点旋转180度
+                 }else if(moveWid < downWid && moveHgt > downHgt){
+                    drag.style.width = downWid - moveWid + 'px'
+                    drag.style.height = moveHgt - downHgt + 'px'
+                    drag.style.transformOrigin = 'left center'
+                    drag.style.transform = 'rotateY(180deg)'
+                    // 如果最终位置的长高都小于初始位置的长高,则用初始的长高减去最终的长高,且以上边和左边都旋转180度
+                 }else{
+                    drag.style.width = downWid - moveWid + 'px'
+                    drag.style.height = downHgt - moveHgt + 'px'
+                    drag.style.transformOrigin = 'left top'
+                    drag.style.transform = 'rotate(180deg)'
+                 }
+            }
+            document.onmouseup = function(){
+                document.onmousemove = ''
+            }
+        }
+    </script>
+</body>
+</html>

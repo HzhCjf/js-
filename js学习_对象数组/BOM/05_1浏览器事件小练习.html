@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            position: absolute;
+            left: 50%;
+            top: 200px;
+        }
+
+        button{
+            position: fixed;
+            bottom: 0%;
+            right: 100px;
+        }
+        body{
+            height: 2000px;
+            background:linear-gradient(to bottom,#e26969,#55afeb,#a029cf)
+        }
+        input{
+            background: linear-gradient(to right,#fff129,#1de72e,#6078e4);
+        }
+    </style>
+</head>
+<body>
+    <input type="" name="" value="">
+    <button>回到顶部</button>
+    <script>
+        // 小练习 ： 1.悬浮搜索框 2. 回到顶部；
+        let ipt = document.querySelector('input')
+        let btn = document.querySelector('button')
+        window.onscroll = function(){
+            if(document.documentElement.scrollTop >= 200){
+                ipt.style.position = 'fixed'
+                ipt.style.top = 10 + 'px'
+            }else{
+                ipt.style.position = 'absolute'
+                ipt.style.top = 200 + 'px'
+            }
+            btn.onclick = function(){
+                let timer = setInterval(function(){
+                    document.documentElement.scrollTop -= 30
+                    if(document.documentElement.scrollTop == 0){
+                        ipt.style.position = 'absolute'
+                        ipt.style.top = 200 + 'px'
+                        clearInterval(timer)
+                    }
+                },1)
+            }
+        }
+        
+    </script>
+</body>
+</html>

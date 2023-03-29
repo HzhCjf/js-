@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // window.onload = function(){
+        //     console.log(333);
+        // }
+        // console.log(111);
+    </script>
+    <style>
+        .box{
+            width: 100px;
+            height: 2000px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <button class="btn">回到顶部</button>
+    <script>
+        // 浏览器事件 ： 和浏览器相关的事件 
+        // 一、window.onload = function(){}
+        // 在 dom结构和资源加载完毕之后执行 ；
+        // console.log(222);
+
+        // 二、window.onresize 事件  ： 浏览器尺寸发生改变的时候执行；
+        // window.onresize = function(){
+        //     // console.log("浏览器尺寸改了");
+        //     console.log("宽：",window.innerWidth);
+        //     console.log("高：",window.innerHeight);
+        // }
+
+
+        // 三 、window.onscroll事件 ： 浏览器发生滚动的时候执行；
+        // 获取页面卷去的高度  :
+                    //  document.documentElement.scrollTop
+        // 设置卷去的高度
+            //     document.documentElement.scrollTop
+        // 获取或者设置 卷去高度兼容性问题 
+            // 1. 有文档声明 ；document.documentElement.scrollTop
+            // 2. 没有文档声明 ： document.body.scrollTop
+        window.onscroll = function(){
+            console.log("滚了");
+            console.log( document.documentElement.scrollTop);
+
+            // var top = document.documentElement.scrollTop || document.body.scrollTop;
+            // console.log(top);
+        }
+
+        var btn = document.querySelector(".btn");
+        btn.onclick = function(){
+            document.documentElement.scrollTop = 0;
+        }
+        
+
+
+
+
+
+
+        // 小练习 ： 1.悬浮搜索框 2. 回到顶部；
+
+        
+
+    </script>
+</body>
+</html>

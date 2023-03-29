@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        // 事件对象 ： 在事件触发的时候，js 会提供一个内置对象，这个对象描述了事件的一些相关信息；
+
+        // 一、获取事件对象 
+        var boxEle = document.querySelector(".box");
+       /*  boxEle.onclick = function(event){
+            console.log(event);  // 事件对象
+
+            // altKey ： false  ：触发事件的时候 是否按了 alt按键
+            // shiftKey
+            // ctrlKey
+
+            // button  : 0 左键  1 滚轮  2 右键
+
+
+            // console.log(event.clientY);
+
+
+            // console.log(event.offsetY);
+
+            // console.log(event.pageY);
+
+        } */
+
+
+        /* 
+        元素的尺寸 
+            1. offsetWidth 和 offsetHeight ： 自身 + border+ padding
+            2.clientWidth 和 clientHeight ： 自身 + pading 
+        元素偏移量
+            offsetLeft 和 offsetTop
+            没有定位 
+                相对于页面 左边和 上边的偏移量 
+            有定位 
+                相对于 定位父级的左边 和上边偏移量
+        元素的左边和上边边框的宽度
+            clientLeft 和 clientTop
+        
+        事件对象 ： 利用 x 和 y  命名的； 和事件有关 ，和鼠标的坐标有关；
+            1.offsetX 和 offsetY ： 鼠标触发事件的时候距离 事件源的左边和上边的距离；
+            2.clientX 和 clientY ： 鼠标触发事件的时候距离 浏览器的左边和上边的距离
+            3.pageX 和 pageY ： 鼠标触发事件的时候距离页面的左边和上边的距离；
+        
+        */
+
+
+
+        
+    </script>
+</body>
+</html>

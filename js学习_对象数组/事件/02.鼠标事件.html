@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        // 鼠标事件 
+        // 1.左键 的单击效果  click 
+        // document.onclick = function(){
+        //     console.log("鼠标单击了");
+        // }
+
+        // 2. 右键单击事件   : contextmenu
+        // document.oncontextmenu = function(){
+        //     console.log("右键点击了");
+        // }
+
+        // 3.双击左键 事件 ：  dblclick
+        // document.ondblclick = function(){
+        //     console.log("鼠标双击了");
+        // }
+
+
+        // 4.鼠标移入的时候触发 事件 ： mouseover 
+        var boxEle = document.querySelector(".box");
+        // boxEle.onmouseover = function(){
+        //     console.log("鼠标覆盖了");
+        // }
+
+        // 5.鼠标移除的时候触发事件： mouseout 
+        // boxEle.onmouseout = function(){
+        //     console.log("鼠标移除了");
+        // }
+
+        // 6.鼠标按下的时候触发事件： mousedown 
+        // boxEle.onmousedown = function(){
+        //     console.log("鼠标按下了");
+        // }
+
+        // 7.鼠标抬起的时候触发事件 ： mouseup 
+        // boxEle.onmouseup = function(){
+        //     console.log("鼠标抬起了");
+        // }
+
+        // 8.鼠标移动的时候触发事件 ： mousemove
+        // boxEle.onmousemove = function(){
+        //     console.log("鼠标移动了");
+        // }
+
+        // 9.鼠标移入的时候触发事件 ： mouseenter
+        // boxEle.onmouseenter = function(){
+        //     console.log("鼠标进入了");
+        // }
+
+        // 10 鼠标移除的时候触发事件 ： mouseleave
+     
+        boxEle.onmouseleave = function(){
+            console.log("鼠标离开了");
+        }
+
+
+    </script>
+</body>
+</html>

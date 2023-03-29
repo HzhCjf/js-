@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>主页</h1>
+    <button class="btn1">点击我跳转到a页面</button>
+    <button class="btn2">点击我前进一个历史记录</button>
+    <button class="btn3">点击我跳转到指定历史记录</button>
+
+    <script>
+        // 操作历史记录信息 ，前提是必须有历史记录；
+        // 操作历史记录 ： window.history
+        var btn = document.querySelector(".btn1");
+        btn.onclick = function () {
+            window.location.href = "./a.html";
+        }
+
+        // 1.前进一个历史记录：window.history.forward()
+        var btn2 = document.querySelector(".btn2");
+        btn2.onclick = function () {
+            window.history.forward();
+            // window.history.back();
+        }
+
+        // 2.后退一个历史记录 ： window.history.back();
+
+        // 3.跳转到指定历史记录 
+        /* 
+            go :  正数 ，前进几个历史记录
+                   0  ，跳转当前页面
+                   负数 ,回退几个历史记录
+        
+        */
+        //    4.查看历史记录的长度  ：window.history.length
+        var btn3 = document.querySelector(".btn3");
+        btn3.onclick = function () {
+            // window.history.go(2);
+            console.log(window.history.length);
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

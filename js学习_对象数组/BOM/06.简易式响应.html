@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 5rem;
+            height: 2rem;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+
+        // 手淘 的移动端解决方案 ： flexible.js
+        // 响应式布局 ： rem 布局  
+        // rem ： 相对于 根字体的大小的倍数 ；  1rem =  1倍 
+        // 根字体大小 默认是 16px
+
+        // 主体思路是 动态更改 根字体的大小；
+        // 在任意尺寸下  全部 宽度都是 10rem  ，动态设置 根字体大小
+
+        
+            // 宽度 ： 200px  ---->  10 rem    根字体大小为？  20px
+            // 宽度 ： 300px  ----> 10 rem  根字体   30px
+            // 宽度 ： n  px  ----> 10 rem  根字体  n/10 px
+        
+
+        document.documentElement.style.fontSize = window.innerWidth/10 + "px";
+        window.onresize = function(){
+            document.documentElement.style.fontSize = window.innerWidth/10 + "px";
+        }
+
+    </script>
+</body>
+</html>

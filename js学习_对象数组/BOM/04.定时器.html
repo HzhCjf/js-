@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="btn1">清除定时器</button>
+    <script>
+        // 定时器 
+        // 一、倒计时定时器  : setTimeout
+        // 第一个参数是回调函数  第二个参数是 倒计时时间 单位是毫秒
+        // 倒计时定时器的 返还值 是一个数字 ，类似 id ；可以用于清除定时器操作；
+
+        // var timer = setTimeout(function () {
+        //     console.log("执行了");
+        // }, 3000);
+
+        // var btn1 = document.querySelector(".btn1");
+        // btn1.onclick = function(){
+        //     clearTimeout(timer);  // 清除定时器 clearTimeout(定时器的返还值); 在定时器实行之前 清除；
+        // }
+
+
+        // console.log(timer);
+        // var timer2 = setTimeout(function () {
+        //     console.log("执行了");
+        // }, 1000);
+        // console.log(timer2);
+        // var timer3 = setTimeout(function () {
+        //     console.log("执行了");
+        // }, 1000);
+        // console.log(timer3);
+
+
+
+        // 二、间隔定时器 ： 间隔一段时间 会重复执行回调函数；
+        //  1. setInterval : 第一个参数 是回调函数  第二个参数是间隔时间；
+        // 2. 清除间隔定时器 
+        // var num = 0;
+        // var timer = setInterval(function () {
+        //     num++;
+        //     console.log("执行了", num);
+        //     document.title = num;
+        // }, 1000);
+
+        // var btn1 = document.querySelector(".btn1");
+        // btn1.onclick = function () {
+        //     clearInterval(timer);
+        // }
+
+
+        // 三、定时器注意点 ： 
+        // 1.清除定时器 可以混用 ；
+        // var timer = setTimeout(function(){
+        //     console.log("执行了");
+        // }, 3000);
+
+        // var timer = setInterval(function(){
+        //     console.log("执行了");
+        // }, 1000);
+
+        // var btn = document.querySelector(".btn1");
+        // btn.onclick = function(){
+        //     // clearInterval(timer);
+        //     clearTimeout(timer);
+        // }
+
+
+        // 2.倒计时定时器 可以模拟 间隔定时器 ；
+        // setInterval(function(){
+        //     console.log(1111);
+        // }, 1000);
+        // var num = 0;
+        // function fn(){
+        //     setTimeout(function(){
+        //         num++;
+        //         console.log(num);
+        //         if(num<10){
+        //             fn();
+        //         }
+        //     }, 1000);
+        // }
+        // fn();
+
+
+        // 3.定时器里的this 指向 window
+        // var btn = document.querySelector(".btn1");
+        // btn.onclick = function(){
+        //     console.log(this);
+        //     var that = this;
+        //     setTimeout(function(){
+        //         console.log(that);
+        //     }, 1000);
+        // }
+
+        // 4.定时器的执行顺序 
+        // 定时器里的回调 是一个异步任务 ，在js里有2种队列  ，一种是同步队列 ，另一种是异步队列 ，会优先执行同步 在执行异步队列；
+        console.log(1111);
+        setTimeout(function() {
+            console.log(222)
+        });
+        setTimeout(function() {
+            console.log(444)
+        });
+        console.log(3333);
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        // 需求 拖拽 
+        var boxEle = document.querySelector(".box");
+        boxEle.onmousedown = function(){
+            document.onmousemove = function(event){
+                boxEle.style.positon = 'absolute'
+                boxEle.style.left = event.clientX-100 + 'px'
+                boxEle.style.top = event.clientY-100 + 'px'
+            }
+            document.onmouseup = function () {  
+                document.onmouseup = null
+                document.onmousemove = null
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .menu{
+            width: 150px;
+            height: 200px;
+            border: 1px solid #adadad;
+            background-color: #f1f1f1;
+            display: none;
+        }
+        p{
+            font-size: 14px;
+            padding-bottom: 7px;
+            margin-top: 8px;
+            padding-left: 20px;
+            
+        }
+        p:hover{
+            background: linear-gradient(to right,#ff9191,#8eacff,#d885f8);
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <p>返回</p>
+        <p>前进</p>
+        <p>关闭</p>
+        <p>刷新</p>
+        <p>新建</p>
+    </div>
+    <script>
+        let menu = document.querySelector('.menu')
+        document.oncontextmenu = function(event){
+            menu.style.display = 'block'
+            menu.style.position = 'absolute'
+            menu.style.left = event.clientX + 'px'
+            menu.style.top = event.clientY + 'px'
+        }
+    </script>
+</body>
+</html>

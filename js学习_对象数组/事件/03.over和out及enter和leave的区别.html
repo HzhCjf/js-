@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box"></div>
+    </div>
+    <script>
+        // 一、利用 over 和 out 绑定事件 
+        // 如果有子元素 ，那么 over 和out 事件也会在子元素上触发；
+        // var containerEle = document.querySelector(".container");
+        // containerEle.onmouseover = function(){
+        //     console.log("鼠标覆盖了");
+        // }
+        // containerEle.onmouseout = function(){
+        //     console.log("鼠标移除了");
+        // }
+
+        // 二、利用 enter 和 leave 绑定事件  （用的多些）；
+        // enter 和 leave 只会在 绑定元素身上触发事件 ；
+        var containerEle = document.querySelector(".container");
+        containerEle.onmouseenter = function(){
+            console.log("鼠标进入了");
+        }
+
+        containerEle.onmouseleave = function(){
+            console.log("鼠标离开了");
+        }
+
+
+    </script>
+</body>
+</html>
