@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 600px;
+            height: 600px;
+            border: 1px solid;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .container div {
+            width: 190px;
+            height: 190px;
+            position: absolute;
+            border: 1px solid;
+            border-radius: 5px;
+        }
+
+        div {
+            font-size: 32px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div style="left:4px;top:0px">1</div>
+        <div style="left:33.33%;top:0px">2</div>
+        <div style="left:66.66%;top:0px">3</div>
+        <div style="left:4px;top:33.33%">4</div>
+        <div style="left:33.33%;top:33.33%">5</div>
+        <div style="left:66.66%;top:33.33%">6</div>
+        <div style="left:4px;top:66.66%">7</div>
+        <div style="left:33.33%;top:66.66%">8</div>
+        <div style="left:66.66%;top:66.66%">9</div>
+    </div>
+    <script>
+        // 需求 ：
+        // 1.实现9个方块的拖动效果 
+        // 2.检测 拖动元素 和 其他元素的碰撞；
+        // 3. 获取被碰撞的元素  ，计算碰撞面积
+        // 4. 把拖动元素 和 碰撞面积最大元素 互换位置；
+        // 一、实现多个元素的拖拽效果 ；
+        // 1.给元素加上颜色 ；
+        var colors = ["yellow", "blue", "green", "pink", "orange", "black", "yellowgreen", "skyblue", "red"];
+        var divs = document.querySelectorAll(".container div");
+        divs.forEach(function (item, key) {
+            item.style.backgroundColor = colors[key];
+        })
+
+        // 2.多元素的拖拽 
+        divs.forEach(function (div) {
+            div.onmousedown = function (e) {
+                // 清除过渡效果
+                this.style.transition = 'none'
+                // 计算鼠标在该元素内的相对位置
+                var x = e.clientX - this.offsetLeft;
+                var y = e.clientY - this.offsetTop;
+                // 获取原始位置
+                let xxx = this.style.left
+                let yyy = this.style.top
+                // 为最大碰撞面积的元素
+                var maxEle = null;
+                this.style.zIndex = 1;
+                this.onmousemove = function (e) {
+                  var crashArr = [];  //保持和拖拽元素碰撞的元素数组
+                    // 获取移动时的位置
+                    var xx = e.clientX;
+                    var yy = e.clientY;
+                    this.style.left = xx - x + "px";
+                    this.style.top = yy - y + "px";
+
+                    // 检测拖拽元素 和 其他 8个元素是否碰撞 ，并收集碰撞的元素
+                    // this
+                    var that = this;
+                    divs.forEach(function(item){
+                        // console.log("this",this);
+                        if(that!==item){  // 拖拽的元素  和 循环的元素 不是一个元素 那么就检测碰撞；
+                            // 其他的 8个元素；
+                            if(isCrash(that,item)){
+                                // 碰了 ；把碰撞的元素 收集起来；
+                                crashArr.push(item);
+                            }
+                        }
+                    })
+
+                    console.log("碰撞的元素是:",crashArr);
+
+                    // 计算 碰撞元素 和拖拽元素的碰撞面积 ，找到最大的碰撞面积
+                    // 分别计算 crashArr里元素 和 this的碰撞面积
+
+                    var maxArae = 0;  // 最大碰撞面积
+                    crashArr.forEach(function(item){
+                            // 计算碰撞面积 
+                            // 碰撞面积 =   w * h;
+                            var w = item.offsetWidth - Math.abs(item.offsetLeft-that.offsetLeft);
+                            var h = item.offsetHeight - Math.abs(item.offsetTop-that.offsetTop);
+                            var arae = w * h;
+                            if(arae>maxArae){
+                                maxArae = arae;
+                                maxEle = item;  // 最大碰撞面积的元素；
+                            }
+                    })
+                    console.log("最大碰撞面积的元素是",maxEle);
+                    
+
+
+
+                }
+                this.onmouseup = function () {
+                    if(maxEle){
+                        this.style.left = maxEle.style.left
+                        this.style.top = maxEle.style.top
+                        this.style.transition = 'all 1s'
+                        maxEle.style.transition = 'all 1s'
+                        maxEle.style.left = xxx 
+                        maxEle.style.top = yyy 
+                    }else{
+                        this.style.left = xxx
+                        this.style.top = yyy
+                    }
+                    
+                    this.onmousemove = "";
+                    this.style.zIndex = 0;
+                }
+            }
+        })
+
+        // 1.检测 拖拽元素 和 其他的8个元素之间是否碰撞；
+        // 2.收集 和 拖拽元素的碰撞元素
+        // 3. 计算碰撞面积；
+
+
+
+        function isCrash(box1,box2){
+                var Aminx = box1.offsetLeft;
+                var Amaxx = box1.offsetLeft + box1.offsetWidth;
+
+                var Aminy = box1.offsetTop;
+                var Amaxy = box1.offsetTop + box1.offsetHeight
+
+                // 蓝色 box2  是 B
+                var Bminx = box2.offsetLeft;
+                var Bmaxx = box2.offsetLeft + box2.offsetWidth;
+
+                var Bminy = box2.offsetTop;
+                var Bmaxy =  box2.offsetTop + box2.offsetHeight;
+
+                if(Amaxx>Bminx && Aminx<Bmaxx && Amaxy>Bminy && Aminy<Bmaxy){
+                    // console.log("横轴和纵轴碰撞了");
+                    return true;
+                }else{
+                    return false;
+                }
+        }
+
+
+    </script>
+</body>
+
+</html>

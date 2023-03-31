@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            键盘事件:
+                1.键盘按下的时候执行
+                2.键盘抬起的时候执行
+                3.键盘按压的时候执行
+        */
+    //    1.键盘按下的时候执行事件  keydown
+    // 键盘事件只能在   document和表单上绑定
+    document.onkeydown = function(){
+        console.log('按下了');
+    }
+
+    // 2.键盘抬起的时候执行事件 keyup
+    document.onkeyup = function(){
+        console.log('抬起了');
+    }
+
+    // 3.键盘按压的时候执行事件 keypress
+    // 只支持大部分按键
+    document.onkeypress = function(){
+        console.log('按压了');
+    }
+
+
+    // 如何区分按键:
+    // 方式一:通过事件对象的keyCode(不推荐)
+    // keyup和keydown的keyCode不区分大小写
+    document.onkeydown = function (e) {  
+        console.log(e.keyCode);
+    }
+
+
+
+    // 方式二:通过事件对象的key(推荐)
+    document.onkeydown = function(e){
+        let key  = e.key
+        console.log(key);
+    }
+
+
+
+    // 组合按键 :   ctrl    shift   alt
+    // altKey shiftKey ctrlKey
+    document.onkeydown = function(e){
+        let key = e.key
+        // 按了alt为true,否则为false
+        console.log(e.altKey);
+
+        if(key === 'a' && e.shiftKey ){
+            console.log('按了');
+        }else{
+            console.log('没按');
+        }
+        // 永远都是false,因为和系统组合按键冲突,shift加字母是打出的是大写字母
+    }
+
+
+
+     // 练习 ： 两个方块运动 ，通过 方向键 可以控制方块运动的方向， 如果 一个碰到一个另一个方块 ，那么另一个方块消失；
+    </script>
+</body>
+</html>

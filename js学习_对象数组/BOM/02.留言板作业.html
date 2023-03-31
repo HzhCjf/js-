@@ -60,11 +60,6 @@ p {
     top: 30px;
     text-decoration: none;
 }
-/* .replay{
-    position:absolute;
-    right: 5px;
-    top: 35px;
-} */
 .mask{
     width: 100vw;
     height: 100vh;
@@ -91,11 +86,12 @@ p {
     
 }
 .comfirm button{
-    /* position: absolute; */
-    /* right: 10px; */
     float:right;
     margin-top: 20px;
     margin-right: 10px;
+}
+li{
+    background:linear-gradient(to left,#56beee,#fc735a,#d06aff)
 }
 
 </style>
@@ -106,11 +102,10 @@ p {
     <textarea id="message">我就是传说中的无敌小明</textarea>
     <button id="btn">提交留言</button>
     <ul id="list">
-        
+
     </ul>
-    
-   
 </div>
+
 <script>
     // 获取用户名
     let user = document.getElementById('user')
@@ -185,9 +180,6 @@ p {
             }
         })
     }
-
-
-
 </script>
 </body>
 </html>

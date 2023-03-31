@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: 3;
+        }
+
+        .box2 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+            left: 500px;
+            top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+
+    <script>
+        // 检测碰撞 ： 检测2个元素 是否碰了 ；
+        // todolist
+        var box1 = document.querySelector(".box1");
+        var box2 = document.querySelector(".box2");
+        box1.onmousedown = function (e) {
+            var x = e.clientX - this.offsetLeft;
+            var y = e.clientY - this.offsetTop;
+            this.onmousemove = function (e) {
+                var xx = e.clientX;
+                var yy = e.clientY;
+                this.style.left = xx - x + "px";
+                this.style.top  = yy - y + "px";
+
+                // 红色 box1 是  A
+                var Aminx = this.offsetLeft;
+                var Amaxx = this.offsetLeft + this.offsetWidth;
+                let Aminy = this.offsetTop
+                let Amaxy = this.offsetTop+this.offsetHeight
+
+                // 蓝色 box2  是 B
+                var Bminx = box2.offsetLeft;
+                var Bmaxx = box2.offsetLeft + box2.offsetWidth;
+                let Bminy = box2.offsetTop
+                let Bmaxy = box2.offsetTop + box2.offsetHeight
+
+                if((Amaxx>Bminx && Aminx<Bmaxx) && (Aminy<Bmaxy && Amaxy > Bminy)){
+                    console.log("横轴和y轴都碰撞了");
+                    this.style.left = -(xx - x) + "px";
+                    this.style.top  = -(yy - y) + "px";
+                    this.style.transition = 'all 1s'
+                }
+                
+                // y 轴 ；
+                // 1.画一下 2.y轴  3.红色方块运动 碰到 蓝色之后 反方向运动
+            }
+            this.onmouseup = function(){
+                this.onmousemove = ''
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

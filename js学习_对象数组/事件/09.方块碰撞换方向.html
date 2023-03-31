@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.box1 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+
+    .box2 {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        position: absolute;
+        left: 500px;
+        top: 0px;
+    }
+    </style>
+    
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <script>
+        var box1 = document.querySelector(".box1");
+        var box2 = document.querySelector(".box2");
+        box1.onclick = function(){
+            var that = this;
+            var dir = 1;
+            setInterval(function(){
+                var leftNum = parseInt( getComputedStyle(that)['left']);
+                leftNum+=5*dir;
+                that.style.left = leftNum + "px";
+                // console.log(isCrash(that,box2));
+                if(isCrash(that,box2)){
+                    dir = -1;
+                }
+            }, 100);
+        }
+
+
+
+        // i/o  输入  和 输出；
+        function isCrash(box1,box2){
+                var Aminx = box1.offsetLeft;
+                var Amaxx = box1.offsetLeft + box1.offsetWidth;
+
+                var Aminy = box1.offsetTop;
+                var Amaxy = box1.offsetTop + box1.offsetHeight
+
+                // 蓝色 box2  是 B
+                var Bminx = box2.offsetLeft;
+                var Bmaxx = box2.offsetLeft + box2.offsetWidth;
+
+                var Bminy = box2.offsetTop;
+                var Bmaxy =  box2.offsetTop + box2.offsetHeight;
+
+                if(Amaxx>Bminx && Aminx<Bmaxx && Amaxy>Bminy && Aminy<Bmaxy){
+                    // console.log("横轴和纵轴碰撞了");
+                    return true;
+                }else{
+                    return false;
+                }
+        }
+
+
+
+    </script>
+</body>
+</html>

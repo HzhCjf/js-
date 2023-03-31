@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1{
+            width: 100px;
+            height: 100px;
+            background-color: brown;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background-color: brown;
+            position: absolute;
+            left: 200px;
+            top: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <script>
+        let box1 = document.querySelector('.box1')
+        let box2 = document.querySelector('.box2')
+        let body = document.body
+        var dir = 'bottom'
+        box1.onclick = function(){
+            setInterval(function(){
+                switch(dir){
+                    case 'top':
+                        var num = parseInt(getComputedStyle(box1)['top']);
+                        box1.style.top = num - 10 + 'px';
+                        break;
+                    case 'bottom':
+                        var num = parseInt(getComputedStyle(box1)['top']);
+                        box1.style.top = num + 10 + 'px';
+                        break;
+                    case 'left':
+                        var num = parseInt(getComputedStyle(box1)['left']);
+                        box1.style.left = num - 10 + 'px';
+                        break;
+                    case 'right':
+                        var num = parseInt(getComputedStyle(box1)['left']);
+                        box1.style.left = num + 10 + 'px';
+                        break;
+                }
+                if(isCrash(box1,box2)){
+                    box2.remove()
+                    let box3 = document.createElement('div')
+                    box3.style.backgroundColor = 'red'
+                    box3.style.width = 100 + 'px'
+                    box3.style.height = 100 + 'px'
+                    box3.style.position = 'absolute'
+                    box3.style.left = Math.floor(Math.random() * 100) +'px'
+                    box3.style.top = Math.floor(Math.random() * 100) +'px'
+                    body.appendChild(box3)
+                }
+            },100)
+            
+            
+            
+        }
+        document.onkeydown = function(e){
+            var key = e.key;
+            switch(key){
+                case 'ArrowUp':
+                    dir = 'top';
+                    break;
+                case 'ArrowDown':
+                    dir = 'bottom';
+                    break;
+                case 'ArrowLeft':
+                    dir = 'left';
+                    break;
+                case 'ArrowRight':
+                    dir = 'right';
+                    break;
+            } 
+        }
+
+
+
+        function isCrash(box1, box2) {
+            var Aminx = box1.offsetLeft;
+            var Amaxx = box1.offsetLeft + box1.offsetWidth;
+
+            var Aminy = box1.offsetTop;
+            var Amaxy = box1.offsetTop + box1.offsetHeight
+
+            // 蓝色 box2  是 B
+            var Bminx = box2.offsetLeft;
+            var Bmaxx = box2.offsetLeft + box2.offsetWidth;
+
+            var Bminy = box2.offsetTop;
+            var Bmaxy = box2.offsetTop + box2.offsetHeight;
+
+            if (Amaxx > Bminx && Aminx < Bmaxx && Amaxy > Bminy && Aminy < Bmaxy) {
+                // console.log("横轴和纵轴碰撞了");
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

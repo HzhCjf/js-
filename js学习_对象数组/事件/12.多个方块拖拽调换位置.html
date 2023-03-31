@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .container {
+            width: 600px;
+            height: 600px;
+            border: 1px solid;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .container div {
+            width: 190px;
+            height: 190px;
+            position: absolute;
+            border: 1px solid;
+            border-radius: 5px;
+        }
+
+        div {
+            font-size: 32px;
+            color: #fff;
+        }
+    </style>
+     <div class="container">
+        <div style="left:4px;top:0px">1</div>
+        <div style="left:33.33%;top:0px">2</div>
+        <div style="left:66.66%;top:0px">3</div>
+        <div style="left:4px;top:33.33%">4</div>
+        <div style="left:33.33%;top:33.33%">5</div>
+        <div style="left:66.66%;top:33.33%">6</div>
+        <div style="left:4px;top:66.66%">7</div>
+        <div style="left:33.33%;top:66.66%">8</div>
+        <div style="left:66.66%;top:66.66%">9</div>
+    </div>
+    <script>
+        var colors = ["rgb(96, 255, 96)", "rgb(99, 184, 253)", "rgb(253, 168, 99)", "rgb(242, 117, 247)", "rgb(255, 98, 119)", "rgb(183, 49, 245)", "rgb(86, 120, 184)", "rgba(253, 242, 86, 0.815)", "rgb(184, 86, 94)"];
+        // 获取所有的9个div
+        let divs = document.querySelectorAll('.container div')
+        // 为div给上背景颜色
+        divs.forEach(function(item,key){
+            item.style.backgroundColor = colors[key]
+        })
+        // 循环div
+        divs.forEach(function(div){
+            // 点击div
+            div.onmousedown = function(e){
+                // 清除残留过渡
+                this.style.transition = 'none'
+                // 移动时层级最高
+                this.style.zIndex = 1;
+                // 声明碰撞面积最大的元素
+                let maxEle = null
+                
+                //计算鼠标在该元素内的相对位置
+                let x = e.clientX - this.offsetLeft
+                let y =e.clientY - this.offsetTop
+                // 获取元素的原始位置
+                let orgW = this.style.left
+                let orgH = this.style.top
+                // 添加鼠标移动事件
+                this.onmousemove = function(e){
+                    // 声明一个所有碰撞的元素数组
+                    let crasharr = []
+                    // 获取移动的位置
+                    let xx = e.clientX
+                    let yy = e.clientY
+                    // 为元素从原始移动到鼠标位置
+                    this.style.left = xx - x +'px'
+                    this.style.top = yy - y + 'px'
+                    // 把现在这个元素给到that
+                    let that = this
+                    // 循环divs
+                    divs.forEach(function(item){
+                        // 如果现在的元素不是自身
+                        if(that !== item){
+                            // 与其他的碰撞了
+                            if(isCrash(that,item)){
+                                // 把碰撞的给到数组
+                                crasharr.push(item)
+                            }
+                        }
+                    })
+                    // 声明一个碰撞到的最大面积
+                    let maxArae = 0;
+                    // 循环碰撞元素数组
+                    crasharr.forEach(function(item){
+                        // 获取碰撞面积的宽 = 被碰撞元素的宽 - 绝对值(被碰撞元素的左偏移度 - 元素的左偏移度)
+                        let w = item.offsetWidth - Math.abs(item.offsetLeft-that.offsetLeft)
+                        // 获取碰撞面积的高 = 被碰撞元素的高 - 绝对值(被碰撞元素的上偏移度 - 元素的上偏移度)
+                        let h = item.offsetHeight- Math.abs(item.offsetTop - that.offsetTop)
+                        // 面积
+                        let arae = w * h
+                        // 如果被碰撞的元素大于上一个最大面积,则成为最大面积
+                        if(arae > maxArae){
+                            maxArae = arae
+                            maxEle = item
+                        }
+                    })
+                }
+                // 鼠标抬起
+                this.onmouseup = function(){
+                    // 如果最大面积不为空,说明有碰撞
+                    if(maxEle){
+                        // 交换位置
+                        this.style.left = maxEle.style.left
+                        this.style.top = maxEle.style.top
+                        this.style.transition = 'all 1s'
+                        maxEle.style.left = orgW
+                        maxEle.style.top = orgH
+                        maxEle.style.transition = 'all 1s'
+                        // 没有碰撞,返回原位
+                    }else{
+                        this.style.left = orgW
+                        this.style.top = orgH
+                    }
+                    // 将移动事件清空
+                    this.onmousemove = "";
+                    // 层级最低
+                    this.style.zIndex = 0;
+                }
+            }
+        })
+
+
+        function isCrash(box1,box2){
+                var Aminx = box1.offsetLeft;
+                var Amaxx = box1.offsetLeft + box1.offsetWidth;
+
+                var Aminy = box1.offsetTop;
+                var Amaxy = box1.offsetTop + box1.offsetHeight
+
+                // 蓝色 box2  是 B
+                var Bminx = box2.offsetLeft;
+                var Bmaxx = box2.offsetLeft + box2.offsetWidth;
+
+                var Bminy = box2.offsetTop;
+                var Bmaxy =  box2.offsetTop + box2.offsetHeight;
+
+                if(Amaxx>Bminx && Aminx<Bmaxx && Amaxy>Bminy && Aminy<Bmaxy){
+                    // console.log("横轴和纵轴碰撞了");
+                    return true;
+                }else{
+                    return false;
+                }
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

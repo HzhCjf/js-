@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        div{
+            color: rgba(120, 192, 255, 0.404);
+        }
     </style>
 </head>
 <body>
@@ -19,7 +22,8 @@
             drag.style.position = 'absolute'
             drag.style.left = event.clientX + 'px'
             drag.style.top = event.clientY + 'px'
-            drag.style.border = '1px dashed #000'
+            drag.style.border = '1px solid rgb(42, 155, 255)'
+            drag.style.backgroundColor = 'rgba(120, 192, 255, 0.404)'
             // 获取初始的位置
             let downWid = event.clientX
             let downHgt = event.clientY
@@ -58,6 +62,31 @@
                 document.onmousemove = ''
             }
         }
+
+
+        // 方法2:
+        // document.onmousedown = function(e){
+        //     console.log("鼠标按下的时候，开始拖动");
+        //     boxEle.style.display = "block";
+        //     boxEle.style.width = "0px";
+        //     boxEle.style.height = "0px";
+        //     var x = e.clientX;
+        //     var y = e.clientY;
+        //     document.onmousemove = function(e){
+        //         console.log("鼠标移动，一直设置box的大小")
+        //         var xx = e.clientX;
+        //         var yy = e.clientY; 
+        //         boxEle.style.left = Math.min( x ,xx) + "px";  // 设置 box的位置
+        //         boxEle.style.width = Math.abs( xx - x) + "px";                         // 设置大小
+
+        //         boxEle.style.top = Math.min( y,yy) + "px";  // 设置 box的位置
+        //         boxEle.style.height =  Math.abs( yy - y) + "px"; 
+
+        //     }
+        //     document.onmouseup = function(){
+        //         boxEle.style.display = "none";
+        //     }
+        // }
     </script>
 </body>
 </html>

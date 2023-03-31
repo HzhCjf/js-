@@ -40,6 +40,8 @@
             menu.style.position = 'absolute'
             menu.style.left = event.clientX + 'px'
             menu.style.top = event.clientY + 'px'
+            // 阻止默认事件
+            event.preventDefault()
         }
     </script>
 </body>
