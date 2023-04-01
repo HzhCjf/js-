@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 520px;
+            height: 280px;
+            margin: 0 auto;
+            border: 1px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .imgContainer {
+            width: 2600px;
+            height: 280px;
+            position: absolute;
+            left: 0px;
+        }
+
+        .imgContainer img {
+            float: left;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="imgContainer">
+            <img src="./img/1t.png" alt="">
+            <img src="./img/2t.png" alt="">
+            <img src="./img/3t.png" alt="">
+            <img src="./img/4t.png" alt="">
+            <img src="./img/5t.png" alt="">
+        </div>
+    </div>
+
+    <script>
+        // 一、让imgContainer 从右向左移动一个图片的距离；
+        var imgContainer = document.querySelector(".imgContainer");
+
+        var index = 0; // 图片所在位置的下标
+
+        // index  = 0   ----> -520px
+        // index = 1  ----- > -1040
+        // index = 2  --- >  1560px
+        // index = n ----> (n +1) *-520
+        let img1 = document.querySelector('.imgContainer img') 
+        let img1Copy = img1.cloneNode(true)
+        imgContainer.style.width = 3120 + 'px'
+        imgContainer.appendChild(img1Copy)
+        console.log(imgContainer);
+        setInterval(function () {
+            move(imgContainer, -520 * (index + 1), "left", function () {
+                console.log("运动结束了");
+                index++;
+                console.log(index);
+                if(index===5){
+                    index = 0;
+                    imgContainer.style.left = "0px";
+                }
+            })
+        }, 2000);
+
+
+
+
+
+
+        function move(boxEle, target, dir, cb) {
+            var timer = setInterval(function () {
+                var num = parseInt(getComputedStyle(boxEle)[dir]);
+                // 现在放在 0 ----> 500 px  加 
+                // 现在在 500px ----> 0   减
+                var speed = target > num ? 1 : -1
+
+                if (num === target) {
+                    clearInterval(timer);
+                    // console.log("运动完成");
+                    // if(cb){
+                    //     cb();
+                    // }
+                    cb && cb();  // cb 回调函数 可以传 也可以不传都不会报错
+                } else {
+                    boxEle.style[dir] = num + 10 * speed + "px";
+                }
+            }, 10)
+        }
+    </script>
+</body>
+
+</html>

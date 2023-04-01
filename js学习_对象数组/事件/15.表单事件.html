@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="myform" action="" method="get">
+        <input type="text" class="box" name="uname" />
+        <input type="text" class="box" name="age" />
+        <input type="submit" value="提交">
+    </form>
+
+    <script>
+        // 表单事件:只能作用于表单事件
+        // 一.输入事件:input事件
+        let boxEle = document.querySelector('.box')
+        boxEle.oninput = function(){
+            console.log('输入的内容是',this.value);
+        }
+
+
+        // 二.表单 聚焦的时候触发事件   focus
+        boxEle.onfocus = function(){
+            console.log('聚焦了');
+        }
+
+
+        // 三.表单失焦事件: blur
+        boxEle.onblur = function(){
+            console.log('失去焦点');
+        }
+
+
+        // 四.表单内容改变时候触发  change
+        // 触发条件:1.失去焦点  2.内容改变
+        boxEle.onchange = function(){
+            console.log('内容发生改变');
+        }
+
+
+        // 五.提交事件  submit
+        let myformEle = document.querySelector('myform')
+        myformEle.onsubmit = function(){
+            console.log('提交了');
+            // return false     //阻止默认事件
+        }
+    </script>
+</body>
+</html>

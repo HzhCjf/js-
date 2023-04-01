@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .outer {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+
+        .center {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+        }
+
+        .inner {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="center">
+            <div class="inner"></div>
+        </div>
+    </div>
+    <script>
+        // 一、0级事件的传播 
+        // 0级事件 默认是 由小到大触发 。 这种触发顺序叫冒泡
+        // var  outerEle = document.querySelector(".outer")
+        // var  centerEle = document.querySelector(".center")
+        // var  innerEle = document.querySelector(".inner")
+        // outerEle.onclick = function(){
+        //     console.log("outer")
+        // }
+        // centerEle.onclick = function(){
+        //     console.log("center")
+        // }
+        // innerEle.onclick = function(){
+        //     console.log("inner")
+        // }
+
+        // 二、二级事件的事件触发 
+        // 二级事件默认事件触发顺序是冒泡阶段触发 ；
+        // 通过第三个参数 更改事件的触发顺序 ，默认是false 就是冒泡,改成true ， 事件就会在 捕获阶段触发；
+        // 事件触发 ： 事件先经历 捕获阶段 ----》目标元素(点击谁就是谁)--->冒泡阶段
+        // 获取目标元素 ： e.target 事件在哪个元素上触发 就是哪个元素；
+        var outerEle = document.querySelector(".outer")
+        var centerEle = document.querySelector(".center")
+        var innerEle = document.querySelector(".inner")
+
+        // window.addEventListener("click", function () {
+        //     console.log("window");
+        // })
+        // document.addEventListener("click", function () {
+        //     console.log("document")
+        // })
+
+        // document.documentElement.addEventListener("click", function () {
+        //     console.log("html")
+        // })
+
+        // document.body.addEventListener("click", function () {
+        //     console.log("body")
+        // })
+        outerEle.addEventListener("click", function (e) {
+            console.log("outer", e.target)
+        }, false)
+        centerEle.addEventListener("click", function (e) {
+            console.log("center");
+        }, false)
+        innerEle.addEventListener("click", function (e) {
+            console.log("inner");
+        }, false)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            /* transition: all 1s; */
+            animation: myani 1s;
+        }
+        @keyframes myani{
+            from{
+                left: 0px;
+            }
+            to{
+                left: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        // 一、移动端事件 
+        // 1.触摸开始的时候执行事件  ：touchstart
+        // document.ontouchstart = function(){
+        //     console.log("触摸开始了");
+        // }
+
+        // // 2.正在触摸的时候执行 ： touchmove
+        // document.ontouchmove = function(){
+        //     console.log("触摸了");
+        // }
+
+        // // 3.触摸结束的时候执行 ： touchend
+        // document.ontouchend = function(){
+        //     console.log("触摸结束");
+        // }
+
+
+        // 二、其他事件 
+
+        // 1.过渡结束触发事件 :transitionend
+        // var boxEle = document.querySelector(".box");
+
+        // boxEle.onclick = function(){
+        //     this.style.left = "300px";
+        //     // this.style.top = "300px";
+        //     // setTimeout(function(){
+        //     //     boxEle.style.top = "300px";
+        //     // }, 1000);
+        // }
+        
+
+        // boxEle.ontransitionend = function(){
+        //     console.log("过渡结束了");
+        //     boxEle.style.top = "300px";
+        // }
+
+        // 2.动画结束的时候触发事件 ； animationend
+        // var boxEle = document.querySelector(".box");
+        // boxEle.onanimationend = function(){
+        //     console.log("动画结束了");
+        // }
+
+
+    </script>
+</body>
+</html>

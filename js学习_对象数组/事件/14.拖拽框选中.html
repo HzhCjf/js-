@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            color: rgba(120, 192, 255, 0.404);
+            position: absolute;
+            border: 1px dotted;
+            display: none;
+            width: 0px;
+            height: 0px;
+        }
+        .dir{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            margin: 50px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="dir"></div>
+    <div class="box"></div>
+    <script>
+        // 获取元素
+        let drag = document.querySelector('.box')
+        let dirs = document.querySelectorAll('.dir')
+       
+
+
+        // 方法2:
+        document.onmousedown = function (e) {
+            console.log("鼠标按下的时候，开始拖动");
+            drag.style.display = "block";
+            drag.style.width = "0px";
+            drag.style.height = "0px";
+            drag.style.border = "none";
+            var x = e.clientX;
+            var y = e.clientY;
+            document.onmousemove = function (e) {
+                console.log("鼠标移动，一直设置box的大小")
+                drag.style.border = "2px dotted";
+                var xx = e.clientX;
+                var yy = e.clientY;
+                drag.style.left = Math.min(x, xx) + "px";  // 设置 box的位置
+                drag.style.width = Math.abs(xx - x) + "px"; // 设置大小
+
+                drag.style.top = Math.min(y, yy) + "px";  // 设置 box的位置
+                drag.style.height = Math.abs(yy - y) + "px";
+
+                dirs.forEach(function (item) {
+                    // 检测 每一个 item 和 drag 是否碰撞了；
+                    if (isCrash(item, drag)) {
+                        // 碰了 
+                        // console.log(item);
+                        item.style.background = "rgb(99, 184, 253)";
+                    }else{
+                        // 没有碰撞
+                        item.style.background = "white";
+                    }
+                })
+
+            }
+            document.onmouseup = function () {
+                drag.style.display = "none";
+                document.onmousemove = "";
+            }
+        }
+
+
+
+
+        // 是否碰撞函数
+        function isCrash(box1, box2) {
+            var Aminx = box1.offsetLeft;
+            var Amaxx = box1.offsetLeft + box1.offsetWidth;
+
+            var Aminy = box1.offsetTop;
+            var Amaxy = box1.offsetTop + box1.offsetHeight
+
+            // 蓝色 box2  是 B
+            var Bminx = box2.offsetLeft;
+            var Bmaxx = box2.offsetLeft + box2.offsetWidth;
+
+            var Bminy = box2.offsetTop;
+            var Bmaxy = box2.offsetTop + box2.offsetHeight;
+
+            if (Amaxx > Bminx && Aminx < Bmaxx && Amaxy > Bminy && Aminy < Bmaxy) {
+                // console.log("横轴和纵轴碰撞了");
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

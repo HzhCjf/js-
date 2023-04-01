@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <ul>
+            <li class="active">111</li>
+            <li class="active">222</li>
+            <li class="active">333</li>
+            <li class="active">444</li>
+            <li class="active">555</li>
+            <span>hello</span>
+            <p>你好</p>
+        </ul>
+        <button>点击我添加li元素</button>
+    </div>
+
+    <script>
+        // 事件委托 ，事件委派:把子元素事件委托给父级元素绑定
+        // 有 1000个 li 元素  ，需要给 每一个li元素绑定 点击事件?
+
+
+        // 事件委托 实现绑定 ： 把 li的事件委托给父级元素
+        // var ulEle = document.querySelector("ul");
+        // ulEle.onclick = function(e){
+        //     // 把 li元素区分出来； e.target
+        //     // console.log("点击了",e.target);
+        //     // console.log(e.target.nodeName);
+        //     // if(e.target.nodeName==="LI"){
+        //     //     console.log("点击了li元素");
+        //     // }
+        //     // console.log(e.target);
+        //     if(e.target.classList.contains("active")){
+        //         console.log("点击了li元素");
+        //     }
+
+        // }
+
+        // var containerEle = document.querySelector(".container");
+        // containerEle.onclick = function (e) {
+        //     if (e.target.classList.contains("active")) {
+        //         console.log("点击了li元素");
+        //     }
+        // }
+
+
+
+
+        // 第一 ： 节约性能  
+        // 第二 ： 动态元素绑定事件
+        var ulEle = document.querySelector("ul");
+        var lis = document.querySelectorAll("li");
+        var btn = document.querySelector("button");
+
+        // 普通写法 ： 添加的元素事件需要重新绑定
+        // lis.forEach(function(li){
+        //     li.onclick = function(){
+        //         console.log("点击了li元素");
+        //     }
+        // })
+
+        // 事件委托写法  ：动态添加元素不需要重新绑定事件
+        ulEle.onclick = function(e){
+            if(e.target.nodeName === "LI"){
+                console.log("点击了");
+            }
+        }
+
+
+
+        btn.onclick = function(){
+            var liEle = document.createElement("li");
+            liEle.innerHTML = "内容";
+            ulEle.appendChild(liEle);
+        }
+
+        // console.time();
+        // for(var i=0;i<1000;i++){
+        //     console.log(i)
+        // }
+        // console.timeEnd();
+
+    </script>
+</body>
+
+</html>

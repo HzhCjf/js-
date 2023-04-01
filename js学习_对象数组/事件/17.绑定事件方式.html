@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">我是div</div>
+    <script>
+        // 0 级事件 ：  元素 .on事件名称  = 事件函数 
+        // 1 级事件 ： 没有；
+        // 2 级事件 ： 元素.addEventListener("事件名",事件函数,是否冒泡);
+        // 3 级事件 ： blur  focus  ... 
+
+        // 一、0级事件绑定 ； 
+        // 1.绑定事件 ；
+        // var boxEle = document.querySelector(".box");
+        // boxEle.onclick = function(){
+        //     console.log("点击了");
+        // }
+        // // 2.解除绑定事件 ；
+        // boxEle.onclick  = null;
+
+        // 二、二级事件的绑定 
+        // 1.绑定事件 
+        // addEventListener: 添加事件监听
+        // var boxEle = document.querySelector(".box");
+        // var  fn1 = function(){
+        //     console.log("点击了");
+        // }
+        // boxEle.addEventListener("click",fn1);
+
+        // // 2.解除绑定事件
+        // // 注意 ： 解除绑定的事件函数 要和 绑定的事件函数一样；
+        // // var fn2 = function(){
+        // //     console.log("点击了");
+        // // }
+        // // boxEle.removeEventListener("click",fn2)
+        // boxEle.removeEventListener("click",fn1)
+
+        // 三、addEventListener 兼容性问题 
+        // function addEvent(ele,eventName,fn){
+        //     // ele 绑定的元素  ， eventName 事件名称 ，fn 事件函数；
+        //     if(window.addEventListener){
+        //         // 证明系统支持 addEventListener 函数 
+        //         ele.addEventListener(eventName,fn);
+        //     }else{
+        //         // IE8及以下浏览器 
+        //         ele.attachEvent("on"+eventName,fn);
+        //     }
+        // }
+        // var boxEle = document.querySelector(".box");
+        // addEvent(boxEle,"click",function(){
+        //     console.log("点击了");
+        // })
+
+
+        // 四、0级事件绑定 和 2级事件绑定的区别 ？
+        // 0级事件绑定多个事件的时候 后一个会覆盖前面的事件
+        // 2级事件 绑定多个事件都会有效果；
+        var boxEle = document.querySelector(".box");
+        // boxEle.onclick = function(){
+        //     console.log("点击了111");
+        // }
+        // boxEle.onclick = function(){
+        //     console.log("点击了222");
+        // }
+
+
+        //var arr =  [fn1,fn2,fn3]
+        // arr.forEach(fucntion(fn){
+            //  fn();
+        // })
+
+        boxEle.addEventListener("click",function(){
+            console.log("点击了111");
+        })
+
+        boxEle.addEventListener("click",function(){
+            console.log("点击了2222");
+        })
+        var fn3 = function(){
+            console.log("点击了333");
+        }
+        boxEle.addEventListener("click",fn3)
+        // boxEle.removeEventListener("click",fn3);
+    </script>
+</body>
+</html>

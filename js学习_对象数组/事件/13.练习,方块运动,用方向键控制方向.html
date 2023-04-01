@@ -37,31 +37,31 @@
                 switch(dir){
                     case 'top':
                         var num = parseInt(getComputedStyle(box1)['top']);
-                        box1.style.top = num - 10 + 'px';
+                        box1.style.top = num - 30 + 'px';
                         break;
                     case 'bottom':
                         var num = parseInt(getComputedStyle(box1)['top']);
-                        box1.style.top = num + 10 + 'px';
+                        box1.style.top = num + 30 + 'px';
                         break;
                     case 'left':
                         var num = parseInt(getComputedStyle(box1)['left']);
-                        box1.style.left = num - 10 + 'px';
+                        box1.style.left = num - 30 + 'px';
                         break;
                     case 'right':
                         var num = parseInt(getComputedStyle(box1)['left']);
-                        box1.style.left = num + 10 + 'px';
+                        box1.style.left = num + 30 + 'px';
                         break;
                 }
                 if(isCrash(box1,box2)){
                     box2.remove()
-                    let box3 = document.createElement('div')
-                    box3.style.backgroundColor = 'red'
-                    box3.style.width = 100 + 'px'
-                    box3.style.height = 100 + 'px'
-                    box3.style.position = 'absolute'
-                    box3.style.left = Math.floor(Math.random() * 100) +'px'
-                    box3.style.top = Math.floor(Math.random() * 100) +'px'
-                    body.appendChild(box3)
+                    // let box3 = document.createElement('div')
+                    // box3.style.backgroundColor = 'red'
+                    // box3.style.width = 100 + 'px'
+                    // box3.style.height = 100 + 'px'
+                    // box3.style.position = 'absolute'
+                    // box3.style.left = Math.floor(Math.random() * 100) +'px'
+                    // box3.style.top = Math.floor(Math.random() * 100) +'px'
+                    // body.appendChild(box3)
                 }
             },100)
             

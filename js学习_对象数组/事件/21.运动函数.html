@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        // 运动函数
+        // 1.方块从左至右运动
+        let boxEle = document.querySelector('.box')
+        // 把方块的运动封装成函数,提高复用性
+        //封装函数   函数对象 运动目标 方向  回调函数
+        function move(boxEle,target,dir,cb){
+            let timer = setInterval(function(){
+                // num是运动对象的位置距离大小
+                let num = parseInt(getComputedStyle(boxEle)[dir])
+                // 如果运动目标大于运动距离
+                // 例: 第二运动到第三运动是500 ---->0 ,这就是目标小于距离,则减法
+                let speed = target > num ? 1 : -1
+                // 距离到达目标后停止
+                if(num === target){
+                    clearInterval(timer)
+                    // 如果有cb,则执行cb函数,没有则不执行,避免错误
+                    cb && cb()
+                }else{
+                    boxEle.style[dir] = num + 10 * speed + 'px'
+                }
+            },20)
+        }
+
+
+        move(boxEle,500,'left',function(){
+            move(boxEle,500,'top',function(){
+                move(boxEle,0,'left',function(){
+                    move(boxEle,0,'top')
+                })
+            })
+        })
+    </script>
+</body>
+</html>
