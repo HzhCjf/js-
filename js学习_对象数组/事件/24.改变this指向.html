@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            改变this指向:三种方式
+            不要关注this的定义,需要关注this的调用
+        */
+        // 一.通过  函数.call(需要改变的this,函数参数1,函数参数2...) 来修改this指向
+        // function fn(a,b){
+        //     console.log(this,a,b);
+        // }
+        // let obj = {
+        //     name : 1,
+        // }
+        // fn.call(obj,1,2)
+
+
+        // 1.call调用函数  第一个参数是对象 ，那么函数里的this就是这个对象
+        // fn.call({name:"hello"},5,6);
+        // 2.call 调用函数 第一个参数 是 null 或者是 undefined 那么函数里的this 会执行window
+        // 3.call 调用函数的时候 第一个参数是简单数据类型 ，那么 函数里的this 会指向  对象格式的简单数据类型 ，就是把简单数据类型转成对象；
+
+
+        // 二.通过  函数.apply(需要改变的this,[参数1,参数2...]) 来改变函数里的this指向
+        function fn(a,b){
+            console.log(this,a,b);
+        }
+        fn.apply(123,[1,2])
+        // apply的传参的时候需要用数组装起来
+        // 1.apply调用函数  第一个参数是对象 ，那么函数里的this就是这个对象
+        // fn.apply({name:"hello"},5,6);
+        // 2.apply 调用函数 第一个参数 是 null 或者是 undefined 那么函数里的this 会执行window
+        // 3.apply 调用函数的时候 第一个参数是简单数据类型 ，那么 函数里的this 会指向  对象格式的简单数据类型 ，就是把简单数据类型转成对象；
+
+
+        // 简化写法 ；
+        // function fn(){
+        //     console.log(arguments);
+        //     function mytest(){
+        //         console.log(this,arguments);
+        //     }
+        //     mytest.apply({name:"123"},arguments)
+        // }
+
+
+        // fn(1,2,3) ;// 不定参 ，参数不确定 
+
+
+
+
+        // 三.通过  函数.bind() 来改变this指向
+        // 需要改变this指向,但是客户不能指向,js或者框架内部指向
+        function fn(a,b){
+            console.log(this,a,b);
+        }
+        fn.bind(123)(1,2)//bind改变this指向需要执行两次,也可以不加后面一个小括号选择不执行函数,只改变this指向,
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 实现一个mycall方法 
+        // fn是 需要改this的函数
+        // obj 是需要改到 fn里的this对象；
+        // function mycall(fn,obj,...args){
+        //     obj = obj || window;  // 针对传入的 null 和 undefined 处理 
+        //     // console.log(obj);
+        //     obj = Object(obj);  // 如果是简单数据类型 ，那么 把简单数据类型 变成对象；
+        //     obj.fnName = fn;
+        //     // console.log(obj);
+        //     obj.fnName(...args);  // 通过对象 来调用 fnName方法 ，那么 fnName 里的this 就指向这个 obj对象；
+        //     delete obj.fnName;  // 调用完毕了 ，this已经被改了，那么这个函数方法 就没有意义了，可以删除掉了；
+        // }
+
+        // function myfn(a,b,c){
+        //     console.log(this,a,b,c);
+        // }
+        // mycall(myfn,{hello:"你好"},1,2,3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function mycall(fn,obj,...ages){
+            obj = obj||window
+            obj = Object(obj)
+            obj.fnname = fn
+            obj.fnname(...ages)
+            delete obj.fnname
+        }
+        function myfn(a,b,c){
+            console.log(this,a,b);
+        }
+        mycall(myfn,123,1,2)
+
+
+
+        function myapply(fn,obj,ages){
+            obj = obj||window
+            obj = Object(obj)
+            obj.fnname = fn
+            obj.fnname(...ages)
+            delete obj.fnname
+        }
+        function myfn2(a,b,c){
+            console.log(this,a,b);
+        }
+        myapply(myfn2,123,[1,2])
+
+
+
+        function mybind(fn,obj){
+            obj = obj||window
+            obj = Object(obj)
+            obj.fnname = fn 
+            return function(...ages){
+                obj.fnname(...ages)
+                delete obj.fnname
+            }
+        }
+        function myfn3(a,b,c){
+            console.log(this,a,b);
+        }
+        mybind(myfn3,123)(1,2)
+    </script>
+</body>
+</html>

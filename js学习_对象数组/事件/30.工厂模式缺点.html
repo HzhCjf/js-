@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.性能问题 2.写法复杂 ；
+        // 1.性能问题 
+        // function Person(name,age){
+        //     var obj = {};
+        //     obj.name = name;  // 属性
+        //     obj.age = age;  // 属性
+        //     obj.hobby = function(){  // 方法
+        //         console.log("喜欢篮球")
+        //     }
+        //     return obj;
+        // }
+        // var zhangsan = Person("张三",20);
+        // var lisi = Person("李四",21);
+        // console.log(zhangsan.hobby === lisi.hobby);
+
+
+        // 构造函数，1.性能问题 。 给所有对象提供一个公共空间，可以让所有对象复用；这个公共空间 称为 prototype 原型；
+        // 构造函数的调用 是通过 new 可以调用 ，new 可以简化写法；
+        function Person(name, age) {
+            this.name = name;  // 属性
+            this.age = age;  // 属性
+        }
+        Person.prototype.hobby = function () {
+            console.log("喜欢篮球");
+        }
+        let qq = new Person('zhangsan',2222,qq.hobby())
+        console.log(qq);
+        // 具象化 ，通过new 来具象 ，new 也称为 实例化；
+        // var  zhangsan = new Person("张三",20);
+        // var lisi = new Person("李四",21);
+        // console.log(zhangsan.hobby === lisi.hobby);
+
+
+        // new 做的事情 
+        // 一、创建一个空对象 
+        // 二、把这个对象改成 构造函数里的this
+        // 三、把构造函数的公共空间 prototype 赋值给这个对象的原型；
+        // 四、如果构造函数没有返还对象 那么会隐式返还这个空对象 也就构造函数里的this
+        function mynew(Person, name, age) {
+            var obj = {};
+            var res = Person.call(obj, name, age);
+            obj.__proto__ = Person.prototype
+            if (typeof res !== "object") {
+                return obj;
+            } else {
+                return res;
+            }
+        }
+
+        var zhangsan = mynew(Person,"张三",20);
+        console.log(zhangsan);
+
+
+
+
+        function mynew2(Person,name,age){
+            let obj = {}
+            let res = Person.call(obj,name,age)
+            obj.__proto__ = Person.prototype
+            if(res !== 'object'){
+                return obj
+            }else{
+                return res
+            }
+        }
+        let qw = mynew2(Person,'zz',198)
+        console.log(qw);
+// 作业 ：复习   防抖 节流  mycall myapply mybind  new的实现；
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 高阶函数： 一个函数有函数作为输入 或者输出的函数 称为高阶函数
+         function mybind(fn, obj) {
+            obj = obj || window;
+            obj = Object(obj);
+            obj.fnName = fn;
+            return function (...args) {
+                obj.fnName(...args);
+                delete obj.fnName;  //删除掉 fnName
+            }
+        }
+
+        function myfn(a, b,c) {
+            console.log(this, a, b,c)
+        }
+
+        // curry: 科里化，把多元参数转成一元参数的过程；
+        mybind(myfn, { name: 123 })(1,2,3)
+    </script>
+</body>
+</html>

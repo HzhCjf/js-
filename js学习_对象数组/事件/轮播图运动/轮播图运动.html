@@ -26,12 +26,30 @@
         .imgContainer img {
             float: left;
         }
+        .nextOrPre {
+            width: 520px;
+            height: 50px;
+            font-size: 50px;
+            color: red;
+            position: absolute;
+            top: 40%;
+            z-index: 1;
+        }
+
+        .next {
+            float: right;
+        }
     </style>
 
 </head>
 
 <body>
     <div class="container">
+        <div class="nextOrPre">
+            <span class="pre">
+                < </span>
+                    <span class="next">></span>
+        </div>
         <div class="imgContainer">
             <img src="./img/1t.png" alt="">
             <img src="./img/2t.png" alt="">
@@ -44,9 +62,9 @@
     <script>
         // 一、让imgContainer 从右向左移动一个图片的距离；
         var imgContainer = document.querySelector(".imgContainer");
-
+        var containerEle = document.querySelector(".container");
         var index = 0; // 图片所在位置的下标
-
+        let timer
         // index  = 0   ----> -520px
         // index = 1  ----- > -1040
         // index = 2  --- >  1560px
@@ -56,19 +74,56 @@
         imgContainer.style.width = 3120 + 'px'
         imgContainer.appendChild(img1Copy)
         console.log(imgContainer);
-        setInterval(function () {
+        function auto() {
+            timer = setInterval(function () {
+                move(imgContainer, -520 * (index + 1), "left", function () {
+                    console.log("运动结束了");
+                    index++;
+                    console.log(index);
+                    if (index === 5) {
+                        index = 0;
+                        imgContainer.style.left = "0px";
+                    }
+                })
+            }, 2000);
+        }
+
+        auto();
+
+
+
+         // 1.over 和 out ： 会触发子元素
+        // 2. enter 和 leave  ： 不会触发子元素 
+
+        // containerEle.onmouseover = function(){
+        //     console.log("移入了")
+        // }
+        // containerEle.onmouseout = function(){
+        //     console.log("移除了");
+        // }
+
+        containerEle.onmouseenter = function () {
+            console.log("移入了")
+            clearInterval(timer);
+        }
+
+        containerEle.onmouseleave = function () {
+            console.log("移除了");
+            auto();
+        }
+
+
+        // 下一页 功能 ；
+        var nextEle = document.querySelector(".next");
+        nextEle.onclick = function () {
             move(imgContainer, -520 * (index + 1), "left", function () {
-                console.log("运动结束了");
                 index++;
-                console.log(index);
-                if(index===5){
+                if (index === 5) {
                     index = 0;
                     imgContainer.style.left = "0px";
                 }
             })
-        }, 2000);
-
-
+        }
 
 
 

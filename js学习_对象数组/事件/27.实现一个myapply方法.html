@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function myapply(fn, obj, arg) {
+            obj = obj || window;  // 针对传入的 null 和 undefined 处理 
+            obj = Object(obj);  // 如果是简单数据类型 ，那么 把简单数据类型 变成对象；
+            obj.fnName = fn;
+            // arg = [1,2,3,4]  ----> ...arg --->1,2,3,4
+            obj.fnName(...arg);  // 通过对象 来调用 fnName方法 ，那么 fnName 里的this 就指向这个 obj对象；
+            delete obj.fnName;  // 调用完毕了 ，this已经被改了，那么这个函数方法 就没有意义了，可以删除掉了；
+        }
+
+        function myfn(a, b,c,d) {
+            console.log(this, a, b,c,d);
+        }
+
+        myapply(myfn, { name: 123 }, [1, 2, 3, 4])
+    </script>
+</body>
+</html>

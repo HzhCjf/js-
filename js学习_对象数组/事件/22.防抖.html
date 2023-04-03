@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>点击我1</button>
+    <!-- <button>点击我2</button> -->
+    <script>
+        // 防抖 ： debounce ，在一段时间内 ，如果不停触发事件 ，那么事件只会执行一次 ，如果 事件触发的间隔时间小于 保护事件，那么会重新计时 ；
+
+        // 一、前置防抖 ： 先执行代码 ，在防抖。
+        // var btn = document.querySelector("button");
+        // var timer = null;
+        // btn.onclick = function () {
+        //     if (!timer) {
+        //         console.log("执行了");
+        //     }
+        //     clearTimeout(timer);  // 清除 timer 
+        //     timer = setTimeout(function(){
+        //         timer = null;
+        //     }, 2000);
+        // }
+
+        // 第一次 ： timer  = null  ----> if(!time == true) 会执行代码    clearTimeout(null);    timer = 1;  
+        // 第二次  timer   = 1  ----> if(!timer === false) 不会执行；
+        // 第一种 ： 间隔时间小于2s   clearTimeout(1); timer被重新计时 ；
+        // 第二种 ：间隔 大于 2s  执行代码   clearTimeout(null) 没有意义；
+
+        // 二、后置防抖 ： 先防抖 在执行代码；
+
+        // var btn = document.querySelector("button");
+        // var timer = null;
+        // btn.onclick = function () {
+        //     clearTimeout(timer);  // 清除 timer 
+        //     timer = setTimeout(function(){
+        //         timer = null;
+        //         console.log("执行了");
+        //     }, 2000);
+        // }
+
+
+
+        // 三、通用防抖  : 封装一个防抖函数 
+        // function debounce(fn, delay) {
+        //     var timer = null;
+        //     return function () {
+        //         if (!timer) {
+        //             fn();
+        //         }
+        //         clearTimeout(timer);  // 清除 timer 
+        //         timer = setTimeout(function () {
+        //             timer = null;
+        //         }, delay);
+        //     }
+        // }
+
+        // var btns = document.querySelectorAll("button");
+        // btns[0].onclick =debounce(function(){console.log("执行了")},2000)
+        // btns[1].onclick =debounce(function(){console.log("执行了222")},2000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 前置防抖
+        // let btn = document.querySelector('button')
+        // 判断条件
+        // let timer = null
+        // btn.onclick = function(){
+        //     // null为false,取反直接执行
+        //     if(!timer){
+        //         console.log('执行了');
+        //     }
+        //     // 清除定时器,如果一直点就一直清除.
+        //     clearTimeout(timer)
+        //     // 定时器时间过后就会把timer的值重置
+        //     timer = setTimeout(function(){
+        //         timer = null
+        //     },1000)
+        // }
+
+
+
+        // 后置防抖
+        // let btn = document.querySelector('button')
+        // let timer = null
+        // btn.onclick = function(){
+        //     if(!timer){
+        //         // 点了之后就直接清除timer
+        //         clearTimeout(timer)
+        //         timer = setTimeout(function(){
+        //             console.log('执行了');
+        //             timer = null
+        //         },1000)
+        //     }
+        // }
+
+
+        let btn = document.querySelector('button')
+        function debounce(fn,delay){
+            let timer = null
+            return function(){
+                if(!timer){
+                    fn()
+                }
+                // 清除定时器,如果一直点就一直清除.
+                clearTimeout(timer)
+                // 定时器时间过后就会把timer的值重置
+                timer = setTimeout(function(){
+                    timer = null
+                },delay)
+            }
+        }
+        btn.onclick = debounce(function(){
+            console.log(666);
+        },2000)
+    </script>
+</body>
+
+</html>

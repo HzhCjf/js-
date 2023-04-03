@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 520px;
+            height: 280px;
+            margin: 0 auto;
+            border: 1px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .imgContainer {
+            width: 2600px;
+            height: 280px;
+            position: absolute;
+            left: 0px;
+        }
+
+        .imgContainer img {
+            float: left;
+        }
+
+        .nextOrPre {
+            width: 520px;
+            height: 50px;
+            font-size: 50px;
+            color: red;
+            position: absolute;
+            top: 40%;
+            z-index: 1;
+        }
+
+        .next {
+            float: right;
+        }
+
+        .dots {
+            width: 520px;
+            height: 50px;
+            position: absolute;
+            top: 90%;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dots span {
+            width: 10px;
+            height: 10px;
+            display: block;
+            background-color: rgb(255, 255, 255);
+            border-radius: 50%;
+            margin: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="dots">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="nextOrPre">
+            <span class="pre">
+                < </span>
+                    <span class="next">></span>
+        </div>
+        <div class="imgContainer">
+            <img src="./img/1t.png" alt="">
+            <img src="./img/2t.png" alt="">
+            <img src="./img/3t.png" alt="">
+            <img src="./img/4t.png" alt="">
+            <img src="./img/5t.png" alt="">
+        </div>
+    </div>
+
+    <script>
+        // 点的功能 ；
+        // 1.轮播图轮播的时候，点 的样式需要改变
+        // 2.点击 点的时候 轮播图需要切换位置；
+
+        var imgContainer = document.querySelector(".imgContainer");
+
+        var containerEle = document.querySelector(".container");
+
+
+        var index = 0; // 图片所在位置的下标
+
+        var timer;
+        function auto() {
+            timer = setInterval(function () {
+                move(imgContainer, -520 * (index + 2), "left", function () {
+                    console.log("运动结束了");
+                    index++;
+                    console.log(index);
+                    if (index === 5) {
+                        index = 0;
+                        imgContainer.style.left = "-520px";
+                    }
+                    changeDots();
+                })
+            }, 2000);
+        }
+
+        auto();
+
+
+        containerEle.onmouseenter = function () {
+            console.log("移入了")
+            clearInterval(timer);
+        }
+
+        containerEle.onmouseleave = function () {
+            console.log("移除了");
+            auto();
+        }
+
+
+        // 下一页 功能 ；
+        var nextEle = document.querySelector(".next");
+        nextEle.onclick = function () {
+            move(imgContainer, -520 * (index + 2), "left", function () {
+                index++;
+                if (index === 5) {
+                    index = 0;
+                    imgContainer.style.left = "-520px";
+                }
+                changeDots();
+            })
+        }
+
+        // 实现上一页功能
+        var preEle = document.querySelector(".pre");
+        preEle.onclick = function () {
+            move(imgContainer, -520 * index, "left", function () {
+                // console.log("运动结束");
+                index--;
+                console.log(index);
+                if (index === -1) {
+                    imgContainer.style.left = "-2600px";
+                    index = 4;
+                }
+                changeDots();
+            })
+        }
+
+
+        // 点的功能 
+        // 1.轮播图切换的时候 点要切换
+        function changeDots() {
+            var dots = document.querySelectorAll(".dots span");
+            dots.forEach(function (item, key) {
+                if (key === index) {
+                    item.style.background = "rgb(255, 112, 17)";
+                } else {
+                    item.style.background = "white";
+                }
+            })
+        }
+        changeDots();
+
+        // 2.点击点的时候 轮播图 需要切换
+        var dots = document.querySelectorAll(".dots span");
+        dots.forEach(function (item, key) {
+            item.onclick = function () {
+                // console.log(key);
+                index = key;  // 需要把index的值 改变；
+                move(imgContainer, -520 * (index + 1), "left", function () {
+                    changeDots();
+                })
+            }
+        })
+
+
+        // 监听 页面切换的事件 
+        var flag = true;
+        window.addEventListener("visibilitychange",function(){
+            // console.log("切换了");
+            flag = !flag;
+            // console.log(flag);
+            if(flag){
+                // 切回来了 ，启动轮播图 
+                auto();
+            }else{
+                // 切换走了 ，停止轮播图；
+                clearInterval(timer);
+            }
+        })
+
+
+
+
+
+
+        // 复制 第一张图片 放在最后面
+        var firstImg = imgContainer.firstElementChild;
+        var copyFirstImg = firstImg.cloneNode(true);
+
+        var lastImg = imgContainer.lastElementChild;  // 获取最后一个图
+        console.log("最后一张", lastImg);
+        var copyLastImg = lastImg.cloneNode(true); // 复制一份；
+        imgContainer.insertBefore(copyLastImg, firstImg) // 把复制的元素 放在第一张之前；
+        imgContainer.style.left = "-520px";
+        imgContainer.style.width = "3640px";
+        imgContainer.appendChild(copyFirstImg)
+
+
+
+
+
+
+        function move(boxEle, target, dir, cb) {
+            var timer = setInterval(function () {
+                var num = parseInt(getComputedStyle(boxEle)[dir]);
+                // 现在放在 0 ----> 500 px  加 
+                // 现在在 500px ----> 0   减
+                var speed = target > num ? 1 : -1
+
+                if (num === target) {
+                    clearInterval(timer);
+                    // console.log("运动完成");
+                    // if(cb){
+                    //     cb();
+                    // }
+                    cb && cb();  // cb 回调函数 可以传 也可以不传都不会报错
+                } else {
+                    boxEle.style[dir] = num + 20 * speed + "px";
+                }
+            }, 1)
+        }
+    </script>
+</body>
+
+</html>

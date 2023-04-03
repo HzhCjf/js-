@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 面向对象 （oop）： 是一种思维方式 ，编程思维 ；
+        // 2. 面向过程 ： 注重事物发展的顺序 按照事物发展顺序一步一步执行
+
+        // 面向对象里 ： 先分析需求中涉及的对象 ，分析对象的 特征(属性)和行为（方法）；
+        // 抽象 对象的共性特性 和 特性特征；  把共性特征抽象成类（提高复用性）  
+        // 组织类之间的各种逻辑关系；
+        
+        // 类 ： 一类事物 ，一类事物的共同特征 ，一种抽象 ，泛指 ，复数；
+        // 对象 ： 独一无二 。
+        // 类 ----》 具象化 ----》对象 
+        // 人类 ----> 张三 、李四、王五....
+
+        // js里表述 类 ；工厂模式描述类 ；
+        // js里表述类的函数 约定俗成（不是语法规则，是共识） 首字母大写；
+        // 工厂模式 
+        function Person(name,age,height,hobby){  // 人类工厂；
+            var obj = {};  // 添加原材料；
+            // 加工原材料
+            obj.name = name;
+            obj.age = age;
+            obj.height = height;
+            obj.hobby = function(){
+                console.log("爱好是"+hobby);
+            }
+            // 出厂
+            return obj;
+        }
+
+        // 具象化 ；
+        var zhangsan = Person("张三",20,"178","篮球");
+        var lisi = Person("李四",21,"180","足球");
+        console.log(zhangsan,lisi);
+
+
+        /* 
+        类 ：复数   工厂模式
+        对象：独一无二  ，对象；
+        */
+
+
+
+
+
+    </script>
+</body>
+</html>

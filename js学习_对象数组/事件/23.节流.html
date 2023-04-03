@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 节流 ： throttle ，事件 在一定时间间隔内，不停的触发；控制触发的频率；
+
+        // move事件 
+        // 一、通过定时器实现节流  ：
+        // var timer = null;
+        // document.onmousemove = function () {
+        //     if (!timer) {
+        //         console.log("move了");
+        //         timer = setTimeout(function () {
+        //             timer = null;
+        //         }, 1000);
+        //     }
+        // }
+
+        // 第一次  ： timer =  null ----> 进入判断  执行代码 ---> timer = 1； 
+        // 第二次 ： time  = 1；  不会进入判断  不会执行；
+        // 时间超过 2s  timer = null  ，又会执行 代码 
+
+
+        // 二、利用时间戳 实现节流 
+        // var startTime = new Date().getTime();
+        // document.onmousemove = function () {
+        //     var endTime = new Date().getTime();
+        //     if (endTime - startTime > 1000) {
+        //         console.log("执行了");
+        //         startTime = endTime;
+        //     }
+        // }
+
+
+        // 三、通用节流 
+        // function throttle(fn, delay) {
+        //     var startTime = new Date().getTime();
+        //     return function () {
+                
+        //         var endTime = new Date().getTime();
+        //         if (endTime - startTime > delay) {
+        //             fn();
+        //             // fn.call(this);
+        //             startTime = endTime;
+        //         }
+        //     }
+        // }
+
+        // document.onmousemove =throttle(function(){
+        //     console.log("执行了",this);
+        // },500);
+
+
+        /* 
+        防抖 debounce： 在指定时间内 执行一次 ，如果小于间隔时间 ，那么时间会重置 。施法前摇；
+        节流 throttle ： 在一段时间内 不停的执行事件 ，控制频率 。 技能cd
+        // input框输入的时候 做一个节流处理；
+        
+        
+        */
+
+
+
+        // let timer = null
+        // document.onmousemove = function(){
+        //     if(!timer){
+        //         console.log('老move了');
+        //         timer = setTimeout(function(){
+        //             timer = null
+        //         },1000)
+        //     }
+        // }
+
+
+
+        // let nowtime = new Date().getTime()
+        // document.onmousemove = function(){
+        //     let endtime = new Date().getTime()
+        //     if(endtime - nowtime > 1000){
+        //         console.log('老move了');
+        //         nowtime = endtime
+        //     }
+        // }
+
+
+        function throttle(fn,delay){
+            let nowtime = new Date().getTime()
+            return function(){
+                let endTime = new Date().getTime()
+                if(endTime - nowtime > 1000){
+                    fn()
+                    nowtime = endTime
+                }
+            }
+        }
+
+        document.onmousemove = throttle(function(){
+            console.log('老move了2.0版');
+        },1000)
+    </script>
+</body>
+
+</html>
