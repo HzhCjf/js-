@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 一、私有成员  ： 类的内部可以访问 ，外部不能访问的成员；
+        // 1.私有成员  2.公有 
+        // function Person() {
+        //     var _weight = "100kg";  // 私有属性； ，只能内部调用 
+        //     console.log(_weight)
+        //     this.name = "张三";  // 公有 
+        //     this.age = 20; // 公有 
+        //     console.log(this.age);  // 内部调用
+        // }
+
+        // var zhangsan = new Person();
+        // console.log(zhangsan.age); // 外部调用 ；
+        // console.log(zhangsan._weight);
+
+        // __proto__ : 私有成员 ；
+        // console.log({});
+        // var obj = {
+        //     name: "张三",
+        //     age: 20
+        // }
+        // // obj.__proto__.height = "178cm";  // 不推荐；
+        // // console.log(obj);
+        // // Object.setPrototypeOf(obj,{height:"178cm"});  // 推荐设置原型 
+        // // console.log(obj);
+        // // console.log(obj.__proto__);
+        // var res = Object.getPrototypeOf(obj);
+        // console.log(res);
+
+
+        // 二、静态成员 （静态属性 和 静态方法）： 是属于类的特性 不属于对象的特性 ；
+        // 不需要实例化  直接调用；
+        // 静态成员 是描述类的 属性和特征 ；
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+
+        // Person.myname = "hello";  // 静态属性 
+        // Person.myfn = function(){
+        //     console.log("myfn");
+        // }
+        // Person.prototype.fn = function(){
+        //     console.log("fn")
+        // }
+
+        // console.log(Person.myname)
+        // Person.myfn();
+
+        // var zhangsan = new Person("张三",20);
+        // // console.log(zhangsan);
+        // console.log(zhangsan.myname);
+
+
+        // 统计 Person类的实例化次数；
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+            Person.num++;
+        }
+        Person.num = 0; // 静态属性 记录实例化的次数；
+
+        var zhangsan = new Person("张三",20);
+        var lisi = new Person("李四",21);
+        console.log(Person.num);
+
+
+        
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -46,23 +46,38 @@
             属性 ：1. 按钮属性   2. divs 属性 3. num 属性 记录选项卡位置的值
             方法 ：1.循环按钮方法  btnFor  2.循环div 的方法 divFor
         */
+
+
+        // 选项卡类
         function Tab(btns, divs) {
+            // 按钮
             this.btns = btns;
+            // div
             this.divs = divs;
+            // div索引
             this.num = 0;
+            // 内部调用按钮
             this.btnFor(); 
         }
+        // 按钮方法
         Tab.prototype.btnFor = function(){
+            // 将指向实例化对象的this装入that,因为再forEach中this不再指向对象
             var that = this;
+            // 为每个按钮绑定点击事件
             this.btns.forEach(function(btn,key){
                 btn.onclick = function(){
+                    // 点击时,索引值就对应这个
                     that.num = key;
+                    // 调用div方法
                     that.divFor(key);
                 }
             })
         }
+        // 创建div组类
         Tab.prototype.divFor = function(key){
+            // 循环每个div
             this.divs.forEach(function(div,k){
+                // 当div的key与按钮的key一样时,div显示,其他div隐藏
                 if(k === key){
                     div.style.display = "block"
                 }else{
@@ -78,24 +93,37 @@
 
         var btns2 = document.querySelectorAll(".container2 button");
         var divs2 = document.querySelectorAll(".container2 div");
+        // 实例化选项卡类
         let tab2 = new Tab(btns2,divs2);
+        // 获取下一页按钮
         let nextEle = document.querySelector('.next')
+        // 为下一页按钮添加点击事件
         nextEle.onclick = function(){
+            // 当div的索引为2时(最后一个)
             if(tab2.num == 2){
+                // 把索引重置为第一个的前面(0的前面),后面索引+1,直接到第一个
                 tab2.num = -1
             }
+            // 索引+1
             tab2.num++
+            // 切换div
             tab2.divFor(tab2.num)
         }
 
         var btns3 = document.querySelectorAll(".container3 button");
         var divs3 = document.querySelectorAll(".container3 div");
+        // 实例化选项卡
         let tab3 = new Tab(btns3,divs3);
+        // 定时器自动切换,轮播
         setInterval(function(){
+            // 当div的索引为2时(最后一个)
             if(tab3.num == 2){
+                // 把索引重置为第一个的前面(0的前面),后面索引+1,直接到第一个
                 tab3.num = -1
             }
+            // 索引+1
             tab3.num++
+            // 切换div
             tab3.divFor(tab3.num)
         },1000)
     </script>

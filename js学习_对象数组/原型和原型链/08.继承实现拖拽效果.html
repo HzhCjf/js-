@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+
+        .box1 {
+            background-color: red;
+            left: 0px;
+        }
+
+        .box2 {
+            background-color: blue;
+            left: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+
+    <script>
+        // 一、面向过程的拖拽 
+        // var box1 = document.querySelector(".box1");
+        // box1.onmousedown = function (e) {
+        //     var x = e.clientX - this.offsetLeft;
+        //     var y = e.clientY - this.offsetTop;
+        //     this.onmousemove = function (e) {
+        //         var xx = e.clientX;
+        //         var yy = e.clientY;
+        //         this.style.left = xx - x + "px";
+        //         this.style.top = yy - y + "px";
+        //     }
+        //     this.onmouseup = function () {
+        //         this.onmousemove = "";
+        //     }
+        // }
+
+        // 二、改成面向对象写法 ；
+        // 单一模式  ： 功能越单一越好 ；后期维护更方便；
+        
+        
+
+        function Drag(ele) {
+            this.ele = ele;
+            this.downFn();
+        }
+
+        Drag.prototype.downFn = function () {
+            var that = this;
+            this.ele.onmousedown = function (e) {
+                var x = e.clientX - this.offsetLeft;
+                var y = e.clientY - this.offsetTop;
+                that.moveFn(x,y);
+                that.upFn();
+                that.style.zIndex = 1
+            }
+        }
+
+        Drag.prototype.moveFn = function (x,y) {
+            this.ele.onmousemove = function (e) {
+                var xx = e.clientX;
+                var yy = e.clientY;
+                this.style.left = xx - x + "px";
+                this.style.top = yy - y + "px";
+                this.style.zIndex = 1
+            }
+        }
+
+        Drag.prototype.upFn = function () {
+            this.ele.onmouseup = function () {
+                // this.style.zIndex = 0
+                this.onmousemove = "";
+            }
+        }
+        // 创建子类
+        function SonDrag(...ages){
+            // 改变父类的this指向
+            Drag.call(this,...ages)
+        }
+        // 拷贝父类的原型到子类原型里面
+        SonDrag.prototype = copy(Drag.prototype)
+        // 因为子类原型中的constructor被覆盖,重新找回constructor指向子类
+        SonDrag.prototype.constructor = SonDrag
+        // 重写子类的移动moveFn
+        SonDrag.prototype.moveFn = function(x,y){
+            this.ele.onmousemove = function (e) {
+                var xx = e.clientX;
+                var yy = e.clientY;
+                var disx = xx - x ;
+                var disy = yy - y;
+                if(disx<=0){
+                    disx = 0;
+                }else if(disx >= 600){
+                    disx = 600
+                }
+                if(disy<=0){
+                    disy = 0;
+                }else if(disy>=600){
+                    disy = 600
+                }
+                this.style.left = disx + "px";
+                this.style.top = disy + "px";
+            }
+        }
+        var box1 = document.querySelector(".box1");
+        var drag1 = new Drag(box1);
+
+
+        var box2 = document.querySelector(".box2");
+        var drag2 = new SonDrag(box2);
+
+
+
+        // function getType(arg){
+        //     return typeof arg
+        // }
+
+        // 深拷贝
+        function copy(obj1){
+            // 判断是否是数组,是数组就创建数组,不是就创建对象
+            let obj2 = Array.isArray(obj1) ? [] : {};
+            // 遍历
+            for(let key in obj1){
+                if (obj1.hasOwnProperty(key)) {
+                    // 对对象中的值进行类型判断,如果是对象,则继续调用函数,来进行拷贝
+                    if(typeof obj1[key] === 'object'){
+                        obj2[key] = copy(obj1[key])
+                    }
+                    else{
+                        // 不是则直接拷贝
+                        obj2[key] = obj1[key]
+                    }
+                }
+                
+            }
+            // 返回拷贝的
+            return obj2
+         }
+    </script>
+</body>
+
+</html>

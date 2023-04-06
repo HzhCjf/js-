@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 面向对象的三大特征: 1.封装   2.继承  3.多态
+        // 继承:子类继承父类的特征和行为
+        // 一.构造函数的继承
+        // function Dad(name){
+        //     this.name = name
+        //     this.age = 69
+        //     this.money = '$987456311478464'
+        //     this.hobby = function(){
+        //         console.log('马杀鸡');
+        //     }
+        // }
+
+        // // 子类
+        // // 继承:extends 扩展
+
+        // // 通过改变子类的this到父类构造函数中去
+        // function Son(name){
+        //     Dad.call(this,name)
+        //     this.height = '185cm'
+        // }
+
+        // let zhangsan = new Son('张三')
+        // let zhanger = new Dad('张二')
+        // console.log(zhanger);
+        // console.log(zhangsan);
+
+
+
+
+
+
+        // 二.原型的继承:切断两个原型直接的引用关系
+        // 1.组合继承
+        // function Dad(name){
+        //     this.name = name
+        //     this.age = 69
+        //     this.money = '$987456311478464'
+            
+        // }
+        // Dad.prototype.hobby = function(){
+        //         console.log('马杀鸡');
+        // }
+        // function Link(){}
+        // Link.prototype = Dad.prototype
+        // Son.prototype = new Link()
+        // Son.prototype.constructor = Son
+
+        // function Son(name){
+        //     Dad.call(this,name)
+        //     this.height = '185cm'
+        // }
+        // Son.prototype.hobby = function(){
+        //     console.log('精油推背');
+        // }
+
+        
+        // let zhangsan = new Son('张三')
+        // let zhanger = new Dad('张二')
+        // zhanger.hobby()
+        // zhangsan.hobby()
+
+
+
+        // 2.深拷贝
+        function Dad(name){
+            this.name = name
+            this.age = 69
+            this.money = '$987456311478464'
+            
+        }
+        Dad.prototype.hobby = function(){
+                console.log('马杀鸡');
+        }
+        function Son(name){
+            Dad.call(this,name)
+        }
+        // 拷贝原型
+         Son.prototype = copy(Dad.prototype)
+         Son.prototype.constructor = Son
+         let zhangsan = new Son('张三')
+         let zhanger = new Dad('张二')
+         console.log(zhanger,zhangsan);
+
+         function copy(obj1){
+            // 判断是否是数组,是数组就创建数组,不是就创建对象
+            let obj2 = Array.isArray(obj1) ? [] : {};
+            // 遍历
+            for(let key in obj1){
+                if (obj1.hasOwnProperty(key)) {
+                    // 对对象中的值进行类型判断,如果是对象,则继续调用函数,来进行拷贝
+                    if(typeof obj1[key] === 'object'){
+                        obj2[key] = copy(obj1[key])
+                    }
+                    else{
+                        // 不是则直接拷贝
+                        obj2[key] = obj1[key]
+                    }
+                }
+                
+            }
+            // 返回拷贝的
+            return obj2
+         }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 多态:一个方法在不同的类里,可以呈现不同的形态
+        
+
+        // 学生类
+        function Student(name,age){
+            this.name = name
+            this.age = age
+        }
+        // 为学生类创建方法
+        Student.prototype.doSomeThing = function(){
+            console.log('在学习!!!');
+        }
+
+        // 工作人员类
+        function Worker(name,age){
+            this.name = name
+            this.age = age
+        }
+        // 为工作类创建方法
+        Worker.prototype.doSomeThing = function(){
+            console.log('在工作');
+        }
+        // 通过一个方法实现doSomeThing在不同类里表现不同的形态
+        function getSomeThing(obj){
+            obj.doSomeThing()
+        }
+        // 实例化
+        let zhangsan = new Student('张三',25)
+        let zhangsi = new Worker('张四',65)
+        // 调用
+        getSomeThing(zhangsan)
+        getSomeThing(zhangsi)
+    </script>
+</body>
+</html>

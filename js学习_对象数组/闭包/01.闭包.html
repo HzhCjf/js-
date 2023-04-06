@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 闭包:函数外部环境对函数形成一个包围
+        /* 
+        闭包(closure)是一个函数以及其捆绑的周边环境状态(lexical environment,词法环境)的引用的组合
+        换而言之,闭包让开发者可以从内部函数访问外部函数的作用域.在JavaScript中,闭包会随着函数的创建
+        而被同时创建 
+        */
+        
+
+        // 最简单的闭包
+        // let a = 10
+        // function fn(){
+        //     console.log(a);
+        // }
+        // fn()
+
+
+        // 利用嵌套函数实现闭包
+        // function fn(){
+        //     let a = 10
+        //     function myfn(){
+        //         console.log(a);
+        //     }
+        //     myfn()
+        // }
+        // fn()
+
+
+        // function fn(){
+        //     let a = 10
+        //     return function(a){
+        //         console.log(a);
+        //     }
+        // }
+        // let myfn = fn()//1.声明a变量 2.调用fn()a会打印  3.a会被垃圾回收机制回收
+        // // 变量会常驻内存,可以实现缓存,但也占用内存
+        // myfn()
+
+
+
+
+        // 利用闭包实现缓存
+        // function fn(){
+        //     console.log('fn');
+        // }
+
+        // function once(fn){
+        //     let flag = true
+        //     return function(){
+        //         if(flag){
+        //             fn()
+        //             flag = false
+        //         }else{
+        //             console.log('fn函数已经被执行了');
+        //         }
+        //     }
+        // }
+        // let myfn = once(fn)
+        // myfn()
+        // myfn()
+        // myfn()
+        // myfn = null//手动销毁闭包里面的内容,清理缓存
+
+
+
+
+        
+        function Person(name,age){
+            this.name = name
+            this.age = age
+        }
+
+        // 创建一个单例函数
+        function createInstance(Person){
+            // 缓存值
+            let instance = null
+            // 返回函数        形参
+            return function (...ages) {
+                // 如果没有缓存值  
+                if(!instance){
+                    // 把实例化的给到缓存里面
+                    instance = new Person(...ages)
+                }
+                // 返还缓存值
+                return instance
+            }
+        }
+        
+        let MyPerson = createInstance(Person)
+        let zhangsan = new MyPerson('张三',20)
+        let lisi = new MyPerson('李四',29)
+        console.log(zhangsan,lisi);
+    </script>
+</body>
+</html>

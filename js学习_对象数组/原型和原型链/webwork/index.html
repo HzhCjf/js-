@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // webwork:节约js性能
+        // ESM:ES6 module
+
+        let work1 = new Worker('./a.js');   //加载a.js文件,一步执行a.js文件
+        // 监听一个固有事件
+        work1.addEventListener('message',function(e){
+            console.log('work1',e.data);//接收到返回值
+        })
+
+        let work2 = new Worker('./b.js')
+        work2.addEventListener('message',function(e){
+            console.log('work2',e.data);//接收到返回值
+        })
+
+        
+    </script>
+</body>
+</html>

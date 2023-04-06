@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 练习 ：利用 静态成员  记录 实例化的对象 ，保证多次实例化只有一个实例； 单例模式； 单体模式；
+
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+            if(!Person.num){
+                Person.num = this
+            }
+            return Person.num
+        }
+        Person.num; // 静态属性 记录实例化的次数；
+
+        var zhangsan = new Person("张三",20);
+        var lisi = new Person("李四",21);
+        console.log(lisi);
+    </script>
+</body>
+</html>

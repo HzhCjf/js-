@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 600px;
+            height: 600px;
+            border: 1px solid;
+            margin: 0 auto;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+    <script>
+        // 创建方块的类,x轴,y轴,颜色,放在什么位置
+        function Rect(x,y,color,container){
+            //没有方块
+            this.ele = null
+            // x轴位置
+            this.x = x
+            // y轴位置
+            this.y = y
+            // 方块颜色
+            this.color = color
+            // 方块放在上面容器里
+            this.container = container
+            // 调用生成方块的方法
+            this.createRect()
+        }
+        // 生成方块方法
+        Rect.prototype.createRect = function () {
+            // 创建div 生成方块；
+            this.ele = document.createElement("div");
+            // 方块宽
+            this.ele.style.width = "50px";
+            // 方块高
+            this.ele.style.height = "50px";
+            // 方块x轴位置
+            this.ele.style.left = this.x + "px";
+            // 方块y轴位置
+            this.ele.style.top = this.y + "px";
+            // 定位属性
+            this.ele.style.position = "absolute";
+            // 边框
+            this.ele.style.border = "1px solid";
+            // 方块颜色
+            this.ele.style.background = this.color;
+            // 将方块追加到容器里面
+            this.container.appendChild(this.ele);
+        }
+
+        // 声明食物
+        var food;
+        // 创建贪吃蛇类
+        function Snake(container) {
+            // 容器
+            this.container = container;
+             // 蛇数组
+            this.bodyArr = [];
+            this.dir = "right"; // 蛇的方向 
+            this.createBody();
+        }
+        Snake.prototype.createBody = function () {
+            // 50
+            // i=0  ----> 0
+            // i=1 ----> 50
+            // i=2 ---->100
+            // 初始蛇的长度
+            for (var i = 0; i < 5; i++) {
+                // 当蛇的长度等于5的时候,添加蛇头到蛇组
+                if (i === 4) {
+                    this.bodyArr.push(new Rect(i * 50, 0, "red", this.container));
+                    // 添加蛇身到蛇组
+                } else {
+                    this.bodyArr.push(new Rect(i * 50, 0, "blue", this.container));
+                }
+            }
+        }
+
+        Snake.prototype.move = function () {
+            // 获取到蛇头,蛇组的最后一个,位置是蛇组索引是蛇组的长度-1
+            var head = this.bodyArr[this.bodyArr.length - 1];
+
+            // 蛇头移动一个距离 
+            var numx = parseInt(head.ele.style.left);
+            var numy = parseInt(head.ele.style.top);
+
+            // 在以前蛇头的地方添加一个 
+            this.bodyArr.splice(this.bodyArr.length - 1, 0, new Rect(numx, numy, "blue", this.container))
+            // 控制方向
+            // 键盘按键key值对应的值
+            switch (this.dir) {
+                case 'right':
+                    head.ele.style.left = numx + 50 + "px";
+                    break;
+                case 'left':
+                    head.ele.style.left = numx - 50 + "px";
+                    break;
+                case 'up':
+                    head.ele.style.top = numy - 50 + "px";
+                    break;
+                case 'down':
+                    head.ele.style.top = numy + 50 + "px";
+                    break;
+            }
+
+            // 判断 如果 蛇头的坐标 和 食物的坐标一样了 那么就碰撞了，把 蛇的身体加一个  ，食物要重新生成；
+            if (head.ele.style.left === food.rect.ele.style.left && head.ele.style.top === food.rect.ele.style.top) {
+                console.log("吃到食物了");
+                // 1.蛇的身体加一个方块 （不删除方块就是添加一个方块）； 2.食物要重新生成；
+                food.rect.ele.remove(); // 删除食物 
+                food = new Food(this.container);  // 重新生成一个食物；
+            } else {
+                // 没有碰到 那么就删除最后的方块；
+                // 删除最后一个方块 ：1. 把数组里的 rect删除   2.dom里的元素删除
+                var res = this.bodyArr.shift();  //删除数组的第一个元素
+                res.ele.remove();
+            }
+
+
+
+
+        }
+
+
+        // 创建食物 
+        function Food(container) {
+            // 食物位置随机
+            this.x = this.randomNum(0, 11) * 50;
+            this.y = this.randomNum(0, 11) * 50;
+            // 创建食物
+            this.rect = new Rect(this.x, this.y, "green", container);
+        }
+        // 食物位置数值参数,
+        Food.prototype.randomNum = function (min, max) {
+            return parseInt(Math.random() * (max - min + 1)) + min;
+        }
+        food = new Food(document.querySelector(".container"));
+
+        var snake = new Snake(document.querySelector(".container"));
+        // 蛇按时间移动
+        setInterval(function () {
+            snake.move();
+        }, 500)
+        // snake.move();
+
+
+
+        // 监听键盘事件 控制 方向；
+
+        document.onkeydown = function (e) {
+            // 获取键盘按下事件的按键key值
+            var key = e.key;
+            // console.log(key);
+            // 获取到按键
+            switch (key) {
+                case 'ArrowRight':
+                    // 禁止直接反方向移动
+                    if (snake.dir !== "left") {
+                        snake.dir = "right";
+                    }
+                    break;
+                case 'ArrowLeft':
+                    if (snake.dir !== "right") {
+                        snake.dir = "left";
+                    }
+                    break;
+                case 'ArrowUp':
+                    if (snake.dir !== "down") {
+                        snake.dir = "up";
+                    }
+                    break;
+                case 'ArrowDown':
+                    if (snake.dir !== "up")
+                        snake.dir = "down";
+                    break;
+            }
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

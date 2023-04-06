@@ -39,11 +39,13 @@
     <script>
         // 需求二 ：实现多个选项卡 ；
         // 函数封装  ；
-
         function Tab(btns,divs) {
+            // 为每个按钮绑定点击事件
             btns.forEach(function (btn, key) {
                 btn.onclick = function () {
+                    // 循环div组
                     divs.forEach(function (div, k) {
+                        // 当div与按钮的key值一样时,div显示,其余div隐藏
                         if (k === key) {
                             div.style.display = "block";
                         } else {

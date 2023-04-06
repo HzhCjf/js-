@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+
+        .box1 {
+            background-color: red;
+            left: 0px;
+        }
+
+        .box2 {
+            background-color: blue;
+            left: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+
+    <script>
+        // 一、面向过程的拖拽 
+        // var box1 = document.querySelector(".box1");
+        // box1.onmousedown = function (e) {
+        //     var x = e.clientX - this.offsetLeft;
+        //     var y = e.clientY - this.offsetTop;
+        //     this.onmousemove = function (e) {
+        //         var xx = e.clientX;
+        //         var yy = e.clientY;
+        //         this.style.left = xx - x + "px";
+        //         this.style.top = yy - y + "px";
+        //     }
+        //     this.onmouseup = function () {
+        //         this.onmousemove = "";
+        //     }
+        // }
+
+        // 二、改成面向对象写法 ；
+        // 单一模式  ： 功能越单一越好 ；后期维护更方便；
+        
+        
+
+        function Drag(ele) {
+            this.ele = ele;
+            this.downFn();
+        }
+
+        Drag.prototype.downFn = function () {
+            var that = this;
+            this.ele.onmousedown = function (e) {
+                var x = e.clientX - this.offsetLeft;
+                var y = e.clientY - this.offsetTop;
+                that.moveFn(x,y);
+                that.upFn();
+                that.style.zIndex = 1
+            }
+        }
+
+        Drag.prototype.moveFn = function (x,y) {
+            this.ele.onmousemove = function (e) {
+                var xx = e.clientX;
+                var yy = e.clientY;
+                this.style.left = xx - x + "px";
+                this.style.top = yy - y + "px";
+                this.style.zIndex = 1
+            }
+        }
+
+        Drag.prototype.upFn = function () {
+            this.ele.onmouseup = function () {
+                // this.style.zIndex = 0
+                this.onmousemove = "";
+            }
+        }
+
+    
+        var box1 = document.querySelector(".box1");
+        var drag1 = new Drag(box1);
+
+
+        var box2 = document.querySelector(".box2");
+        var drag2 = new Drag(box2);
+        drag2.moveFn = function(x,y){
+            this.ele.onmousemove = function (e) {
+                var xx = e.clientX;
+                var yy = e.clientY;
+                var disx = xx - x ;
+                var disy = yy - y;
+                if(disx<=0){
+                    disx = 0;
+                }else if(disx >= 600){
+                    disx = 600
+                }
+                if(disy<=0){
+                    disy = 0;
+                }else if(disy>=600){
+                    disy = 600
+                }
+                this.style.left = disx + "px";
+                this.style.top = disy + "px";
+            }
+        }
+
+
+
+        // function getType(arg){
+        //     return typeof arg
+        // }
+
+
+
+    </script>
+</body>
+
+</html>

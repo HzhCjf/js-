@@ -16,11 +16,16 @@
         <div style="display: none;">div3</div>
     </div>
     <script>
+        // 获取按钮组
         let btns = document.querySelectorAll('.con button')
+        // 获取div组
         let divs = document.querySelectorAll('.con div')
+        // 为所有按钮添加点击事件
         btns.forEach(function(btn,key){
             btn.onclick = function(){
+                // 循环div组
                 divs.forEach(function(div,k){
+                    // 如果div组的key值与按钮组的key值一样,则div显示,其余div隐藏
                     if(k === key){
                         div.style.display = 'block'
                     }else{

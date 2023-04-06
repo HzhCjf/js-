@@ -57,12 +57,14 @@
             this.container.appendChild(this.ele);
         }
 
-        // 创建贪吃蛇类
-        function Snake(container) {
+
+       // 创建贪吃蛇类
+       function Snake(container) {
             // 容器
             this.container = container;
             // 蛇数组
             this.bodyArr = [];
+            this.dir = "right"; // 蛇的方向 
             // 蛇组的各个方块的位置
             this.createBody();
         }
@@ -82,38 +84,82 @@
                 }
             }
         }
-        // 蛇移动
+
         Snake.prototype.move = function () {
             // 获取到蛇头,蛇组的最后一个,位置是蛇组索引是蛇组的长度-1
             var head = this.bodyArr[this.bodyArr.length - 1];
 
-
             // 蛇头移动一个距离 
-            var num = parseInt(head.ele.style.left);
+            var numx = parseInt(head.ele.style.left);
+            var numy = parseInt(head.ele.style.top);
 
-            // 在以前蛇头的地方添加一个 ,以前蛇头位置           添加的方块
-            this.bodyArr.splice(this.bodyArr.length - 1, 0, new Rect(num, 0, "blue", this.container))
-            // 蛇头移动一格位置
-            head.ele.style.left = num + 50 + "px";
-
-
+            // 在以前蛇头的地方添加一个 
+            this.bodyArr.splice(this.bodyArr.length - 1, 0, new Rect(numx, numy, "blue", this.container))
+            // 控制方向
+            // 键盘按键key值对应的值
+            switch (this.dir) {
+                case 'right':
+                    head.ele.style.left = numx + 50 + "px";
+                    break;
+                case 'left':
+                    head.ele.style.left = numx - 50 + "px";
+                    break;
+                case 'up':
+                    head.ele.style.top = numy - 50 + "px";
+                    break;
+                case 'down':
+                    head.ele.style.top = numy + 50 + "px";
+                    break;
+            }
             // 删除最后一个方块 ：1. 把数组里的 rect删除   2.dom里的元素删除
             var res = this.bodyArr.shift();  //删除数组的第一个元素
             res.ele.remove();
-
 
         }
 
         var snake = new Snake(document.querySelector(".container"));
         setInterval(function () {
             snake.move();
-
         }, 1000)
 
 
 
+        // 监听键盘事件 控制 方向；
 
-        // 1.复习  2. 实现2个方块的拖动效果 ，一个直接拖 另外一个需要给边界  3.继续实现贪吃蛇；
+        document.onkeydown = function (e) {
+            // 获取键盘按下事件的按键key值
+            var key = e.key;
+            // console.log(key);
+            // 获取到按键
+            switch (key) {
+                case 'ArrowRight':
+                    // 禁止直接反方向移动
+                    if (snake.dir !== "left") {
+                        snake.dir = "right";
+                    }
+                    break;
+                case 'ArrowLeft':
+                    if (snake.dir !== "right") {
+                        snake.dir = "left";
+                    }
+                    break;
+                case 'ArrowUp':
+                    if (snake.dir !== "down") {
+                        snake.dir = "up";
+                    }
+                    break;
+                case 'ArrowDown':
+                    if (snake.dir !== "up")
+                        snake.dir = "down";
+                    break;
+            }
+        }
+
+
+
+
+
+
     </script>
 </body>
 

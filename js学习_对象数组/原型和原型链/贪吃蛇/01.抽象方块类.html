@@ -19,32 +19,50 @@
     </style>
 </head>
 <body>
-    <div class="con"></div>
+    <div class="container"></div>
     <script>
         // 贪吃蛇:利用方块,画身体和食物
         // 属性:1.ele构成方块的元素.    2.x和y的坐标    3.方块的颜色    4.容器
         // 方法:1.createRect:创建一个div作为方块的元素
-        function Rect(x,y,color,con){
+
+        // 创建方块的类,x轴,y轴,颜色,放在什么位置
+        function Rect(x,y,color,container){
+            //没有方块
             this.ele = null
+            // x轴位置
             this.x = x
-            this.y - y
+            // y轴位置
+            this.y = y
+            // 方块颜色
             this.color = color
-            this.con = con
+            // 方块放在上面容器里
+            this.container = container
+            // 调用生成方块的方法
             this.createRect()
         }
+        // 方块的生成方法
         Rect.prototype.createRect = function(){
+            // 生成一个div元素
             this.ele = document.createElement('div')
+            // 设置宽
             this.ele.style.width = '50px'
+            // 设置高
             this.ele.style.height = '50px'
+            // 设置x轴位置
             this.ele.style.left = this.x + 'px'
+            // 设置y轴位置
             this.ele.style.top = this.y + 'px'
+            // 设置定位属性
             this.ele.style.position = 'absolute'
+            // 设置颜色
             this.ele.style.background = this.color
-            this.con.appendChild(this.ele)
+            // 把方块追加到容器里面
+            this.container.appendChild(this.ele)
         }
-
-        let conEle = document.querySelector('.con')
-        let reat1 = new Rect(0,0,'red',conEle)
+        // 生成容器
+        let containerEle = document.querySelector('.container')
+        // 生成方块
+        let reat1 = new Rect(0,0,'red',containerEle)
     </script>
 </body>
 </html>
