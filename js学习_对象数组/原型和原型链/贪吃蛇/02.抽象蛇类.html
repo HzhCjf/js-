@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 600px;
+            height: 600px;
+            border: 1px solid;
+            margin: 0 auto;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+    <script>
+        function Rect(x, y, color, container) {
+            this.ele = null;
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.container = container;
+            this.createRect();
+        }
+        Rect.prototype.createRect = function () {
+            // 创建div 生成方块；
+            this.ele = document.createElement("div");
+            this.ele.style.width = "50px";
+            this.ele.style.height = "50px";
+            this.ele.style.left = this.x + "px";
+            this.ele.style.top = this.y + "px";
+            this.ele.style.position = "absolute";
+            this.ele.style.border = "1px solid";
+            this.ele.style.background = this.color;
+            this.container.appendChild(this.ele);
+        }
+
+
+        function Snake(container) {
+            this.container = container;
+            this.bodyArr = [];
+            this.createBody();
+        }
+        Snake.prototype.createBody = function () {
+            // 50
+            // i=0  ----> 0
+            // i=1 ----> 50
+            // i=2 ---->100
+            for (var i = 0; i < 5; i++) {
+                if (i === 4) {
+                    this.bodyArr.push(new Rect(i * 50, 0, "red", this.container));
+                } else {
+                    this.bodyArr.push(new Rect(i * 50, 0, "blue", this.container));
+                }
+            }
+        }
+
+        Snake.prototype.move = function () {
+            var head = this.bodyArr[this.bodyArr.length - 1];
+
+
+            // 蛇头移动一个距离 
+            var num = parseInt(head.ele.style.left);
+
+            // 在以前蛇头的地方添加一个 
+            this.bodyArr.splice(this.bodyArr.length - 1, 0, new Rect(num, 0, "blue", this.container))
+
+            head.ele.style.left = num + 50 + "px";
+
+
+            // 删除最后一个方块 ：1. 把数组里的 rect删除   2.dom里的元素删除
+            var res = this.bodyArr.shift();  //删除数组的第一个元素
+            res.ele.remove();
+
+
+        }
+
+        var snake = new Snake(document.querySelector(".container"));
+        setInterval(function () {
+            snake.move();
+
+        }, 1000)
+        // snake.move();
+
+
+
+
+        // 1.复习  2. 实现2个方块的拖动效果 ，一个直接拖 另外一个需要给边界  3.继续实现贪吃蛇；
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 原型:
+            // 每一个构造函数都会有一个原型,这个原型叫显示原型  prototype
+        // function Person(){
+
+        // }
+        // console.log(Person);//显示原型
+
+
+
+        // 每一个对象也会有自己的原型,对象的原型称为隐式原型,以前叫__proto__,现在叫[[prototype]]
+        // var obj = {
+        //     name:"zhangsan"
+        // }
+        // console.log(obj);//里面的[[prototype]]与下面的一样
+        // console.log(obj.__proto__);
+
+
+
+        // 显示原型和隐式原型的关系:两个是同一个空间,只是名字不同,一个是实例化前,一个是实例化后的名字
+        // function Person(name,age){
+        //     this.name = name
+        //     this.age = age
+        // }
+        // Person.prototype.fn = function(){
+        //     console.log('fn');
+        // }
+        // console.log('构造函数',Person.prototype);
+        // //实例化
+        // let obj = new Person('张三',20)
+        // console.log(obj);
+        // console.log('对象',obj.__proto__);
+        // console.log(obj.__proto__ === Person.prototype);
+
+
+
+
+        // 显示原型有一个固有属性 constructor 指向构造函数本身
+        function Person(name,age){
+            this.name = name
+            this.age = age
+        }
+        Person.prototype.fn = function(){
+            console.log('fn',this);
+        }
+        console.log(Person.prototype.constructor===Person);
+        let zhangsan = new Person('张三',20)
+        console.log(zhangsan.constructor === Person);
+        zhangsan.fn()
+
+
+
+
+
+        // 
+    </script>
+</body>
+</html>

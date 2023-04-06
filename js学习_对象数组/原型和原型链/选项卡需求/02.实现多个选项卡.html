@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container1">
+        <button>按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div style="display: block;">div1</div>
+        <div style="display: none;">div2</div>
+        <div style="display: none;">div3</div>
+    </div>
+
+    <div class="container2">
+        <button>按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div style="display: block;">div1</div>
+        <div style="display: none;">div2</div>
+        <div style="display: none;">div3</div>
+    </div>
+
+    <div class="container3">
+        <button>按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div style="display: block;">div1</div>
+        <div style="display: none;">div2</div>
+        <div style="display: none;">div3</div>
+    </div>
+
+    <script>
+        // 需求二 ：实现多个选项卡 ；
+        // 函数封装  ；
+
+        function Tab(btns,divs) {
+            btns.forEach(function (btn, key) {
+                btn.onclick = function () {
+                    divs.forEach(function (div, k) {
+                        if (k === key) {
+                            div.style.display = "block";
+                        } else {
+                            div.style.display = "none";
+                        }
+                    })
+                }
+            })
+        }
+        var btns = document.querySelectorAll(".container1 button");
+        var divs = document.querySelectorAll(".container1 div");
+        Tab(btns,divs);
+
+        var btns2 = document.querySelectorAll(".container2 button");
+        var divs2 = document.querySelectorAll(".container2 div");
+        Tab(btns2,divs2);
+
+        var btns3 = document.querySelectorAll(".container3 button");
+        var divs3 = document.querySelectorAll(".container3 div");
+        Tab(btns3,divs3);
+
+
+    </script>
+</body>
+
+</html>

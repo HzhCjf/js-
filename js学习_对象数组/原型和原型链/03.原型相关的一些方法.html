@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.constructor:判断数据类型
+        // let arr = []
+        // let obj = {}
+        // let str = '111'
+        // console.log(arr.constructor === Array);
+        // console.log(obj.constructor === Object);
+        // console.log(str.constructor === String);
+
+
+
+
+        // 2.instanceof:判断实例和构造器的原型链上是否有关系(慎用),数组和对象容易混淆
+        // let arr = []
+        // let obj = {}
+        // let str = new String('1111')
+        // console.log(arr instanceof Array);
+        // console.log(obj instanceof Object);
+        // console.log(str instanceof String);
+        // console.log(arr instanceof Object);//true
+
+
+
+        // 3.查看某个构造函数的原型,是否是对象的原型链上的原型,isPrototypeOf
+        // function Person(name,age){
+        //     this.name = name
+        //     this.age = age
+        // }
+        // let zhangsan = new Person('张三',20)
+        // let res = Person.prototype.isPrototypeOf(zhangsan)
+        // let res2 = Object.prototype.isPrototypeOf(zhangsan)
+        // console.log(res,res2);
+
+
+
+
+
+        // 4.查看某个属性是否对象自身和原型和原型链上的属性
+        // 属性 in 对象
+        // let obj = {
+        //     name:'张三',
+        //     age:20
+        // }
+        // obj.__proto__.age = 30
+        // Object.prototype.age = 40
+        // console.log('age' in obj);
+
+
+
+
+        // 5.判断对象的属性是否自身属性,    对象.hasOwnProperty('属性名')
+        // let obj = {
+        //     name:'123',
+        //     age:20
+        // }
+        // obj.__proto__.height = '180cm'
+        // Object.prototype.myage = 30
+        // console.log(obj.hasOwnProperty('myage'));
+
+
+
+
+        // for in 循环原型及原型链上的属性和方法
+        let obj = {
+            name:'123',
+            age:20
+        }
+        for(let key in obj){
+            if(obj.hasOwnProperty(key)){
+                console.log(key);
+            }
+        }
+
+
+
+
+
+        // 判断数据类型 方式 ：
+        //     1.typeof  ： 简单数据类型和函数
+        //     2.Array.isArray() : 判断是否是一个数组
+        //     3.constructor ： 判断构造器是否是某个类型；
+        //     4.instanceof ： 判断实例在原型链上是否有关系；（慎用）
+        //     5.Object.prototype.toString.call(数据)： 精确判断任意类型 
+
+
+
+
+
+        console.log(Object.prototype.toString.call([]))//[object Array]
+        console.log(Object.prototype.toString.call({}))//[object Object]
+        console.log(Object.prototype.toString.call(111))//[object Number]
+        console.log(Object.prototype.toString.call("12312"))//[object String]
+        console.log(Object.prototype.toString.call(null))//[object Null]
+        console.log(Object.prototype.toString.call(undefined));//[object Undefined]
+        console.log(Object.prototype.toString.call(true))//[object Boolean]
+        console.log(Object.prototype.toString.call(/\s/));//[object RegExp]
+        console.log(Object.prototype.toString.call(function () { }));//[object Function]
+        if (Object.prototype.toString.call([]) === '[object Array]') {
+            console.log("是一个数组");
+        } else {
+            console.log("不是一个数组");
+        }
+
+
+
+
+
+
+        // 练习：有2个小狗 ，大黄 和 小黑 都有自己的名字和性别 ，都会叫，大黄只叫一次，小黑每过1s钟叫一次；通过类及对象 描述2只狗；
+        function Dogs(name,sex){
+            this.name = name,
+            this.sex = sex
+        }
+        Dogs.prototype.wow = function(){
+            console.log(this.name+':旺');
+        }
+        let huang = new Dogs('大黄','母')
+        let hei = new Dogs('小黑','母')
+        huang.wow()
+        setInterval(function(){
+            hei.wow()
+        },1000)
+    </script>
+</body>
+</html>

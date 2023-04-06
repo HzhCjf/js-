@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .con{
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="con"></div>
+    <script>
+        // 贪吃蛇:利用方块,画身体和食物
+        // 属性:1.ele构成方块的元素.    2.x和y的坐标    3.方块的颜色    4.容器
+        // 方法:1.createRect:创建一个div作为方块的元素
+        function Rect(x,y,color,con){
+            this.ele = null
+            this.x = x
+            this.y - y
+            this.color = color
+            this.con = con
+            this.createRect()
+        }
+        Rect.prototype.createRect = function(){
+            this.ele = document.createElement('div')
+            this.ele.style.width = '50px'
+            this.ele.style.height = '50px'
+            this.ele.style.left = this.x + 'px'
+            this.ele.style.top = this.y + 'px'
+            this.ele.style.position = 'absolute'
+            this.ele.style.background = this.color
+            this.con.appendChild(this.ele)
+        }
+
+        let conEle = document.querySelector('.con')
+        let reat1 = new Rect(0,0,'red',conEle)
+    </script>
+</body>
+</html>

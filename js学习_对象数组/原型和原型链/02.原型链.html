@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 原型链
+        // 每一个构造函数都会有一个显示原型prototype,由于prototype是一个对象类型,对象又会有自己的隐式原型,隐式原型通过内置的Object构造出来
+        function Person(){
+
+        }
+        console.log(typeof Person.prototype);//object
+        let obj = new Object()
+        console.log(Object.prototype.__proto__);//null
+
+
+
+        // 对象的属性和方法查找,会先在自身属性和方法上查找,然后在原型上查找属性和方法,最后在原型链上查找属性和返回值,如果都找不到就返回undefined
+        // 查找属性或者方法的优先级,叫就近原则
+        function Person(name,age){
+            this.myname = name
+            this.age = age
+        }
+        Person.prototype.myname = '李四'//原型链
+        Object.prototype.myname = '王五'//原型
+        let zhangsan = new Person('张三',20)
+        console.log(zhangsan,myname);
+
+
+
+
+        //给数组扩展方法
+        Array.prototype.myforEach = function(cb){
+            for(i = 0;i<this.length;i++){
+                cb(arr[i],i,this)
+            }
+        }
+
+        let arr = new Array(1,2,3,4,5)
+        console.log(arr);
+        // arr.forEach()
+        arr.myforEach(function(item,key,arr){
+            console.log(item,key,arr);
+        })
+    </script>
+</body>
+</html>

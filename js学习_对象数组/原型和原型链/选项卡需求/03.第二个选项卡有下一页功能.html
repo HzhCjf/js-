@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container1">
+        <button>按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div style="display: block;">div1</div>
+        <div style="display: none;">div2</div>
+        <div style="display: none;">div3</div>
+    </div>
+
+    <div class="container2">
+        <button>按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div style="display: block;">div1</div>
+        <div style="display: none;">div2</div>
+        <div style="display: none;">div3</div>
+    </div>
+    <button class="next">下一页</button>
+
+    <div class="container3">
+        <button>按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div style="display: block;">div1</div>
+        <div style="display: none;">div2</div>
+        <div style="display: none;">div3</div>
+    </div>
+
+    <script>
+        // 把选项卡进行函数封装
+        function Tab(btns,divs) {
+            // 设置一个对象
+            let obj = {
+                // 对应选项卡的索引
+                num:0
+            }
+            // 选项卡的点击
+            btns.forEach(function (btn, key) {
+                btn.onclick = function () {
+                    // 索引库索引
+                    obj.num = key
+                    // 调用切换函数
+                    divFor(key)
+                }
+            })
+            // 对应切换的功能
+            function divFor(key){
+                divs.forEach(function (div, k) {
+                    // 如果按钮对应的选项卡索引相等
+                    if (k === key) {
+                        // 对应的显示
+                        div.style.display = "block";
+                    } else {
+                        // 其他隐藏
+                        div.style.display = "none";
+                    }
+                })
+            }
+            // 把切换的方法放入对象里面
+            obj.divFor = divFor
+            // 返回对象
+            return obj
+        }
+        var btns = document.querySelectorAll(".container1 button");
+        var divs = document.querySelectorAll(".container1 div");
+        Tab(btns,divs);
+
+        var btns2 = document.querySelectorAll(".container2 button");
+        var divs2 = document.querySelectorAll(".container2 div");
+        // 接收返回值
+        let tab2 = Tab(btns2,divs2);
+        // 获取下一页
+        let nextEle = document.querySelector('.next')
+        // 点击
+        nextEle.onclick = function(){
+            // 如果对象里的num等于最后一个选项卡的索引值的时候
+            if(tab2.num == 2){
+                // 把索引值设置为-1
+                tab2.num = -1
+            }
+            // 再进行+1,这时候如果为-1,就变成0索引值了
+            tab2.num++
+            // 进行切换
+            tab2.divFor(tab2.num)
+        }
+
+        var btns3 = document.querySelectorAll(".container3 button");
+        var divs3 = document.querySelectorAll(".container3 div");
+        Tab(btns3,divs3);
+
+
+    </script>
+</body>
+
+</html>
