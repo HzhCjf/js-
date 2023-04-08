@@ -255,11 +255,14 @@
   width: 372px;
   height: 56px;
   overflow: hidden;
+  position: relative;
 }
 .previewArea .prescroll .listOut .list {
   width: 5000px;
   display: flex;
   transition: all 0.8s;
+  position: absolute;
+  left:0px
 }
 .previewArea .prescroll .listOut .list li {
   padding: 2px;

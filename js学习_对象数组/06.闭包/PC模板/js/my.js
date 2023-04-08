@@ -270,3 +270,177 @@ smallArea.onmousemove = function(e){
     mask.style.left = disx +  "px"
     mask.style.top = disy + "px";
 }
+
+
+
+
+
+
+
+
+
+
+// 1.把图片根据数据渲染出来；
+var list = document.querySelector(".list");
+goodData.imgsrc.forEach(function(item){
+    var liEle = document.createElement("li");
+    liEle.innerHTML = `<img src="${item.s}" alt="">`;
+    list.appendChild(liEle);
+})
+
+// 2.点击图片的时候 需要切换图片 
+var lis = list.querySelectorAll("li");
+var smallImg = document.querySelector(".smallArea img");
+var bigAreaImg = document.querySelector(".bigArea img");
+// console.log(lis);
+lis.forEach(function(item,key){
+    item.onclick = function(){
+        // 把 上面的小图替换掉  ， 把右边的放大图 替换掉 ；
+        console.log(key);
+        smallImg.src = goodData.imgsrc[key].s;  // 替换小图
+        bigAreaImg.src = goodData.imgsrc[key].b;
+    }
+})
+
+// 点击下一个的时候 放大图小图 滚动 ；
+var rightEle = document.querySelector(".right");
+rightEle.onclick =throttle( function(){
+    var  leftNum = parseInt( getComputedStyle(list)['left']);
+    if(leftNum>-(lis.length-5)*lis[0].offsetWidth){
+        list.style.left = leftNum - lis[0].offsetWidth + "px";
+    }
+},800);
+
+
+var leftEle = document.querySelector(".left");
+leftEle.onclick =throttle( function(){
+    var  leftNum = parseInt( getComputedStyle(list)['left']);
+    if(leftNum<0){
+        list.style.left = leftNum + lis[0].offsetWidth + "px";
+    }
+},800);
+
+
+
+
+function throttle(fn, delay) {
+    var startTime = new Date().getTime();
+    return function () {
+        
+        var endTime = new Date().getTime();
+        if (endTime - startTime > delay) {
+            fn();
+            // fn.call(this);
+            startTime = endTime;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------选项卡逻辑--------------
+
+
+// 第一个选项卡 
+// var btns = document.querySelectorAll(".tabTitle h4");
+// var tabPlan = document.querySelectorAll(".tabContent .tab-pane");
+
+// btns.forEach(function (btn, key) {
+//     btn.onclick = function () {
+//         btns.forEach(function (item) {
+//             item.classList.remove("active");
+//         })
+//         this.classList.add("active");
+//         tabPlan.forEach(function (tab, k) {
+//             if (k === key) {
+//                 tab.style.display = "block";
+//                 tab.classList.add("active");
+//             } else {
+//                 tab.style.display = "none";
+//                 tab.classList.remove("active");
+//             }
+//         })
+//     }
+// })
+
+
+// // 第二个选项卡 
+
+// var btns2 = document.querySelectorAll(".tab-wraped li")
+// var tabPlan2 = document.querySelectorAll(".tab-content .tab-pane")
+
+// btns2.forEach(function (btn, key) {
+//     btn.onclick = function () {
+//         btns2.forEach(function (item) {
+//             item.classList.remove("active");
+//         })
+//         this.classList.add("active");
+//         tabPlan2.forEach(function (tab, k) {
+//             if (k === key) {
+//                 tab.style.display = "block";
+//                 tab.classList.add("active");
+//             } else {
+//                 tab.style.display = "none";
+//                 tab.classList.remove("active");
+//             }
+//         })
+//     }
+// })
+
+
+function Tab(btns, tabPlan) {
+    this.btns = btns;
+    this.tabPlan = tabPlan;
+    this.btnFor();
+}
+
+// 处理按钮的
+Tab.prototype.btnFor = function () {
+    var that = this;
+    this.btns.forEach(function (btn, key) {
+        btn.onclick = function () {
+            that.btns.forEach(function (item) {
+                item.classList.remove("active");
+            })
+            this.classList.add("active");
+            that.tabPlanFor(key);
+        }
+    })
+}
+
+// 处理 tabplan 显示或者隐藏；
+Tab.prototype.tabPlanFor = function (key) {
+    this.tabPlan.forEach(function (tab, k) {
+        if (k === key) {
+            tab.style.display = "block";
+            tab.classList.add("active");
+        } else {
+            tab.style.display = "none";
+            tab.classList.remove("active");
+        }
+    })
+}
+
+var btns = document.querySelectorAll(".tabTitle h4");
+var tabPlan = document.querySelectorAll(".tabContent .tab-pane");
+new Tab(btns,tabPlan);
+
+var btns2 = document.querySelectorAll(".tab-wraped li")
+var tabPlan2 = document.querySelectorAll(".tab-content .tab-pane")
+new Tab(btns2,tabPlan2);
