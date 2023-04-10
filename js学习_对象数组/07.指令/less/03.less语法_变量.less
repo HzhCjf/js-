@@ -1,0 +1,50 @@
+// 变量 ： 定义变量 通过 @变量名:变量值；
+// 一、变量的定义 
+// @w:100px;  // 定义的变量
+// @h:100px;
+// .box{
+//     width: @w;
+//     height: @h;
+//     background-color: red;
+// }
+
+// 二、变量的运算 
+// 运算 只有有一个 单位 那么最终结果就会有单位 ，否则就没有单位；
+// @a:100px;
+// @b:20;
+
+// 1.加法运算
+// .box{
+//     width: @a+@b;
+//     height: 200px;
+// }
+// 2.减法运算: 必须需要空格 
+// .box{
+//     width: @a - @b;
+//     height: 200px;
+// }
+
+// 3.乘法 
+// .box{
+//     width: @a*@b;
+//     height: 200px;
+// }
+
+// 4.除法  : 需要加上小括号
+// .box{
+//     width: (@a/@b);
+//     height: 100px;
+//     background-color: red;
+// }
+
+// 三 、特殊情况 变量需要通过 @{变量} 包裹
+@myname:.box;
+@{myname}{
+    width:100px;
+    height:100px;
+}
+
+@myurl:"/1.png";
+.contaier{
+    background:url("./imgages@{myurl}");
+}

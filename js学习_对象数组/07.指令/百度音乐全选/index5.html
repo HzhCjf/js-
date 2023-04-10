@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+  <section id="wrap">
+    <h2 class="title">百度音乐榜单</h2>
+    <ul id="list">
+      <li>
+        <input type="checkbox" />
+        <span>第一条信息</span>
+        <a href="javascript:;" class="collect">收藏</a>
+        <a href="javascript:;" class="cancelCollect">取消收藏</a>
+        <a href="javascript:;" class="remove">删除</a>
+      </li>
+    </ul>
+    <footer class="footer">
+      <label><input type="checkbox" id="checkAll"  />全选/全不选</label>
+    </footer>
+  </section>
+  <script>
+    var data = [
+      {
+        id: 0,
+        title: "残酷月光 - 费启鸣",
+        checked: true,
+        collect: false
+      }, {
+        id: 1,
+        title: "兄弟 - 艾热",
+        checked: false,
+        collect: false
+      }, {
+        id: 2,
+        title: "毕生 - 夏增祥",
+        checked: true,
+        collect: true
+      }, {
+        id: 3,
+        title: "公子向北去 - 李春花",
+        checked: false,
+        collect: false
+      }, {
+        id: 4,
+        title: "战场 - 沙漠五子",
+        checked: false,
+        collect: false //是否收藏 true 收藏 false 没有收藏
+      }
+    ];
+    
+
+    let listEle = document.querySelector('#list')
+    listEle.innerHTML = '';
+    data.forEach(function(item){
+        let liEle = document.createElement('li')
+        liEle.innerHTML = `<input type="checkbox" value = ${item.checked} />
+        <span>${item.title}</span>
+        <a href="javascript:;" class="collect">收藏</a>
+        <a href="javascript:;" class="cancelCollect">取消收藏</a>
+        <a href="javascript:;" class="remove">删除</a>`
+        listEle.appendChild(liEle)
+        
+    })
+    let cancelCollectEles = document.querySelectorAll('.cancelCollect')
+    cancelCollectEles.forEach(function(item){
+        item.style.display = 'none'
+        item.onclick =function(){
+            this.style.display = 'none'
+            this.previousElementSibling.style.display = 'inline-block'
+        }
+    })
+    let collectEles = document.querySelectorAll('.collect')
+    collectEles.forEach(function(item){
+        item.onclick = function(){
+            this.style.display = 'none'
+            this.nextElementSibling.style.display = 'inline-block'
+        }
+    })
+
+    let removeEles = document.querySelectorAll('.remove')
+    removeEles.forEach(function(item){
+        item.onclick = function(){
+            this.parentElement.remove()
+        }
+    })
+
+
+    let inputEles = document.querySelectorAll('#list input')
+    let checkAllEle = document.querySelector('.footer input')
+    checkAllEle.addEventListener('change',function(){
+        inputEles.forEach(function(item){
+            item.checked = checkAllEle.checked
+        })
+    })
+    let num = 0
+    inputEles.forEach(function(item,key){
+        
+        if(item.value === 'true'){
+            item.checked = true
+        }
+        item.onclick = function(){
+            let content = []
+            if(this.checked){
+                this.value = 'true'
+            }else{
+                this.value = 'false'
+            }
+            inputEles.forEach(function(item){
+                content.push(item.value)
+            })
+            console.log(content);
+            let content2=['true', 'true', 'true', 'true', 'true']
+            
+            if(content == ~content2){
+                num++
+            }else{
+                checkAllEle.checked =false
+            }
+            if(num % 5 == 0){
+                checkAllEle.checked = true
+                
+            }else{
+                checkAllEle.checked = false
+            }
+            console.log(num);
+        }
+
+    })
+  </script>
+</body>
+
+</html>

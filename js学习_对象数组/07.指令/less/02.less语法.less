@@ -1,0 +1,36 @@
+// 一、注释
+// less注释 就是不会编译成css的注释
+/* 
+我是css注释，会被编译出来 
+*/
+
+
+//二、 嵌套语法 
+.container{
+    width: 300px;
+    height: 300px;
+    background-color: red;
+    .center{
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+        .inner{
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+    }
+}
+
+// 三、可以引用父级名称 
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    // .box:hover{
+    //     background-color: blue;
+    // }
+    &:hover{
+        background-color: blue;
+    }
+}
