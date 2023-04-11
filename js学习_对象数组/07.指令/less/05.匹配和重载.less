@@ -1,0 +1,50 @@
+// 一、匹配 ：类似 js里的switch case ...
+// .common(@_){
+//     width: 100px;
+//     height: 100px;
+// }
+// .common(b){
+//     background-color: blue;
+// }
+// .common(r){
+//     background-color: red;
+// }
+// .common(y){
+//     background-color: yellow;
+// }
+
+// .box1{
+//     border:1px solid;
+//     .common(r);
+// }
+
+// .box2{
+//     border:1px solid;
+//     .common(b);
+// }
+
+
+// 二、重载 ： 相同的函数根据参数个数的不同加载不同的逻辑；
+.common(@a){
+    width: 100px;
+    height: @a;
+}
+.common(@a,@b){
+    width: @a;
+    height: @b;
+    background-color: red;
+}
+.common(@a,@b,@c){
+    width: @a;
+    height: @b;
+    background-color: @c;
+    border:1px solid;
+}
+
+.box1{
+    .common(100px,100px);
+}
+
+.box2{
+    .common(200px,200px,red);
+}

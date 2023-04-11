@@ -119,10 +119,7 @@
     // 1.勾选下面的全选按钮   上面的是checkbox会联动
     let checkAllEle = document.querySelector('#checkAll')
     checkAllEle.onclick = function(){
-      let that = this
-      data.forEach(function(item){
-        item.checked = that.checked
-      })
+      data.forEach(item=>item.checked = this.checked)
       renderDom(data)
     }
 

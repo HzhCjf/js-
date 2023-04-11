@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // js严格模式  ： 比 混杂模式 语法更加严格的模式 ；
+        // 1.开启严格模式   ： 声明一个  use strict 字符串就可以了
+        // "use strict";  // 开启严格模式；
+
+        // 2.和混杂模式区别  
+
+        // 严格模式下 变量一定需要声明；
+        // function fn() {
+        //     a = 10;  // 全局变量 ，不推荐 ；
+
+        // }
+        // fn();
+        // console.log(a);
+        // var a;
+        // a = 10;
+        // console.log(a);
+
+
+        // 严格模式下 不能有相同的形参 ；
+
+        // function fn(a,a){
+        //     console.log(a)
+        // }
+        // fn(10,20);
+
+
+        // 直接调用函数 ，严格模式下 函数的this 会指向 undefined ；
+        // function fn(){
+        //     console.log(this);
+        // }
+
+        // fn();
+
+
+
+    </script>
+</body>
+
+</html>

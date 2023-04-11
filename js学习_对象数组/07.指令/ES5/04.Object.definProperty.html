@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Object.defineProperty    创建对象
+        // Object.defineProperty    是vue2.0响应式的核心函数
+
+        // 一.创建一个可控制(可观察,可监听)的对象
+        // let val = '张三'
+        // let obj = Object.defineProperty({},"myname",{
+        //     configurable:true,
+        //     enumerable:true,
+        //     get:function(){
+        //         console.log('获取的时候会触发get');
+        //         return val
+        //     },
+        //     set:function(newvalue){
+        //         console.log('修改的时候会触发set',newvalue);
+        //         if(newvalue != val){
+        //             val = newvalue
+        //         }
+        //     }
+        // })
+        // console.log(obj);
+
+
+
+
+        // 二.修改一个对象为可控制对象
+        let obj = {
+            myname:'张三',
+            age:20
+        }
+        let val = obj['myname']
+        Object.defineProperty(obj,'myname',{
+            configurable:true,
+            enumerable:true,
+            get:function(){
+                console.log('获取的时候触发get');
+                return val
+            },
+
+            set:function(newvalue){
+                console.log('修改的时候触发了set');
+                val = newvalue
+            }
+        })
+
+        console.log(obj);
+    </script>
+</body>
+</html>

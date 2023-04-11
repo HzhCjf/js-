@@ -1,0 +1,66 @@
+// mixin 混入  ：类似函数 ；
+// 一、普通的定义和调用函数 ；
+// .common{  // 类似函数的定义
+//     border:1px solid red;
+// }
+
+// .box1{
+//     width: 100px;
+//     height: 100px;
+//     .common; // 类似函数的调用
+// }
+
+// .box2{
+//     width: 200px;
+//     height: 200px;
+//     .common; // 调用 函数
+// }
+
+
+// 二、定义带参数的函数  ；
+
+// .common(@w,@h,@c){ // 定义了 有参数的函数 ；
+//     width: @w;
+//     height: @h;
+//     color: @c;
+//     border: 1px solid;
+// }
+
+// .box1{
+//     background-color: red;
+//     .common(100px, 200px, blue);  // 调用函数 且传参；
+// }
+
+// .box2{
+//     background-color: yellow;
+//     .common(200px, 300px, pink);  // 调用函数 且传参；
+// }
+
+
+// 三、定义 有默认值的参数 ；
+// 参数的默认值 ，有参数传入那么安装传入的参数为准 ，如果没参数传入那么就以默认参数为准；
+// .common(@w:100px,@h:100px,@c:red){
+//     width: @w;
+//     height: @h;
+//     color: @c;
+// }
+// .box{
+//     .common(200px,300px);
+// }
+
+// 四、函数作用域 ；
+
+// 定义的函数样式
+.container{
+    .common(@w){
+        width: @w;
+        height: 100px;
+    }
+}
+
+
+.box1{
+    // .common(200px);
+    .container .common(200px);
+}
+

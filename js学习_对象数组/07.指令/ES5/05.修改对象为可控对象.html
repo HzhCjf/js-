@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box">{{test}}</div>
+    <script>
+        var obj = {
+            name: "张三",
+            age: 20,
+            height: "178cm"
+        }
+
+        function observe(obj) {
+
+            // var keys = [];
+            // for(var key in obj){
+            //     keys.push(key)
+            // }
+            // // console.log(keys);
+
+            // keys.forEach(function(key){
+            //     var val = obj[key];
+            //     setTimeout(function(){
+            //         console.log(val);
+            //     },10)
+            // })
+
+
+
+
+
+
+
+            for (var key in obj) {
+                // (function () {
+                //     var val = obj[key];
+                //     setTimeout(function () {
+                //         console.log(val);
+                //     }, 10)
+                // })()
+                let val = obj[key];
+                Object.defineProperty(obj,key,{
+                    configurable:true,
+                    enumerable:true,
+                    get:function(){  // 是异步的 ；
+                        document.querySelector(".box").innerHTML = "测试数据"
+                        return val;
+                    },
+                    set:function(newvalue){
+                        document.querySelector(".box").innerHTML = "修改了"
+                        val = newvalue;
+                    }
+                })
+            }
+        }
+        // console.log(obj);
+        observe(obj);
+        // console.log(obj);
+        obj.name;
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+// 一、守卫 ： if else 判断 ；
+// .common(@num) when (@num>100){
+//     width: 500px;
+//     height: 500px;
+//     background-color: red;
+// }
+
+// .common(@num) when (@num<100){
+//     width: 10px;
+//     height: 10px;
+//     background-color: blue;
+// }
+
+// .box1{
+//     .common(101);
+// }
+// .box2{
+//     .common(30);
+// }
+
+// 连接多个条件 或者 使用 逗号隔开 ， 且关系 直接用  and 连接 
+// .common(@num) when (@num<100) ,(@num>200){  // 或者关系 
+//     width: 50px;
+//     height: 50px;
+//     background-color: red;
+// }
+// .common(@num) when (@num>=100) and (@num<=200){ // 且关系 
+//     width: 150px;
+//     height: 150px;
+//     background-color: blue;
+// }
+
+// .box1{
+//     .common(120);
+// }
+// .box2{
+//     .common(230);
+// }
+
+// .box3{
+//     .common(30);
+// }
+
+// 二、预定义函数  ；
+// https://lesscss.com.cn/functions/#math-functions
+// @flag :boolean(5>3);
+// .box1{
+//     // width: @flag;
+//     width: if((@flag)100px,200px);
+//     height: 300px;
+// }
+
+// @a:100px;
+// @b:30px;
+// .box{
+//     width:ceil((@a/@b));
+//     height: floor((@a/@b));
+// }
+
+// 三、less 的模块化 ；
+
+@import url("./reset.less");  // 引入公共的less文件 ；

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ES5 标准  ： ECMA Script
+        // ES6 标准 ： ECMA Script 2015  . ES6+
+
+        // let 声明变量  ；
+        // let a = 10;
+        // console.log(a);
+
+        // let 和 var 的区别 ；
+        // 1.let 不能被重复声明 ；
+        // var a = 10;
+        // var a = 20;
+        // console.log(a);
+        // let a = 10;
+        // let a = 20;
+        // console.log(a);
+
+        // 2.let 没有声明前置 （hosting）, 暂时性死区  Temporal Dead Zone简称 TDZ 
+        // console.log(a);
+        // var a = 10;
+        // console.log(a);
+        // let a = 10;
+
+        // 3.let 不会和window绑定 ；
+
+        // var a  = 10;
+        // console.log(window.a);
+
+        // let a = 20;
+        // console.log(window.a);
+
+
+        // 4.let 支持 块级作用域 ；
+        // 块作用域  是 大括号包裹的区域 ；
+        // var 只支持 2种作用域  1.全局作用域  2.函数作用域
+        // let 支持 3种  1.全局 2.函数  3.块作用域 ；
+
+        // {
+        //     // 块作用域
+        //     let  a = 10;
+        //     var b = 20;
+        // }
+
+        // // console.log(a);
+        // console.log(b);
+
+        // for(let i=0;i<3;i++){
+        //     setTimeout(function(){
+        //         console.log(i);
+        //     })
+        // }
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建对象 
+        // 1.字面量  var obj = {};
+        // 2.内置构造函数 var obj = new Object();
+        // 3.工厂模式  
+        // 4.自定义构造函数  
+
+        // 通过  Object.create创建对象 
+        // 一、直接创建一个对象的原型 ；
+        // var obj = Object.create({myname:123});
+        // console.log(obj);
+        // function Person(){
+
+        // }
+        // Person.prototype.create = function(){}
+        // Person.create = function(){  // 静态成员 ；
+
+        // }
+
+        // 二 、既创建 对象的原型 又创建对象；
+        /* 
+            1.value ： 对象的值 
+                可以拆分成 存取器的写法 get 和 set 
+            2.configurable : 配置属性是否能被删除 ；//默认为false
+            3. enumerable: 可枚举 ，循环需要对象的属性是可枚举的；默认为false
+            // 是一个可控制对象 ；
+        */
+        var  obj  = Object.create({myname:123},{
+            age:{ // age 是自定义的；
+                enumerable:true,   // 可枚举 ；
+                configurable:true,
+                // value:20  // value 是预定义的 。
+                get:function(){
+                    console.log("当获取age属性的时候会触发get函数");
+                    return 20;
+                } ,
+                set:function(newvalue){
+                    console.log("当设置的新值的时候触发set：",newvalue);
+                }
+            },
+            height:{
+                enumerable:true,
+                configurable:true,
+                value:"178cm"
+            }
+        });
+        // console.log(obj);
+        // delete obj.age;
+        // console.log(obj);
+
+        // for(var key in obj){
+        //     console.log(key);
+        // }
+
+        // obj.age   // 获取 age属性
+        obj.age = 30; // 设置操作  
+
+    </script>
+</body>
+</html>
