@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="title">学生系统</div>
+        <div id="form">
+            <p>姓名<input id="username" type="text" value="张三123" /></p>
+            <p>年龄<input id="age" type="text" value="21" /></p>
+            <p>性别
+                <select id="gender">
+                    <option>男</option>
+                    <option>女</option>
+                    <option>你猜</option>
+                </select>
+            </p>
+            <p>
+                <input type="button" value="添加" id="addBtn" />
+                <input type="button" value="排序" id="sortBtn" />
+            </p>
+            <select class="sex">
+                <option>默认</option>
+                <option>男</option>
+                <option>女</option>
+            </select>
+
+            <select class="sort">
+                <option>默认</option>
+                <option>年龄由大到小</option>
+                <option>年龄由小到大</option>
+            </select>
+        </div>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+       //  第一步 操作数据 ；  第二步 渲染视图 ；
+        var  usernameEle = document.querySelector("#username");
+        var ageEle = document.querySelector("#age");
+        var genderEle = document.querySelector("#gender");
+
+        var addBtnEle = document.querySelector("#addBtn");
+        var tbodyEle = document.querySelector("tbody");
+
+        var sortBtn  = document.querySelector("#sortBtn");
+
+        var users = [];
+        var users2 = []
+        addBtnEle.onclick = function(){
+            var username = usernameEle.value;
+            var age = ageEle.value;
+            var gender = genderEle.value;
+            users.push({username:username,age:age,gender:gender});
+            users2 = copy(users)
+            // console.log(users);
+            renderDom(users);
+        }
+
+        sortBtn.onclick = function(){
+            // 数据排序 
+            users.sort(function(a,b){
+                return a.age - b.age;
+            })
+            renderDom(users);
+        }
+        
+        // 筛选
+        var xy2 = []
+        let screen = document.querySelector('.sex')
+        screen.onclick = function(){
+            let  xy = users.filter(users => users.gender == this.value)
+            renderDom(xy)
+            xy2 = copy(xy)
+            if(this.value === '默认'){
+                renderDom(users)
+            }
+            console.log(xy2);
+        }
+        
+        // 年龄排序
+        
+        let ageSort = document.querySelector('.sort')
+        function sort(users2){
+                if(ageSort.value === '年龄由小到大'){
+                    let stob = users2.sort((a,b)=>a.age - b.age)
+                    renderDom(stob)
+                }else if(ageSort.value === '年龄由大到小'){
+                    let btos = users2.sort((a,b)=>b.age - a.age)
+                    renderDom(btos)
+                } 
+                if(ageSort.value === '默认'){
+                    renderDom(users)
+                }
+        }
+        ageSort.onclick = function(){
+            console.log(screen.value);
+            if(screen.value !== '默认'){
+                sort(xy2)
+            }else{
+                sort(users2)
+            }
+            
+            
+        }
+        
+        
+
+
+
+        // renderDom(users);
+        function renderDom(users){
+            tbodyEle.innerHTML = "";  // 把 tbody里原本的内容清空
+            users.forEach(function(user,key){
+                var trEle = document.createElement("tr");
+                trEle.innerHTML = "<td>"+user.username+"</td><td>"+user.age+"</td><td>"+user.gender+"</td><td class='del'>删除</td>";
+
+                // 获取删除 按钮 ，点击删除的时候 先删除数据，在渲染视图；
+                var delBtn = trEle.querySelector(".del");
+                delBtn.onclick = function(){
+                    // console.log("点击了删除按钮",key);
+                    users.splice(key,1);
+                    console.log(users);
+                    renderDom(users);
+                }
+
+                tbodyEle.appendChild(trEle);
+            })  
+        }
+
+
+
+
+
+
+
+        // 上面的拷贝虽然已经达成了拷贝数组和对象的问题,但是不能拷贝对象的复杂数据类型,所以得进一步修改
+        function copy(obj1){
+            // 先判断传入的参数是否是数组,如果是数组,则把obj2创建为数组.否则创建为对象
+            let obj2 = Array.isArray(obj1)?[]:{}
+            for(let key in obj1){
+                // 判断对象里面是否还有函数或者方法,数组之类的对象类型,如果有,则再次调用copy函数进入拷贝
+                if(typeof obj1[key] === "object"){
+                    obj2[key] =copy(obj1[key])
+                // 没有对象类型的就直接拷贝
+                }else{
+                    obj2[key] = obj1[key]
+                }
+            }
+            return obj2
+        }
+    </script>
+</body>
+
+</html>

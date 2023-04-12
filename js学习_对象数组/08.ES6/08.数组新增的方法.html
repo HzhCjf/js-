@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ES6 数组新增方法 ；
+
+        // 一、at 方法 : 根据下标获取 键值 ；
+        // ES5:
+        // var arr = ["张安","李四","王五"];
+        // console.log(arr[1])
+        // // ES6 : 
+        // console.log(arr.at(1));
+
+        // 二、fill 方法 ： 填充数组里的键值 ；
+        //     var arr = [1,2,3,4,5,6,7];
+        //    var res =  arr.fill("*",1,4);  // 包前不包后 
+        //    console.log(res);
+
+        // 三 、根据条件查找满足条件的第一项内容 ；
+        // 返还符合条件的第一项内容 
+        // var arr = [1, 2, 3, 4, 5, 6];
+        // var res = arr.find(function (item) {
+        //     return item > 3;
+        // })
+        // console.log(res);
+
+
+        // 四、根据条件查找第一个符合条件的元素索引
+        // var arr = [1, 2, 3, 4, 5, 6];
+        // var index = arr.findIndex(item => item > 3);
+        // console.log(index);
+
+
+        // 五、判断数组中是否包含某个元素；
+        // 数组.includes(元素); 包含就返还true 否则就返还false
+        // var arr = ["张三","李四","王五"];
+        // // arr.indexOf("王五")
+
+        // console.log( arr.includes("王五123"));
+
+
+        // 六、Array.isArray(): 判断是否是一个数组 ；
+        // 数据类型判断
+        // typeof ： 简单数据类型 和 函数 
+        // constructor  === Array
+        // Object.prototype.toString.call() 
+        // instanceof 
+
+        // 七 、 Array.form : 把伪数组转数组 ；
+        // function fn(){
+        //     console.log(arguments);
+        //     var arr = Array.from(arguments);
+        //     console.log(arr);
+        // }
+
+        // fn(1,2,3);
+
+        // 八、Array.of ： 创建一个数组 ；
+        // ES5 ： 
+        // var  arr = new Array(7);
+        // console.log(arr);
+        // var arr = Array.of(7,8);
+        // console.log(arr);
+
+        // 九、数组的 扁平化；
+        // 数组.flat(减低的维度默认值是1);
+        // var arr = [1, 2, 3, [4, 5, [6]]];
+
+        // //    var newarr =  arr.toString().split(",")
+        // //    console.log(newarr);
+        // var newarr = arr.flat(2)
+        // console.log(newarr);
+
+
+
+
+
+    </script>
+</body>
+
+</html>

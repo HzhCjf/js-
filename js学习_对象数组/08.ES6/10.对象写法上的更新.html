@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 对象写法上的更新
+
+
+        // 一.ES6里的对象的 键名和键值如果一样可以省略一个
+        // let name = '张三'
+        // let age = 20
+        // let obj = {
+        //     name,
+        //     age,
+        //     height:'178cm'
+        // }
+
+        // console.log(obj);//{name: '张三', age: 20, height: '178cm'}
+
+
+
+        // 二.对象里的函数的简写
+        // 普通写法
+        // let obj = {
+        //     name:'张三',
+        //     fn:function(){
+        //         console.log('fn');
+        //     },
+        //     fn2:function(){
+        //         console.log('fn2');
+        //     }
+        // }
+
+
+        // 把对象里的函数简写
+        // let obj = {
+        //     name:'张三',
+        //     fn(){
+        //         console.log('fn');
+        //     },
+        //     fn2(){
+        //         console.log('fn2');
+        //     },
+        //     fn3:()=>{
+        //         console.log('fn3');
+        //     },
+        //     fn4:function(){
+        //         console.log('fn4');
+        //     }
+        // }
+        // console.log(obj);//{name: '张三', fn: ƒ, fn2: ƒ, fn3: ƒ, f4: ƒ}
+        // obj.fn()
+        // obj.fn2()
+        // obj.fn3()
+        // obj.fn4()
+
+
+
+
+
+        // 三、对象里键名解析变量 
+
+        var myname = "hello";
+        var myage = "age";
+        var myobj = {my:"nihao"};
+        var obj = {
+            myname:myname,
+            [myage+"aa"]:20,
+            [myobj]:"你好"
+        }
+        console.log(obj);
+
+        for(var key in obj){
+            console.log(typeof key);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ES6 对象新增方法 
+        // 1.Object.keys : 获取 对象所有的键名 放在数组里；
+
+        // var obj = {
+        //     myname:"张三",
+        //     age:20,
+        //     height:"178cm"
+        // }
+
+        // var keys = Object.keys(obj);
+        // console.log(keys);
+
+        // 2.Object.values : 获取对象所有键值 放在数组里；
+        //     var obj = {
+        //         myname:"张三",
+        //         age:20,
+        //         height:"178cm"
+        //     }
+
+        //    console.log(  Object.values(obj));
+
+        // 3. Object.freeze: 冻结对象
+        // var obj = {
+        //     myname: "张三",
+        //     age: 20,
+        //     height: "178cm"
+        // }
+        // Object.freeze(obj);
+        // obj.age = 30;
+        // console.log(obj);
+
+
+        // 4 Object.seal:把对象变成不可配置对象
+        // var obj =  {
+        //     name:"张三",
+        //     age:20
+        // }
+
+        // Object.seal(obj);  //不可配置 ,不能被删除 ；
+        // // obj.age = 30;
+        // // console.log(obj);
+
+        // delete obj.age;
+        // console.log(obj);
+
+        // 5.Object.assign: 合并 2个 或者多个对象
+
+        // var obj1 = {
+        //     name: "张三",
+        //     age: 20
+        // }
+
+        // var obj2 = {
+        //     heigth: "178cm"
+        // }
+
+        // var obj3 = {
+        //     hobby: "篮球"
+        // }
+
+        // var res = Object.assign(obj1, obj2, obj3);
+        // console.log(res);
+
+
+        // 6.Object.is：判断2个值是否相同
+    //    var res =   Object.is(1,2);
+    //    console.log(res);
+    //    console.log(NaN===NaN);  // false
+
+        // var res = Object.is(NaN,NaN);
+        // console.log(res);
+
+        // 7.判断某个属性是否是自身属性 
+        // Object.hasOwn(obj,"height")
+        var obj = {
+            name:"张三",
+            age:20
+        }
+
+        obj.__proto__.height = "178cm";
+
+        // console.log( obj.hasOwnProperty("height"));
+
+    //    console.log(  Object.hasOwn(obj,"height"));
+
+        for(var key in obj){
+            // if(Object.hasOwn(obj,key)){
+                console.log(key);
+            // }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

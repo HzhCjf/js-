@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>11</li>
+        <li>22</li>
+        <li>33</li>
+    </ul>
+    <script>
+        // 展开运算符 ： ... 
+
+        // 一、展开数组 ；
+
+        // 展开运算符 可以去壳 ；
+        // var arr = [3, 2, 6, 4];
+        // var res = Math.max(...arr);  // [3,2,6,4] ----》 3,2,6,4
+        // console.log(res);
+
+        // 1.合并数组 ；
+        // var arr1 = [1, 2, 3];
+        // var arr2 = [4, 5,3];
+        // // var res = arr1.concat(arr2);
+        // // console.log(res);
+        // var res = [...arr1,...arr2,"hello"];
+        // console.log(res);
+
+        // 2.把伪数组转成数组；
+
+        // var lis = document.getElementsByTagName("li");
+        // console.log(lis);
+        // var arr = [...lis];
+        // console.log(arr);
+
+        // arr.forEach(item=>{
+        //     item.onclick = function(){
+        //         console.log(111);
+        //     }
+        // })
+
+
+        // 二、展开对象 ；
+
+        // var obj1 = {
+        //     name:"张安",
+        //     age:20
+        // }
+
+        // var obj2 = {
+        //     ...obj1,
+        //     height:"178cm"
+        // }
+
+        // console.log(obj2);
+
+        // 合并配置 
+
+        // var defalutConfig = {
+        //     w:100,
+        //     h:200,
+        //     bg:"./index/1.png"
+        // }
+
+        // var config = {
+        //     speed:30,
+        //     left:20,
+        //     top:100,
+        //     h:1000
+        // }
+
+        // var newconfig = {...defalutConfig,...config};
+        // console.log(newconfig);
+
+
+
+        // 三、参数的展开 ： rest 剩余参数 ；接收剩余的参数；
+        //多个参数 ，剩余参数只能写在参数的最后 ；
+        function fn(a,b,...args){
+            console.log(args);
+        }
+
+        fn(1,2,3,4,5);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 解构赋值 ： 解构 对象或者数组 ；
+
+        // 一、数组的解构 ；
+
+        // ES5 ： 
+        // var arr = ["张三","李四","王五"];
+        // var a = arr[0];
+        // var b = arr[1];
+        // var c = arr[2];
+
+        // ES6 解构赋值 
+        // a,b,c 是自定义 的；
+        // let [a,b,c] = ["张三","李四","王五"];
+        // console.log(a,b,c);
+
+        // var  arr = [1,2,3,[4,5,[6]]];
+        // // var [a,b,c,[d,e,[f]]] = arr;  // 所有内容都解构 
+        // var [a,b,c,d] = arr;
+        // console.log(d);
+        // var [f,g,[h]] = d;
+        // console.log(h);
+
+
+        // 二、对象解构 
+        // var obj = {
+        //     name:"张安",
+        //     age:20
+        // }
+
+        // // 键名 需要和之前对象里的键名保持一致；
+        // var {name:myname,age:myage} = obj;
+
+        // console.log(myname,myage);
+
+        // var obj = {
+        //     name:"张三",
+        //     age:20,
+        //     obj2:{
+        //         height:"178cm"
+        //     },
+        //     hobby:["足球","篮球"]
+        // }
+
+        // var {name:myname,age:myage,obj2:{height:myheight},hobby:[a,b]} = obj;
+        // console.log(myname,myage,myheight,a,b);
+
+
+
+        // 对象解构简写 ： 解构的时候  键名和键值 一样了 那么可以省略一个 ；
+        // var obj = {
+        //     name:"张三",
+        //     age:20,
+        //     height:"178cm"
+        // }
+
+        // // var {name:name,age:age,height:height} = obj;
+        // var {name,age,height} = obj;
+
+        // console.log(name,age,height);
+
+
+        // 三、参数的解构 
+
+        // function fn({name,age}){
+        //     // console.log(obj);
+        //     // var name = obj.name;
+        //     // var age = obj.age;
+        //     console.log(name,age);
+            
+        // }
+
+        // fn({name:"张三",age:20});
+
+
+        // 四、字符串的解构
+
+        var str = "fdsafdfdsa";
+        let [a,b,c,d,e] = str;
+        console.log(a,b,c,d);
+
+
+
+    </script>
+</body>
+</html>

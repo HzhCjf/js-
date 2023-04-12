@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 一、新增数学方法 
+        // 1.  数的几次方 ； 底数 ** 指数；
+        // var res = Math.pow(2, 3)
+        // var  res = 2 ** 3;
+        // console.log(res);
+        // var res = 2 ** 1024;
+        // var res2 = 2 ** 53;
+
+        // 2.八进制  ： 0o 开头 ；
+        /*
+         二进制  ： 0b1
+         八进制 ： 0开头   ----》 0o开头 
+         十六进制 ： 0xff 
+        */
+
+        // 3.Math.trunc() ：去掉 数字的小数部分 ；
+        // var res = Math.trunc(3.1415);
+        // console.log(res);
+
+        // 4.Math.sign():判断一个数是正数 负数 或者是0 
+        // 如果是正数返还  1  负数 返还 -1  0就返还0；
+        // var res = Math.sign(0);
+        // console.log(res);
+
+        // 5.Math.sqrt() ： 求一个数的平方根 
+        // var num = 4;
+        // var res = Math.sqrt(num);
+        // console.log(res);
+
+        // 6.Math.cbrt() : 求立方根 
+        // var num =  8 ;
+        // var res = Math.cbrt(num);
+        // console.log(res);
+
+        // 7.Math.hypot(): 求所有数的平方和的平方根
+        // var res = Math.hypot(2,3);  // 4 + 9 
+        // console.log(res);
+
+
+
+// 二、number新增方法 
+// 1.Number.isFinite ： 判断一个数字 是否是一个有限的；
+// var num = 2 ** 1024;
+// console.log(num);
+// var res =  Number.isFinite(num);
+// console.log(res);
+
+
+// 2.Number.isNaN() ：判断是否是 NaN
+// var res = Number.isNaN(NaN);
+// console.log(res);
+
+//   3.Number.isInteger():  判断是否是一个整数；
+// int ：整型 ；
+// var num = 3;
+// console.log(Number.isInteger(num));
+
+// 4.Number.parseInt(str):和js里的parseInt 一样；
+
+// console.log(Number.parseInt===parseInt);
+
+var res =  Number.parseInt("100px");
+console.log(res);
+
+
+    </script>
+</body>
+
+</html>

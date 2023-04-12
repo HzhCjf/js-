@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 基本数据类型 ： 1.number 2.string 3.boolean  4.null 5.undefined  6 symbol  7. bigInt 
+
+        // 一、symbol ： 基础数据类型 ，是独一无二的值 ；
+
+        // symbol 一旦生成 就是独一无二的值 ；
+        // 生成 symbol ： 不需要实例化 
+        // let s1 =   Symbol("key1");
+        // // console.log(typeof s1);
+        // let s2 = Symbol("key1");
+        // console.log(s1==s2);
+        // console.log(s1===s2);
+
+        // 1.模拟私有成员 
+        // var obj = {
+        //     name: "张安",
+        //     age: 20,
+        //     [Symbol("weight")]: "100kg"
+        // }
+        // console.log(obj);
+
+        // console.log(obj[Symbol("weight")]);
+
+        // obj.fn
+
+        // 2.特殊的需求 
+
+        // var cate = {
+        //     person:Symbol(),
+        //     animal:Symbol()
+        // }
+
+        // function getCate(type){
+        //     if(type===cate.person){
+        //         console.log("人类")
+        //     }else{
+        //         console.log("动物")
+        //     }
+        // }
+
+        // getCate(cate.person);
+
+
+        // 二、bigint 类型  
+
+        // js 最大 支持  2 ** 53次方 运算 ；大于这个数 js 计算不准确 ；
+
+        // console.log(2**54)
+        // console.log(2**54 +1)
+        // console.log(2**54 +2)
+        // console.log(2**54 +3)
+        // console.log(2**54 +4)
+
+        // 创建 bigInt 类型
+        // 方式一 ：
+        // var num = BigInt(1000);
+        // console.log(num);
+        // console.log(typeof num);
+
+        // 方式二：
+        // var num = 1000n;
+        // console.log(num);
+        // console.log(typeof num);
+
+        // 注意: bigInt 类型 只能和 bigInt 类型运算 ；
+
+        console.log(2n**54n)
+        console.log(2n**54n +1n);
+        console.log(2n**54n +2n)
+        console.log(2n**54n +3n)
+        console.log(2n**54n +4n)
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 迭代器(iterator)
+        // 迭代器拥有一个next方法,当你调用next方法的时候,会进行迭代,迭代的过程中有两个属性,第一个是value:当前迭代的值,第二个是done:代表当前迭代是否完成
+
+        // js数据里可以通过一个Symbol.iterator查看是否有内置迭代器
+
+        // 获取数据的迭代器
+        // arr.[Symbol.iterator]()获取迭代器
+        // 提供入口获取迭代器
+
+        // 所有js里拥有迭代器的数据都可以被for of 循环
+
+        // 数组有内置迭代器
+        // let arr = ['张三','李四','王五']
+        // let myiterator = arr[Symbol.iterator]()
+        // console.log(myiterator);
+        // console.log(myiterator.next());//{value: '张三', done: false}
+        // console.log(myiterator.next());//{value: '李四', done: false}
+        // console.log(myiterator.next());//{value: '王五', done: false}
+        // console.log(myiterator.next());//{value: undefined, done: true}
+        // console.log(myiterator.next());//{value: undefined, done: true}
+
+
+        // let arr = ['张三','李四','王五']
+        // let myiterator = arr.entries()
+        // console.log(myiterator)
+        // console.log(myiterator.next());//{value: Array(2), done: false} value: (2) [0, '张三']
+        // console.log(myiterator.next());//{value: Array(2), done: false} value: (2) [1, '李四']
+        // console.log(myiterator.next());//{value: Array(2), done: false} value: (2) [2, '王五']
+        // console.log(myiterator.next());//{value: undefined, done: true}
+
+
+
+
+        // 通过for of 循环
+        // let arr = ['张三','李四','王五']
+        // for(var val of arr){
+        //     console.log(val);//张三 李四 王五
+        // }
+        // for(var val of arr.entries()){
+        //     console.log(val);
+        //     //(2) [0, '张三']
+        //     // (2) [1, '李四']
+        //     // (2) [2, '王五']
+        // }
+        // for(var [key,item] of arr.entries()){
+        //     console.log(key,item);
+        //     // 0 '张三'
+        //     // 1 '李四'
+        //     // 2 '王五'
+        // }
+
+
+
+
+
+        var obj = {
+            name:'zhangsan',
+            age:20,
+            height:'178cm'
+        }
+        // console.log(Object.entries(obj));
+        // // (3) [Array(2), Array(2), Array(2)]
+        // //     0: (2) ['name', 'zhangsan']
+        // //     1: (2) ['age', 20]
+        // //     2: (2) ['height', '178cm']
+
+
+        // for(var [key,val] of Object.entries(obj)){
+        //     console.log(key,val);
+        //     // name zhangsan
+        //     // age 20
+        //     // height 178cm
+        // }
+        
+
+
+
+         // 对象没有内置迭代器
+        // for(var val of obj){
+        //     console.log(val);
+        // }
+    </script>
+</body>
+</html>

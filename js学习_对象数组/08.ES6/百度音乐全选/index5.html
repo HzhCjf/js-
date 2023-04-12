@@ -61,7 +61,7 @@
     function renderDom(data){
         let listEle = document.querySelector('#list')
         listEle.innerHTML = ""
-        data.forEach(function(item,key){
+        data.forEach((item,key)=>{
           let liEle = document.createElement('li')
           liEle.innerHTML = `${item.checked?'<input checked type="checkbox" />':'<input  type="checkbox" />'}
           <span>${item.title}</span>
@@ -127,9 +127,7 @@
     // 2.上面的checkbox会影响下面的是否全选
     function ischeckAll(){
       let checkAllEle = document.querySelector('#checkAll')
-      let res = data.every(function(item){
-        return item.checked
-      })
+      let res = data.every(item=> item.checked)
       checkAllEle.checked = res
     }
   </script>

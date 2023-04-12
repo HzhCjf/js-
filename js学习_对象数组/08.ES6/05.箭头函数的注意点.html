@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <button>按钮</button> -->
+    <ul>
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+    </ul>
+    <script>
+        // 箭头函数的注意点 ： 
+        // 一 、箭头函数里的this 问题 ；
+        // 箭头函数里没有this绑定 ，它的this是生成作用域的this绑定；
+        // this 穿透 ；
+        // var btn = document.querySelector("button");
+
+        // btn.onclick = ()=>{
+        //     // console.log(this);
+        //     var arr = [1,2,3];
+        //     arr.forEach(()=>{
+        //         // console.log(this)
+        //         setTimeout(()=>{
+        //             console.log(this);
+        //         }, 10);
+        //     })
+        // }
+
+
+        // 二、箭头函数 没有 隐藏参数 （arguments）；
+
+        // function fn(){
+        //     console.log(arguments);
+        // }
+        // fn(1,2,3);
+
+        // let fn = ()=>{
+        //     console.log(arguments);
+        // }
+        // fn(1,2,3);
+
+        // let fn = (...args)=>{
+        //     console.log(args);
+        // }
+
+        // fn(1,2);
+
+
+        // 三 、箭头函数 不能作为 构造函数；
+
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+
+        // var obj = new Person("张三",20);
+
+        // let fn = (name)=>{   // 不对的 ；
+        //     this.name = name;
+        // }
+
+        // var obj = new fn();
+
+
+        // 四、箭头函数 作为事件函数 的时候 如何使用  this；利用 e.target
+        var lis = document.querySelectorAll("li");
+        lis.forEach(li => {
+            li.onclick =  e=> {
+                // li.style.color = "red";
+                e.target.style.color = "red"
+            }
+        })
+
+
+
+        let users = [{name:"张三",age:29,gender:"男"},{name:"张三",age:21,gender:"男"},{name:"张三",age:26,gender:"男"},{name:"张三",age:30,gender:"女"},{name:"张三",age:22,gender:"男"},{name:"张三",age:28,gender:"男"}]
+
+        /* 
+            晒选 所有的男性  ，且 年龄大于23岁 ，年龄按照 由小到大排列 
+        
+        */
+
+        users.sort((a,b)=>a.age - b.age).forEach(item=>(item.gender === '男' && item.age>23 && console.log(item)))
+
+
+
+
+
+
+
+
+        let obj = {
+            name:'zhangsan',
+            age:20,
+            height:'178cm'
+        }
+
+        // 转成字符串:name=zhangsan&age=20&height=178cm
+
+        // 1.可以获取对象里的所有 键名  ，放在一个数组里；
+        // var keys = Object.keys(obj);
+        // console.log(keys);
+        // 2.可以获取对象里的所有键值  ，放在一个数组里
+        // var values = Object.values(obj);
+        // console.log(values);
+
+        // const  o2s = obj=>{
+        //     return "name=zhangsan&age=20&height=178cm"
+        // };
+
+        // const o2s = obj=>{
+        //     var keys = Object.keys(obj);
+        //     var arr =   keys.map(function(item){
+        //         return `${item}=${obj[item]}`;
+        //     })
+        //     // console.log(arr);
+        //     return arr.join("&");
+        // }
+
+        const o2s = obj=>Object.keys(obj).map(item=>`${item}=${obj[item]}`).join("&");
+        console.log(o2s(obj));
+    </script>
+</body>
+</html>
