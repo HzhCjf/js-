@@ -8,7 +8,29 @@
 </head>
 <body>
     <script>
-        
+        let myIterable = {
+            data: [1, 2, 3],
+            [Symbol.iterator]: function* () {
+                for (let i = 0; i < this.data.length; i++) {
+                    yield this.data[i];
+                }
+                return "迭代完成了！"; // 指定迭代完成时返回的值
+            }
+        };
+
+        let iterator = myIterable[Symbol.iterator](); // 获取迭代器对象
+        console.log(iterator.next()); // 输出 { value: 1, done: false }
+        console.log(iterator.next()); // 输出 { value: 2, done: false }
+        console.log(iterator.next()); // 输出 { value: 3, done: false }
+        console.log(iterator.next()); // 输出 { value: "迭代完成了！", done: true }
+
+        // 使用 for...of 循环遍历可迭代对象
+        for (let value of myIterable) {
+        console.log(value);
+        }
+        // 输出 1, 2, 3
+
+
     </script>
 </body>
 </html>
