@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+         class MyEvent {
+            constructor() {
+                this.handle = {};
+            }
+            addEvent(eventName, eventFn) {
+                // {"click":[fn1,fn2]}
+                if (typeof this.handle[eventName] === "undefined") {
+                    this.handle[eventName] = [];
+                }
+                this.handle[eventName].push(eventFn);
+            }
+            dispatchEvent(eventName) {
+                this.handle[eventName].forEach(fn => {
+                    fn();
+                })
+            }
+        }
+
+
+        // 同步和异步  ： ES5 异步的执行顺序 ： 回调 ；
+        // ES6 ： promise 解决异步的执行顺序问题 ；
+        // 同步任务 ：执行不需要等待的任务 ； 代码移除执行 
+        // 异步任务 ： 需要执行时间的任务 ，资源加载 定时器 ajax（网络请求）  ，不是依次执行 
+
+        // 同步
+        // console.log(111);
+        // console.log(222);
+        // console.log(3333);
+
+        // let event = new MyEvent();
+        let  event = new EventTarget();
+
+
+        function fn1() {
+            setTimeout(function () {
+                console.log(111);
+                // cb();
+                // event.dispatchEvent("myevent1");
+                event.dispatchEvent(new CustomEvent("myevent1"))
+            }, 2000)
+        }
+
+
+        function fn2() {
+            setTimeout(function () {
+                console.log(222);
+                // cb();
+                // event.dispatchEvent("myevent2");
+                event.dispatchEvent(new CustomEvent("myevent2"))
+
+            }, 1000)
+        }
+
+        function fn3() {
+            setTimeout(function () {
+                console.log(333);
+                // cb();
+                // event.dispatchEvent("myevent3");
+                event.dispatchEvent(new CustomEvent("myevent3"))
+
+            }, 3000)
+        }
+        fn1();
+        // event.addEvent("myevent1",function(){
+        //     console.log("第一个执行完毕");
+        //     fn2();
+        // })
+
+        event.addEventListener("myevent1",function(){
+            console.log("第一个执行完毕");
+            fn2();
+        })
+
+        // event.addEvent("myevent2",function(){
+        //     console.log("第二个执行完毕");
+        //     fn3();
+        // })
+        event.addEventListener("myevent2",function(){
+            console.log("第二个执行完毕");
+            fn3();
+        })
+
+        // event.addEvent("myevent3",function(){
+        //     console.log("第三个执行完毕");
+        // })
+
+        event.addEventListener("myevent3",function(){
+            console.log("第三个执行完毕");
+        })
+
+        // fn1();
+        // fn2();
+        // fn3();
+
+        // 回调地狱 ： 回调函数出现层层嵌套 ；
+        // 1.可维护性差  2.不能捕捉错误 ；
+        // 回调地狱 2种方式 解决 ： 
+        // 1.ES6 出现 一个 promise 解决  回调地狱问题；
+        // 2.自定义事件 ，观察者模式，也可以解决回调地狱问题 ；
+        // fn1(function(){
+        //     fn2(function(){
+        //         fn3(function(){
+        //             console.log("执行完毕");
+        //         })
+        //     })
+        // })
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

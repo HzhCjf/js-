@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 私有成员 ： 1.私有属性  2.私有方法 
+        // ES6里的私有成员 需要 加上  # 修饰 ；
+
+        class Person{
+            name = "张三";
+            age = 20;
+            #weight = "100kg"
+            constructor(){
+
+            }
+            fn(){
+                console.log("fn")
+                this.#myfn();
+            }
+            #myfn(){
+                console.log("myfn")
+            }
+            // 公有方法 调用私有成员；
+            getweight(){
+                console.log(this.#weight);
+            }
+
+        }
+
+        var zhangsan = new Person();
+        zhangsan.fn();
+        // zhangsan.#myfn();
+        zhangsan.getweight();
+
+
+
+
+    </script>
+</body>
+</html>

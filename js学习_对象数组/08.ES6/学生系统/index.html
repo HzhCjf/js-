@@ -87,7 +87,7 @@
         // 筛选
         var xy2 = []
         let screen = document.querySelector('.sex')
-        screen.onclick = function(){
+        screen.onchange = function(){
             let  xy = users.filter(users => users.gender == this.value)
             renderDom(xy)
             xy2 = copy(xy)
@@ -112,7 +112,7 @@
                     renderDom(users)
                 }
         }
-        ageSort.onclick = function(){
+        ageSort.onchange = function(){
             console.log(screen.value);
             if(screen.value !== '默认'){
                 sort(xy2)

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="title">学生系统</div>
+        <div id="form">
+            <p>姓名<input id="username" type="text" value="张三123" /></p>
+            <p>年龄<input id="age" type="text" value="21" /></p>
+            <p>性别
+                <select id="gender">
+                    <option>男</option>
+                    <option>女</option>
+                    <option>你猜</option>
+                </select>
+            </p>
+            <p>
+                <input type="button" value="添加" id="addBtn" />
+                <input type="button" value="排序" id="sortBtn" />
+            </p>
+
+        </div>
+        <div class="container">
+            性别筛选：
+            <select class="genderFilter">
+                <option value="0">默认</option>
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+
+            年龄排序：
+            <select class="ageSort">
+                <option value="0">默认</option>
+                <option value="1">年龄由大到小</option>
+                <option value="2">年龄由小到大</option>
+            </select>
+        </div>
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        //  第一步 操作数据 ；  第二步 渲染视图 ；
+        var usernameEle = document.querySelector("#username");
+        var ageEle = document.querySelector("#age");
+        var genderEle = document.querySelector("#gender");
+
+        var addBtnEle = document.querySelector("#addBtn");
+        var tbodyEle = document.querySelector("tbody");
+
+        var sortBtn = document.querySelector("#sortBtn");
+
+        var users = [];
+
+        addBtnEle.onclick = function () {
+            var username = usernameEle.value;
+            var age = ageEle.value;
+            var gender = genderEle.value;
+            users.push({ username: username, age: age, gender: gender });
+            console.log(users);
+            renderDom(users);
+        }
+
+        sortBtn.onclick = function () {
+            // 数据排序 
+            users.sort(function (a, b) {
+                return a.age - b.age;
+            })
+            // console.log(users);
+            renderDom(users);
+        }
+
+
+
+        // renderDom(users);
+        function renderDom(users) {
+            tbodyEle.innerHTML = "";  // 把 tbody里原本的内容清空
+            users.forEach(function (user, key) {
+                var trEle = document.createElement("tr");
+                trEle.innerHTML = "<td>" + user.username + "</td><td>" + user.age + "</td><td>" + user.gender + "</td><td class='del'>删除</td>";
+
+                // 获取删除 按钮 ，点击删除的时候 先删除数据，在渲染视图；
+                var delBtn = trEle.querySelector(".del");
+                delBtn.onclick = function () {
+                    // console.log("点击了删除按钮",key);
+                    users.splice(key, 1);
+                    console.log(users);
+                    renderDom(users);
+                }
+
+                tbodyEle.appendChild(trEle);
+            })
+        }
+
+
+
+        // 一、性别的筛选  ；
+        // 记录 年龄 和 性别 筛选的 索引值 
+
+        var genderIndex = 0;  // 性别筛选的索引值 ；
+        var ageIndex = 0;  // 年龄排序的索引值；
+
+
+
+
+
+        var genderFilterEle = document.querySelector(".genderFilter");
+
+
+        // 筛选性别的规则 放在一个数组里 ；
+        var genderArr = [data => data.map(item => item), data => data.filter(item => item.gender === "男"), data => data.filter(item => item.gender === "女")]
+
+        var ageSortArr = [data=>data.map(item=>item),data=>data.sort((a,b)=>b.age-a.age),data=>data.sort((a,b)=>a.age-b.age)];
+
+
+        genderFilterEle.onchange = function () {
+            // console.log("选择的value值是：", this.value);
+            genderIndex = this.value;
+            var newarr = genderArr[this.value](users);  // 性别筛选
+            // console.log(newarr);
+            newarr = ageSortArr[ageIndex](newarr);
+
+
+            renderDom(newarr);
+        }
+
+
+        // 二、年龄排序 
+
+        var ageSortEle = document.querySelector(".ageSort");
+
+       
+
+
+        ageSortEle.onchange = function(){
+            // console.log(this.value);
+            ageIndex = this.value;
+            var newarr = ageSortArr[this.value](users);
+            console.log(newarr);
+            newarr = genderArr[genderIndex](newarr);
+            renderDom(newarr);
+
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

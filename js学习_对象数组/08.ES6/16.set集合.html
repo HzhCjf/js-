@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        // set 集合 ： 类似键名的集合 ,元素 是不能重复的。
+
+        // 一、创建set 集合 
+        // 1.直接创建 
+        // var set = new Set([1,2,3,4,5,1,1,2]);
+        // console.log(set);
+
+        // 2.add方法添加元素 
+        // var set = new Set();
+        // set.add(1);
+        // set.add(2);
+        // set.add(3);
+        // set.add(4);
+        // console.log(set);
+
+        // 二、集合下的方法 
+        // 1. 集合.has(元素): 判断集合是否有某个元素
+        // var set  = new Set(["张三","李四","王五"]);
+        // console.log(set.has("李四1"));
+
+        // 2.集合的长度 :  集合.size
+        // var set  = new Set(["张三","李四","王五"]);
+        // console.log(set.size);
+
+        // 3.删除集合里的指定元素 集合.delete(元素名) 
+        // var set  = new Set(["张三","李四","王五"]);
+        // set.delete("李四");
+        // console.log(set);
+
+        // 4.删除所有的元素   集合.clear();
+        // var set  = new Set(["张三","李四","王五"]);
+        // set.clear(); // 删除所有元素
+        // console.log(set);
+
+        // 5.获取 所有的键名和 键值 。 集合.keys()  集合.values();
+        // keys 和  values 是一样的；
+        // var set  = new Set(["张三","李四","王五"]);
+        // // console.log(set.keys());
+        // // console.log(set.values());
+        // console.log(set);
+
+        // for(let val of set){
+        //     console.log(val);
+        // }
+
+
+
+        // 数组的去重 ；
+        // var arr = [1,2,1,1,3,2,2,4];
+        // var newarr =[...new Set(arr)];
+        // console.log(newarr);
+
+
+        
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

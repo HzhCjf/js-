@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ES6 静态成员 ： 1.静态属性 2.静态方法 ；
+        // 静态成员 属于类的 不属于实例化对象 。 不需要实例化；
+
+        // ES5 : 
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+
+        // Person.num = 10;  // 静态属性
+        // Person.fn = function(){ // 静态方法 
+
+        // }
+
+        // Object.is()   Object.assign();
+
+
+        // ES6 ： 通过一个关键字  static  声明静态成员 ；
+
+        // class Person {
+        //     static num = 10;  // 静态属性
+        //     constructor(name, age) {
+        //         this.name = name;
+        //         this.age = age;
+        //     }
+        //     static fn(){
+        //         console.log("我是静态方法fn");
+        //     }
+        // }
+
+        // console.log(Person.num);  // 静态属性 
+        // Person.fn();  // 调用静态方法
+
+
+
+
+        // 单例模式  
+        class Person{
+            static instance;  // 静态属性 保持实例化对象 ；
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+                if(Person.instance){
+                    return Person.instance
+                }else{
+                    Person.instance = this;
+                }
+            }
+        }
+
+        let zhangsan = new Person("张三",20);
+        let lisi = new Person("李四",21);
+        console.log(zhangsan,lisi);
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 每一个promise对象  都会拥有一个then方法 ；
+        // then方法会接收 2种回调函数  ： 1.onResolved 2.onRejected ；
+
+        // 1.onResolved 会在 promise调用 resolve的时候执行 ，成功的时候执行第一个回调； 参数会传递 promiseResult
+        // 2.onRejected 在promise调用 reject 的时候执行 ，失败状态的时候执行的第二个回调 ,参数会传递 promiseResult ；可以省略 ；
+        // let  p = new Promise((reslove,reject)=>{
+        //     // reslove("successs");
+        //     // reject("error");
+        //     setTimeout(() => {
+        //         // reslove("successs");
+        //         reject("error");
+        //     }, 1000);
+        // })
+
+        // let onResolved = function(res){
+        //     console.log("成功，执行了",res);
+        // }
+        // let onRejected = function(err){
+        //     console.log("失败了,执行了",err);
+        // }
+
+        // p.then(onResolved,onRejected);
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>11</li>
+        <li>22</li>
+        <li>33</li>
+    </ul>
+    <script>
+        // map 字典 ：类似对象；
+
+        // var myobj = {};
+        // var obj = {
+        //     [myobj]:"hello"
+        // }
+        // console.log(obj);
+
+        // for(var key in obj){
+        //     console.log(typeof key);
+        // }
+
+        // 一、map的创建  
+        // 1.直接创建 
+        // map的键名和键值 都可以是任意类型  
+        // var map = new Map([[{mykey:1},{myname:"张三"}],["age",20],["height","178cm"]]);
+        // console.log(map);
+
+        // 2.通过 set 方法设置键名和键值 ；
+        // var map = new Map();
+        // map.set("myname","张三");
+        // map.set("age",20);
+        // console.log(map);
+
+        // 二、map 下面的方法 
+
+        // 1.map的长度 ；
+        // var map = new Map();
+        // map.set("myname","张三");
+        // map.set("age",20);
+        // console.log(map.size);
+
+        // var obj = {
+        //     name:"张娜",
+        //     age:20
+        // }
+        // console.log(Object.keys( obj).length);
+
+        // 2.根据键名获取 键值 ； map.get("键名");
+        // var map = new Map();
+        // map.set("myname","张三");
+        // map.set("age",20);
+        // console.log(map.get("myname"));
+
+        // 3.判断某个键名是否存在  ： map.has(键名);
+        // var map = new Map();
+        // map.set("myname","张三");
+        // map.set("age",20);
+        // console.log(map.has("age1"));
+
+        // 4.删除某个 键名 ： map.delete("键名");
+        // var map = new Map();
+        // map.set("myname","张三");
+        // map.set("age",20);
+        // map.delete("age");
+        // console.log(map);
+
+        // 5.删除所有元素 
+        // var map = new Map();
+        // map.set("myname","张三");
+        // map.set("age",20);
+        // map.clear();
+        // console.log(map);
+
+        // 6.获取键名和键值 keys 和 values；
+        // var map = new Map();
+        // map.set("myname","张三");
+        // map.set("age",20);
+        // console.log(map.keys());
+        // console.log(map.values());
+
+
+
+        // var map = new Map();
+        // map.set("myname","张三");
+        // map.set("age",20);
+        // console.log(map);
+        // map.forEach((item,key)=>{
+        //     console.log(item,key)
+        // })
+
+        // for(let [key,val] of map){
+        //     console.log(key,val);
+        // }
+
+
+        // 练习  ： 有三个 li  ，获取三个li 作为 map的三个 键名 
+        // 三个 键值 ：red  blue  yellow  ，点击 li的时候 把li的背景图换成对应的颜色 ；
+        /* 
+            li1=>"red",
+            li2=>"blue",
+            li3=>"yellow"
+        */
+
+        var  map = new Map();
+        var lis = document.querySelectorAll("li");
+        map.set(lis[0],"red")
+        map.set(lis[1],"blue")
+        map.set(lis[2],"yellow")
+        console.log(map)
+
+        for(let [key,item] of map){
+            key.onclick = function(){
+                key.style.background = item;
+            }
+        }
+
+        // var  arr = [
+        //     {
+        //         el:"li1",
+        //         bg:"red"
+        //     },
+        //     {
+        //         el:"li2",
+        //         bg:"blue"
+        //     },
+        //     {
+        //         el:"li3",
+        //         bg:"yellow"
+        //     },
+        // ]
+
+
+
+
+
+    </script>
+</body>
+</html>

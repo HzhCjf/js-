@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ES6 继承 
+        // ES5继承  ： 1. 构造函数的继承 （call 、apply、bind）  2.构造函数原型的继承 （直接赋值 ） 3.解决原型的引用问题 （1.深拷贝 ；2.组合继承）；
+
+        // ES6继承  : 关键字 extends 
+
+        // class Dad{
+        //     constructor(name,age){
+        //         this.name = name;
+        //         this.age = age;
+        //     }
+        //     hobby(){
+        //         console.log("喜欢象棋");
+        //     }
+        // }
+
+        // class Son extends Dad{
+
+        //     hobby(){
+        //         console.log("喜欢足球")
+        //     }
+        // }
+
+
+        // let zhangsan = new Son("张三",20);
+        // console.log(zhangsan);
+        // zhangsan.hobby();
+
+        // let dad = new Dad("张四",50);
+        // dad.hobby();
+
+
+
+        // super 关键字 
+        // 1.子类没有调用 constructor 函数 ，那么 子类可以省略 super 关键字 ；
+        // 2.子类有 constructor 那么一定需要调用 super 函数 ，super可以用于 传参到父类 ；
+        // 3.super 不能直接使用 ，只能在子类构造函数 或者函数里使用；
+        // 4.super一定需要在使用this之前调用 ；
+
+        class Dad {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            hobby() {
+                console.log("喜欢象棋");
+            }
+        }
+
+        class Son extends Dad{
+            constructor(name,age){
+                super(name,age);
+                this.height = "178cm";
+            }
+            myhobby(){
+                super.hobby();  // 调用父类 hobby方法；
+            }
+        }
+
+        let zhangsan = new Son("张三",20);
+        console.log(zhangsan);
+        zhangsan.myhobby();
+
+
+
+
+        // 1.继承 关键字  extends  2. super关键字 ；
+
+
+    </script>
+</body>
+
+</html>

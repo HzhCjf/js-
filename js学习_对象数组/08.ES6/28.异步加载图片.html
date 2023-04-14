@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500" id="mycanvas"></canvas>
+    <script>
+        // var img = document.createElement("img");
+        // img.src = "./同步异步.jpg";
+        // // document.body.appendChild(img);
+        // var canvas = document.querySelector("#mycanvas")
+        // var context = canvas.getContext("2d");  // webGL
+        // // canvas 画布 画图片 ，图片加载完毕；
+        // img.onload = function () {
+        //     context.drawImage(img, 0, 0, 200, 200);
+        // }
+
+
+
+        // 利用promise 把图片加载 提取出来 
+        function loadImg(src) {
+            return new Promise((resolve, reject) => {
+                var img = document.createElement("img");
+                img.src = src;
+                // canvas 画布 画图片 ，图片加载完毕；
+                img.onload = function () {
+                    resolve(img);
+                }
+                img.onerror = function(){
+                    reject("加载失败");
+                }
+            })
+        }
+
+
+        var canvas = document.querySelector("#mycanvas")
+        var context = canvas.getContext("2d"); 
+        loadImg("./同步异步.jpg").then(res=>{
+            context.drawImage(res, 0, 0, 200, 200);
+        },err=>{
+            console.log(err);
+        })
+
+
+
+
+        // 1.复习 。 2. 贪吃蛇 改成  class 类的 ；
+
+
+
+
+    </script>
+</body>
+
+</html>

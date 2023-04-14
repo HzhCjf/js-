@@ -59,7 +59,7 @@
     border: solid 1px #19c2ff;
     margin: 0 5px;
 }
-#form .sex{
+#form .genderFilter{
     width: 70px;
     height: 28px;
     border-radius: 12px;
@@ -68,7 +68,7 @@
     left: 315px;
     position: absolute;
 }
-#form .sort{
+#form .ageSort{
     width: 70px;
     height: 28px;
     border-radius: 12px;

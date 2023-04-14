@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ES6里的类 
+
+        // ES5里的类 
+
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        // Person.prototype.fn = function(){
+        //     console.log("fn");
+        // }
+
+        // var zhangsan = new Person("张三",20);
+        // console.log(zhangsan);
+        // zhangsan.fn();
+
+
+        // ES6里的类 
+        // class Person{
+        //     constructor(name,age){
+        //         this.name = name;
+        //         this.age = age;
+        //     }
+        //     fn(){
+        //         console.log("fn");
+        //     }
+        // }
+
+        // var zhangsan = new Person("张三",20);
+        // console.log(zhangsan);
+        // zhangsan.fn();
+
+        // console.log(typeof Person)
+
+
+
+        // 类里的属性 
+        // 方式一 ： 直接写在类里 
+
+        // class Person{
+        //     name = "张三";
+        //     age = 20;
+        //     constructor(){
+
+        //     }
+        // }
+
+        // var  zhangsan = new Person();
+        // console.log(zhangsan);
+
+        // 二、写在 类的 constructor里 ，注意需要 和this 绑定在一起 
+
+        // class Person{
+
+        //     constructor(){
+        //         this.name = "张三";
+        //         this.age = 20
+        //     }
+        //     myage = 30;
+        // }
+
+        // var zhangsan = new Person();
+        // console.log(zhangsan);
+
+
+        // 3.通过存取器形式 写属性；
+
+        // class Person{
+        //     constructor(){
+        //         this.name = "张三";
+        //         this.myage = 30;
+        //     }
+        //     get age(){
+        //         console.log("get")
+        //         return this.myage;
+        //     }
+        //     set age(newvalue){
+        //         console.log("设置了")
+        //         this.myage = newvalue;
+        //     }
+
+        // }
+
+        // var zhangsan = new Person();
+        // console.log(zhangsan);
+
+        // 4.类里定义方法 
+
+        class Person {
+            constructor() {
+                this.name = "zhangsan"
+            }
+            fn() {
+                console.log("fn")
+            }
+            myfn =  ()=> {
+                console.log("myfn")
+            }
+        }
+
+        var zhangsan = new Person();
+        zhangsan.fn();
+        zhangsan.myfn();
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

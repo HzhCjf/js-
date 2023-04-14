@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+
+        .box1 {
+            background-color: red;
+            left: 0px;
+        }
+
+        .box2 {
+            background-color: blue;
+            left: 300px;
+        }
+
+        .box3 {
+            background-color: yellow;
+            left: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+
+    <script>
+
+
+        class Drag {
+            constructor(ele) {
+                this.ele = ele;
+                this.downFn();
+            }
+            downFn() {
+                var that = this;
+                this.ele.onmousedown = function (e) {
+                    var x = e.clientX - this.offsetLeft;
+                    var y = e.clientY - this.offsetTop;
+                    that.moveFn(x, y);
+                    that.upFn();
+                }
+            }
+            moveFn(x, y) {
+                this.ele.onmousemove = function (e) {
+                    var xx = e.clientX;
+                    var yy = e.clientY;
+                    this.style.left = xx - x + "px";
+                    this.style.top = yy - y + "px";
+                }
+            }
+            upFn() {
+                this.ele.onmouseup = function () {
+                    this.onmousemove = "";
+                }
+            }
+        }
+
+
+
+        class SonDrag extends Drag {
+            constructor(...args) {
+                super(...args);
+            }
+            moveFn(x, y) {
+                this.ele.onmousemove = function (e) {
+                    var xx = e.clientX;
+                    var yy = e.clientY;
+                    var disx = xx - x;
+                    var disy = yy - y;
+                    if (disx <= 0) {
+                        disx = 0;
+                    }
+                    if (disx >= window.innerWidth - this.offsetWidth) {
+                        disx = window.innerWidth - this.offsetWidth;
+                    }
+
+                    if (disy <= 0) {
+                        disy = 0;
+                    }
+
+                    if (disy >= window.innerHeight - this.offsetHeight) {
+                        disy = window.innerHeight - this.offsetHeight
+                    }
+                    this.style.left = disx + "px";
+                    this.style.top = disy + "px";
+                }
+            }
+        }
+
+
+
+
+
+        var box1 = document.querySelector(".box1");
+        var drag1 = new Drag(box1);
+
+
+
+        var box2 = document.querySelector(".box2");
+        var drag2 = new SonDrag(box2);
+
+
+
+        var box3 = document.querySelector(".box3");
+        var drag3 = new SonDrag(box3);
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
