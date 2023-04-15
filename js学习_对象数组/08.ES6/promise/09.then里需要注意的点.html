@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 一、then的穿透 ： then里如果不传函数 ，那么会出现穿透现象 。
+
+        // let p = new Promise((resolve,reject)=>{
+        //     resolve("success");
+        // })
+
+        // p.then(1111).then(2222).then(res=>{
+        //     console.log(res);
+        // })
+
+
+        // 二、then里回调函数的简写 ；
+
+
+        // function fn(){
+        //     console.log("fn执行了");
+        // }
+
+        // // setTimeout(() => {
+        // //     fn();
+        // // }, 1000);
+
+        // setTimeout(fn, 1000);
+
+        // let  p = new Promise(resolve=>{
+        //     resolve(123);
+        // })
+
+        // // p.then(console.log);  // 是下面的简写形式 ；
+        // p.then(res=>{
+        //     console.log(res);
+        // })
+
+        // console.log()
+
+
+
+        // 三 、then 里的回调函数  是一个异步函数 且是异步里的微任务；
+        // promise 是同步任务 ，promise里的then是异步任务 ；
+        // 同步 ： 111--->222---->666
+        // 异步 ： 333 ---  444 --- 555   （4---3---5）
+        // 异步 ： 微任务：精度高 延迟小 。     宏任务 ： 精度低 延迟大
+
+        // 宏任务队列 ： 【1】【2】【3】【4】【5】  【6】  不能排队 
+        //                         |      
+        // 微任务队列 ： [1][2][3][4][5]   : 可以插队 ； 1.promise里的then  2.MutationObserver 监听节点变化的；
+        
+        //                     | [6] [4] [5]    
+        
+        // 微任务和宏任务的执行 顺序 ：
+
+        // 【1[1,2,3]】 【2[1,2]】 【3[1,2,3,4]】 【4,[1,2]】 【5[]】 
+
+
+
+        console.log(111);
+        let p = new Promise(res=>{
+            console.log(222);
+            res("success");
+        })
+        setTimeout(() => {
+            console.log(333);
+        });
+        p.then(res=>{
+            console.log(444)
+        })
+        setTimeout(() => {
+            console.log(555);
+        });
+        console.log(6666);
+
+
+        // script  称为 主线程 也是一个大的宏任务 ，主要是用来执行同步代码的，广义讲 同步任务 其实也是异步；
+        // 【script:111--222---666 [444]】 【333[]】  【555[]】
+
+
+    </script>
+</body>
+</html>

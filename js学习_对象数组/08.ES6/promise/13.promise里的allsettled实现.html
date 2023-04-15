@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // promise里的allsettled实现 ；
+
+        // allsettled 使用 
+
+
+        let  p1 = new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve(111);
+            }, 1000);
+        })
+
+
+        let  p2 = new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve(222);
+            }, 3000);
+        })
+
+        let  p3 = new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve(333);
+                // reject("error");
+            }, 2000);
+        })
+
+        
+
+
+        class MyPromise{
+            static allSettled(arr){
+                return new Promise(resolve=>{
+                    var resarr = [];
+                    var count = 0;
+                    arr.forEach(item=>{
+                        item.then(res=>{
+                            count++;
+                            let obj = {
+                                status:"fufilled",
+                                value:res
+                            }
+                            resarr.push(obj);
+                            if(count===arr.length){
+                                resolve(resarr);
+                            }
+
+                        },err=>{
+                            count++;
+                            let obj = {
+                                status:"rejected",
+                                reason:err
+                            }
+                            resarr.push(obj);
+                            if(count===arr.length){
+                                resolve(resarr);
+                            }
+                        })
+                    })
+                })
+            }
+        }
+
+        MyPromise.allSettled([p1,p2,p3]).then(res=>{
+            console.log(res);
+        })
+
+
+    </script>
+</body>
+</html>

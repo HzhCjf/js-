@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // then的四种返还值 ；
+        // let p = new Promise((resolve, reject) => {
+        //     resolve("success");
+        //     // reject("error");
+        // })
+
+        // let res = p.then(res => {
+        //     console.log("onResolved执行了",res);
+        //     // return new Promise((resolve,reject)=>{
+        //     //     resolve("hello123");
+        //     //     // reject("hello666");
+        //     // });
+
+        //     throw new Error("错误");
+
+        // }, err => {
+        //     console.log("onRejected执行了",err);
+        //     // return "123";
+        //     // return new Promise(resolve=>{
+        //     //     resolve("456");
+        //     // })
+        // })
+
+        // 第一种 ： then的回调里没有任何返还 ；then 会返还一个 fufilled状态的promise对象 ，结果值是undefined ；
+        // console.log("结果",res);
+
+        // 第二种： then的回调里返还普通值 ； 结果是一个 fufilled状态 且 结果是是返还的值；
+        // console.log(res);
+
+        // 第三种 ：then的回调里返还一个 promise对象；那最终结果 和这个promise对象保持一致 ；
+        // console.log(res);
+
+        // 第四种 ： then的回调里抛出一个错误 。那么最终结果是一个 rejected状态的promise对象 ，结果值 是错误值 ；
+        // console.log(res);
+
+
+
+
+        // 总结 ： 无论如何 then 都会返还一个promise对象 。每个promise对象会有一个then方法 。then是可以无限链式操作；
+        let p = new Promise((reslove, reject) => {
+            reslove("success");
+        })
+
+        p.then(res => {
+            console.log("1",res);
+            return "hello";
+        }, err => {
+
+        }).then(res => {
+            console.log("2",res);
+            return new Promise((res, rej) => {
+                rej("error");
+            })
+        }, err => {
+
+        }).then(res => { }, err => {
+            console.log("3",err);
+            return 111;
+        }).then(res => {
+            console.log("4",res);
+        }, err => {
+
+        })
+
+        
+
+
+
+
+
+    </script>
+</body>
+
+</html>

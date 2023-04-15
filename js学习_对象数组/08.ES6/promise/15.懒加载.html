@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            border: 1px solid;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container img {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="https://img1.baidu.com/it/u=492865521,2599823772&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt=""
+            data-src="https://img2.baidu.com/it/u=2028084904,3939052004&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500">
+        <img src="https://img1.baidu.com/it/u=492865521,2599823772&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt=""
+            data-src="https://img2.baidu.com/it/u=2028084904,3939052004&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500">
+        <img src="https://img1.baidu.com/it/u=492865521,2599823772&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt=""
+            data-src="https://img2.baidu.com/it/u=2028084904,3939052004&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500">
+        <img src="https://img1.baidu.com/it/u=492865521,2599823772&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt=""
+            data-src="https://img2.baidu.com/it/u=2028084904,3939052004&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500">
+        <img src="https://img1.baidu.com/it/u=492865521,2599823772&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt=""
+            data-src="https://img2.baidu.com/it/u=2028084904,3939052004&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500">
+        <img src="https://img1.baidu.com/it/u=492865521,2599823772&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt=""
+            data-src="https://img2.baidu.com/it/u=2028084904,3939052004&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500">
+
+    </div>
+
+    <script>
+        // 懒加载 ： 资源 先不加载 ，等到需要的时候 在加载 ；按需加载
+
+        function lazyLoad() {
+            var imgs = document.querySelectorAll("img");
+            // 判断  img 在不在可视区域 ，如果在可视区域就加载 ，否则就不加载；
+            imgs.forEach(item => {
+                var num = item.getBoundingClientRect().bottom;
+                if (num < window.innerHeight) {
+                    item.setAttribute("src",item.getAttribute("data-src"));
+                }
+            })
+        }
+
+        lazyLoad();
+
+        window.onscroll = function(){
+            lazyLoad();
+        }
+
+
+
+    </script>
+</body>
+
+</html>

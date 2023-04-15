@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="500" height="500" id="mycanvas"></canvas>
+    <script>
+        // 预加载 ： 提前加载好资源 ，之后再使用 ；
+
+        // 把三张图片 做预加载 ；
+
+        // var srcArr = ["https://img2.baidu.com/it/u=45841977,3664621913&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500", "https://img2.baidu.com/it/u=3329909248,3799019568&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500", "https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500"];
+
+        // function loadImgs(arr) {
+        //     return new Promise(reslove => {
+        //         var resarr = [];
+        //         var count = 0;
+        //         // 分别加载三张图片 
+        //         arr.forEach(src => {
+        //             let img = document.createElement("img");
+        //             img.src = src;
+        //             img.onload = function () {
+        //                 count++;
+        //                 // console.log("图片加载好了");
+        //                 resarr.push(this);
+        //                 if (count === arr.length) {
+        //                     reslove(resarr);
+        //                 }
+        //             }
+        //         })
+        //     })
+        // }
+
+        // var canvas = document.querySelector("#mycanvas");
+        // var ctx = canvas.getContext("2d");
+
+        // loadImgs(srcArr).then(res=>{
+        //     // console.log(res);
+        //     ctx.drawImage(res[0],0,0,100,100);
+        //     ctx.drawImage(res[1],100,100,100,100);
+        //     ctx.drawImage(res[2],200,200,100,100);
+        // })
+
+
+
+
+
+
+
+        // 控制图片的顺序 
+
+        var srcArr = { img1: "https://img2.baidu.com/it/u=45841977,3664621913&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500", img2: "https://img2.baidu.com/it/u=3329909248,3799019568&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500", img3: "https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" };
+
+        function loadImgs(arr) {
+            return new Promise(reslove => {
+                var resarr = {};
+                var count = 0;
+                for (let key in arr) {
+                    let img = document.createElement("img");
+                    img.src = arr[key];
+                    img.onload = function () {
+                        count++;
+                        resarr[key] = this;
+                        if (count === Object.keys(arr).length) {
+                            reslove(resarr);
+                        }
+                    }
+                }
+            })
+        }
+
+        var canvas = document.querySelector("#mycanvas");
+        var ctx = canvas.getContext("2d");
+
+        loadImgs(srcArr).then(res => {
+            console.log(res);
+            ctx.drawImage(res.img1, 0, 0, 100, 100);
+            ctx.drawImage(res.img2, 100, 100, 100, 100);
+            ctx.drawImage(res.img3, 200, 200, 100, 100);
+        })
+
+
+
+    </script>
+</body>
+
+</html>
