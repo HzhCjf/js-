@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+
+    </ul>
+    <script>
+
+        function ajax1() {
+            return new Promise(resolve => {
+                var users = [{ name: "张三" }, { name: "李四" }, { name: "王五" }];
+                setTimeout(() => {
+                    resolve(users);
+                }, 2000)
+            })
+        }
+
+        function ajax2(users) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    var newusers = users.map(item => ({ name: item.name, age: 20 }))
+                    // console.log(newusers);
+                    resolve(newusers);
+                }, 1000);
+            })
+
+        }
+
+        // ajax1().then(users => {
+        //     console.log(users);
+        //     return ajax2(users);
+        // }).then(res => {
+        //     console.log(res);
+        //     var ulEle = document.querySelector("ul");
+        //     res.forEach(item=>{
+        //         let liEle = document.createElement("li");
+        //         liEle.innerHTML = `姓名是${item.name};年龄是${item.age}`;
+        //         ulEle.appendChild(liEle);
+        //     })
+        // })
+
+        (async function () {
+            try {
+                let user1 = await ajax1();
+                console.log(user1)
+                let user2 = await ajax2(user1);
+                console.log(user2);
+                var ulEle = document.querySelector("ul");
+                user2.forEach(item => {
+                    let liEle = document.createElement("li");
+                    liEle.innerHTML = `姓名是${item.name};年龄是${item.age}`;
+                    ulEle.appendChild(liEle);
+                })
+            } catch (err) {
+                console.log(err);
+            }
+        })();
+
+
+
+
+
+    </script>
+</body>
+
+</html>

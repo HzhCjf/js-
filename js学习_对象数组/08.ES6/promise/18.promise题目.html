@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 第一个 ： 
+
+        // setTimeout(() => {
+        //     console.log(1)
+        // })
+        // new Promise((resolve, reject) => {
+        //     console.log(2)
+        //     resolve()
+        // }).then(() => {
+        //     console.log(3)
+        // })
+        // console.log(4) 
+
+        /* 
+            同步 ： 2 --- 4
+            异步 ： 3 --- 1
+        
+        */
+
+
+        // 第二个 ：
+
+        // setTimeout(() => {
+        //     console.log('set1')
+        //     new Promise((resolve, reject) => {
+        //         console.log('pr1')
+        //         resolve()
+        //     }).then(() => {
+        //         console.log('then1')
+        //     })
+        // })
+        // setTimeout(() => {
+        //     console.log('set2')
+        // })
+        // new Promise((resolve, reject) => {
+        //     console.log('pr2')
+        //     resolve()
+        // }).then(() => {
+        //     console.log('then2')//4
+        // })
+        // new Promise((resolve, reject) => {
+        //     console.log('pr3')
+        //     setTimeout(() => {
+        //         console.log('set3')
+        //     })
+        //     resolve()
+        // }).then(() => {
+        //     console.log('then3')
+        // })
+        // console.log(1)
+
+        /* 
+        执行顺序  ：  【】 宏任务   [] 微任务 ；
+
+        【script： pr2-- pr3 --1  [then2,then3]】  【setTimeout：set1--pr1[then1]】  【set2 []】  【set3 []】
+
+        
+        */
+
+
+        // 第三个 ：
+
+        // setTimeout(() => {
+        //     console.log('set1')
+        // }, 2000)
+        // setTimeout(() => {
+        //     console.log('set2')
+        // }, 1000)
+        // new Promise((resolve, reject) => {
+        //     console.log('pr1')
+        //     setTimeout(() => {
+        //         console.log('set3')
+        //         resolve()
+        //     }, 1000)
+        // }).then(() => {
+        //     setTimeout(() => {
+        //         console.log('set4 then1') 
+        //     }, 200)
+        // })
+
+        /* 
+
+        延迟 ：  pr1 --- set2 ---set3  ---1.2s执行 set4 then1----set1
+        
+        */
+
+
+
+        // 第四个 ： 
+
+        // console.log('1');
+
+        // setTimeout(function () {
+        //     console.log('2');
+        //     new Promise(function (resolve) {
+        //         console.log('3'); resolve();
+        //     }).then(function () {
+        //         console.log('4')
+        //     })
+        // })
+        // new Promise(function (resolve) {
+        //     console.log('5');
+        //     resolve();
+        // }).then(function () {
+        //     console.log('6')
+        // })
+        // setTimeout(function () {
+        //     console.log('7');
+        //     new Promise(function (resolve) {
+        //         console.log('8');
+        //         resolve();
+        //     }).then(function () {
+        //         console.log('9')
+        //     })
+        // })
+
+        /* 
+        【script ：1--5 [6]】  【2,3[4]】  【7--8 [9]】
+        
+        */
+
+
+    </script>
+</body>
+
+</html>
