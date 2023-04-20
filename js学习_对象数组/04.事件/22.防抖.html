@@ -131,6 +131,68 @@
         btn.onclick = debounce(function(){
             console.log(666);
         },2000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function del(fn,delay){
+            let timer = null
+            return function(){
+                if(!timer){
+                    fn()
+                }
+                clearTimeout(timer)
+                timer = setTimeout(function(){
+                    timer =  null
+                },delay)
+            }
+        }
     </script>
 </body>
 

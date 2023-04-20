@@ -92,20 +92,30 @@
         // }
 
 
-        function throttle(fn,delay){
-            let nowtime = new Date().getTime()
-            return function(){
-                let endTime = new Date().getTime()
-                if(endTime - nowtime > 1000){
-                    fn()
-                    nowtime = endTime
-                }
-            }
-        }
+        // function throttle(fn,delay){
+        //     let nowtime = new Date().getTime()
+        //     return function(){
+        //         let endTime = new Date().getTime()
+        //         if(endTime - nowtime > 1000){
+        //             fn()
+        //             nowtime = endTime
+        //         }
+        //     }
+        // }
 
-        document.onmousemove = throttle(function(){
-            console.log('老move了2.0版');
-        },1000)
+        // document.onmousemove = throttle(function(){
+        //     console.log('老move了2.0版');
+        // },1000)
+        function Dad(name){
+            this.name=name
+        }
+        Dad.prototype.hobby=function(){console.log('球');}
+        console.log(Dad.prototype.constructor)
+        // ƒ Function() { [native code] }
+
+
+
+        
     </script>
 </body>
 
