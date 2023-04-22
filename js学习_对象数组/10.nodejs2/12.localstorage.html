@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="btn1">存储数据</button>
+    <button class="btn2">获取数据</button>
+    <button class="btn3">删除数据</button>
+    <button class="btn4">删除所有数据</button>
+    <button class="btn5">存储复杂数据</button>
+
+    <script>
+        // 持久化保存数据
+        /* 
+            服务端保存数据 
+                1.文件存储 ： user.json  txt ...
+                2. 数据库保存 
+            客户端保存数据
+                1.cookie 
+                2.localstorage ：本地存储
+                3.sessionStorage ： 本地存储 
+        */
+        // localstorage操作 ： 
+        let btn1 = document.querySelector(".btn1");
+        let btn2 = document.querySelector(".btn2");
+        let btn3 = document.querySelector(".btn3");
+        let btn4 = document.querySelector(".btn4");
+        let btn5 = document.querySelector(".btn5");
+
+        // 1.设置 localstorage ： 
+        btn1.onclick = function () {
+            localStorage.setItem("myname", "zhangsan");
+            localStorage.setItem("age", 20);
+        }
+
+        // 2.获取 localstorage
+        btn2.onclick = function () {
+            console.log(localStorage.getItem("myname"));
+        }
+
+        // 3.删除 localstorage 
+        btn3.onclick = function () {
+            localStorage.removeItem("myname");
+        }
+
+        // 4.删除所有 localstorage 
+        btn4.onclick = function () {
+            localStorage.clear();
+        }
+
+        // 5.存储复杂数据类型 
+        btn5.onclick = function () {
+            localStorage.setItem("users",JSON.stringify( [{name:"张三",age:20},{name:"lisi",age:21}]));
+        // console.log(typeof localStorage.getItem("users"));
+        }
+
+
+        // 作业 ： 1.复习 2. 需要通过一个添加页面 添加进来 利用post发送数据 。
+        /* 
+        // 添加数据的路由地址
+        http://localhost:8989/admin/addnews
+
+        // 显示新闻
+        http://localhost:8989/news/list
+        http://localhost:8989/news/detail
+
+        */
+    //    3. 百度音乐全选 ：需要通过 localstorage 把数据保存起来
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>主页</h1>
+    <button class="btn1">设置</button>
+
+    <script>
+        // 一.设置cookie
+        // 设置cookie键名和键值
+        // 有效期:默认为浏览器会话结束的时候cookie被销毁,关闭浏览器的时候cookie自动销毁
+        // 设置cookie的时期时间
+        // 方式一:  expires :当前时间 + 过期时间的字符串格式
+        // let btn1 = document.querySelector('.btn1')
+        // btn1.onclick = function(){
+        //     let date1 = new Date()
+        //     date1.setHours(new Date().getHours()+1)
+        //     document.cookie = `myname=zhangsan;expires=${date1.toUTCString()}`
+        // }
+
+
+        
+        // 方式二 ： 直接设置过期时间 
+        // Max-Age 的单位是秒 
+        let btn1 = document.querySelector('.btn1')
+        btn1.onclick = function(){
+            document.cookie = "age=20;Max-Age=3600"
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button>点击我删除cookie</button>
+    <button class="btn2">点击我获取cookie</button>
+    <button class="btn3">点击我添加cookie</button>
+    
+    <script>
+        //三、 删除cookie： 设置cookie的过期时间。一旦设置过期时间已经过期之后 浏览器会自动删除cookie；
+
+        document.querySelector("button").onclick = function(){
+            document.cookie="age='';Max-Age=-1";
+        }
+
+        document.querySelector('.btn3').onclick = function(){
+            document.cookie = "age=20;Max-Age=3600"
+        }
+        document.querySelector(".btn2").onclick = function(){
+            console.log(document.cookie);
+        }
+
+
+        /* 
+            cookie操作 
+            1.设置cookie  ： 键名 和键值 过期时间  路径
+            2.获取cookie 
+            3.删除cookie ： 把cookie设置成过期就可以了；
+
+            cookie ： 大概 4k左右 大概存 50个 ；
+                cookie 不够安全 ； corf 
+
+            cookie 主要应用 ：登录  记住密码 ；
+        
+        
+        */
+    </script>
+</body>
+</html>

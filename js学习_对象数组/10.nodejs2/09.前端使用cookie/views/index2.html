@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>点击我获取cookie</button>
+    <button class="btn2">点击我存cookie</button>
+    <script>
+        // 二、获取cookie;
+        /* 
+            1. 设置和 获取cookie的路径要同源 ，同一个服务器下 
+            // 同源 ：  协议  域名 端口  都要一样 就是同源  才能获取对应的cookie
+            // 非同源 ： 跨域 。
+            // http://localhost:8080/test
+            // http://localhost:8989/product
+            2.cookie没有过期 ；
+            3.同一个浏览器 同一个域名下 可以  跨页面访问；
+            4.cookie 会自动携带在请求头部里 ； 标记网络状态的 ；
+            5.和 cookie 存储时候的path 有关 
+                /index 路径存的cookie  那么 获取的路径只能是它的同级 或者比它小的路径
+                /index/myindex : 可以获取cookie
+                / 获取不到 cookie
+        */
+        let btn = document.querySelector("button");
+        btn.onclick = function () {
+            console.log(document.cookie); // 获取域名 下的所有cookie；且通过  ; 隔开 ；
+        }
+
+
+        // 更改cookie的路径位置
+        document.querySelector(".btn2").onclick = function(){
+            document.cookie = "age=20;Max-Age=3600;";
+        }
+
+
+
+
+        // 自定义函数,输入一个cookie的键名获取键值
+        function getcookie(cookieName){
+            let cookies = document.cookie
+            // console.log(cookies);
+            let cookieArr = cookies.split('; ')
+            // console.log(cookieArr);
+            let res
+            cookieArr.forEach(item=>{
+                let linearr = item.split('=')
+                if(linearr[0] === cookieName){
+                    res = linearr[1]
+                }
+            })
+            return res
+        }
+        console.log(getcookie('height'));
+        // getcookie("height") ---> 178cm
+
+
+
+    </script>
+</body>
+
+</html>

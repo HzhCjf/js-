@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./ejs.min.js"></script>
+</head>
+
+<body>
+    <h1>主页</h1>
+    <script>
+        // 前端使用ejs 模板引擎 ： 
+        // 1.引入ejs文件 ；
+        // 2.ejs.js 会对外暴露一个 ejs变量 
+        // console.log(ejs);
+        // 3.通过render方法渲染html
+
+
+
+        let users = [{
+            name: "张三1",
+            age: 20
+        }, {
+            name: "张三2",
+            age: 23
+        }, {
+            name: "张三3",
+            age: 21
+        }]
+
+        let myhtml = ejs.render(`<h1><%=title %></h1><ul><% users.forEach(item=>{  %>
+            <li>姓名是 <%=item.name %> 年龄是<%=item.age %></li>
+       <% }) %> </ul>`, {users:users,title:"我是ejs里的title"});
+    //    console.log(myhtml);
+
+    document.body.innerHTML = myhtml;
+
+
+    </script>
+</body>
+
+</html>
