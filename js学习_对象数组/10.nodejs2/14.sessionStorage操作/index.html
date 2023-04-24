@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn1">设置storage</button>
+    <button class="btn2">获取storage</button>
+    <button class="btn3">删除storage</button>
+    <button class="btn4">删除所有storage</button>
+
+    <script>
+        // sessionStorage  :  类似 localstroage 操作方式和 localstroage一样 ;
+        // 区别 ： sessionStorage 的时效性 。 浏览器关闭的时候自动销毁 ；
+
+        let btn1 = document.querySelector(".btn1")
+        let btn2 = document.querySelector(".btn2")
+        let btn3 = document.querySelector(".btn3")
+        let btn4 = document.querySelector(".btn4")
+
+        // 设置  
+        btn1.onclick = function(){
+            sessionStorage.setItem("myname","hello");
+            sessionStorage.setItem("age",20);
+
+        }
+
+        // 获取 
+        btn2.onclick = function(){
+            console.log(sessionStorage.getItem("myname"));
+        }
+
+        // 删除 
+        btn3.onclick = function(){
+            sessionStorage.removeItem("myname");
+        }
+
+
+        // 删除所有 
+        btn4.onclick = function(){
+            sessionStorage.clear();
+        }
+
+
+
+    </script>
+</body>
+</html>

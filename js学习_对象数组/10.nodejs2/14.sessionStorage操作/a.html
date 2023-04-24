@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>主页 页面一</h1>
+    姓名：<input type="text" class="username" />
+    <button class="next">下一步</button>
+    <script>
+        let usernameEle = document.querySelector(".username");
+        if(sessionStorage.getItem("username")){
+            usernameEle.value = sessionStorage.getItem("username");
+        }
+
+
+        let nextEle = document.querySelector(".next");
+        
+        nextEle.onclick = function(){
+            sessionStorage.setItem("username",usernameEle.value);
+            window.location.href = "./b.html";
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+  <section id="wrap">
+    <h2 class="title">百度音乐榜单</h2>
+    <ul id="list">
+      <li>
+        <input type="checkbox" />
+        <span>第一条信息</span>
+        <a href="javascript:;" class="collect">收藏</a>
+        <a href="javascript:;" class="cancelCollect">取消收藏</a>
+        <a href="javascript:;" class="remove">删除</a>
+      </li>
+    </ul>
+    <footer class="footer">
+      <label><input type="checkbox" id="checkAll" />全选/全不选</label>
+    </footer>
+  </section>
+  <script>
+    // 判断浏览器有没有存储data数据，如果没有存储data数据 ，那么就把data初始化存储 。如果已经存了 ，那么直接获取浏览器里存储的data 来使用 
+
+    if (localStorage.getItem("data")) {
+      // 浏览器已经存储过 data数据
+      var data = JSON.parse(localStorage.getItem("data"));
+    } else {
+      // 浏览器没有存储过data数据 
+      var data = [
+        {
+          id: 0,
+          title: "残酷月光 - 费启鸣",
+          checked: true,
+          collect: true
+        }, {
+          id: 1,
+          title: "兄弟 - 艾热",
+          checked: false,
+          collect: false
+        }, {
+          id: 2,
+          title: "毕生 - 夏增祥",
+          checked: true,
+          collect: true
+        }, {
+          id: 3,
+          title: "公子向北去 - 李春花",
+          checked: false,
+          collect: false
+        }, {
+          id: 4,
+          title: "战场 - 沙漠五子",
+          checked: false,
+          collect: false //是否收藏 true 收藏 false 没有收藏
+        }
+      ];
+      localStorage.setItem("data", JSON.stringify(data));
+    }
+
+
+
+
+
+    // 一、根据数据渲染视图 
+
+
+    function renderDom(data) {
+      var listEle = document.querySelector("#list");
+      listEle.innerHTML = "";
+      data.forEach(function (item, key) {
+        var liEle = document.createElement("li");
+        liEle.innerHTML = `${item.checked ? '<input checked type="checkbox" />' : '<input  type="checkbox" />'}
+                                <span>${item.title}</span>
+                                ${item.collect ? '<a href="javascript:;" class="cancelCollect">取消收藏</a>' : '<a href="javascript:;" class="collect">收藏</a>'}
+                                <a href="javascript:;" class="remove">删除</a>`;
+        listEle.appendChild(liEle);
+
+        // 收藏和取消收藏功能 
+        // var cancelCollectEle = liEle.querySelector(".cancelCollect");
+        // if (cancelCollectEle) {
+        //   cancelCollectEle.onclick = function () {
+        //     console.log("点击了取消收藏");
+        //   }
+        // }
+
+        // 利用事件委托绑定事件 ；
+        liEle.onclick = function (e) {
+          var target = e.target;
+
+          // 取消收藏 
+          if (target.classList.contains("cancelCollect")) {
+            // console.log("点击了取消收藏按钮");
+            // 更改数据里的 collect 的值 ，然后重新渲染页面；
+            // console.log(key);
+            data[key].collect = false;
+            console.log(data);
+            localStorage.setItem("data",JSON.stringify(data));
+
+
+            renderDom(data);
+          }
+
+          // 收藏 
+          if (target.classList.contains("collect")) {
+            // console.log("点击了取消收藏按钮");
+            // 更改数据里的 collect 的值 ，然后重新渲染页面；
+            // console.log(key);
+            data[key].collect = true;
+            localStorage.setItem("data",JSON.stringify(data));
+
+            renderDom(data);
+          }
+
+          // 删除 
+          if (target.classList.contains("remove")) {
+            data.splice(key, 1);
+            ischeckAll()
+            localStorage.setItem("data",JSON.stringify(data));
+
+            renderDom(data);
+          }
+
+          // 勾选 
+          if (target.nodeName === "INPUT") {
+            data[key].checked = target.checked;
+            console.log(data);
+            localStorage.setItem("data",JSON.stringify(data));
+
+            ischeckAll()
+          }
+
+
+        }
+
+
+
+
+      })
+    }
+
+    renderDom(data);
+
+
+    // 全选非全选  
+    // 1.勾选下面的全选按钮  上面的checkbox会联动 ；
+    // 2.上面的checkbox会影响下面的是否全选 ；
+    var checkAllEle = document.querySelector("#checkAll");
+    checkAllEle.onclick = function () {
+      // console.log(this.checked);
+      var that = this;
+      data.forEach(function (item) {
+        item.checked = that.checked
+      })
+      console.log(data);
+      localStorage.setItem("data",JSON.stringify(data));
+      renderDom(data);
+    }
+
+    ischeckAll();
+    function ischeckAll() {
+      var checkAllEle = document.querySelector("#checkAll");
+      var res = data.every(function (item) {
+        return item.checked;
+      })
+      checkAllEle.checked = res;
+    }
+
+
+
+  </script>
+</body>
+
+</html>
