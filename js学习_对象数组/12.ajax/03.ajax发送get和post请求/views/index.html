@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <form action="" method="post" enctype="application/x-www-form-urlencoded">
+
+
+    </form> -->
+    <button class="btn1">点击我发送get请求</button>
+    <button class="btn2">点击我发送post请求</button>
+    <script>
+        // 一、发送get形式的ajax ： 
+        // 1.发送数据  : 通过 querystring 传参 ，也就是通过地址栏传参；
+
+        // 2，接收数据 : 注意需要做一个json转换 ；
+
+        let btn1 = document.querySelector(".btn1");
+        btn1.onclick = function () {
+            let xhr = new XMLHttpRequest();
+            // 请求的地址 就是 api 也叫接口 ；
+            xhr.open("get", "/get?name=zhangsan&age=20");
+            xhr.onload = function () {
+                // console.log(111);
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log(xhr.responseText); // 接收返还的结果 ，就是这个接口输出的内容
+                    let { name, age } = JSON.parse(xhr.responseText);
+                    let pEle = document.createElement("p");
+                    pEle.innerHTML = `姓名是${name}年龄是${age}`;
+                    document.body.appendChild(pEle);
+
+                }
+            }
+            xhr.send();
+        }
+
+
+        // 二、发送post请求 
+        // 1.发送数据 
+            /* 
+                第一种 ： 表单格式 
+                    设置请求头部 ：content-type 类型为 ： application/x-www-form-urlencoded
+                    数据格式 是 :键名=键值&键名=键值
+                第二种 ： json数据
+                    设置请求头部 ： content-type 类型为 ： application/json
+                    发送数据的格式是 ： json字符串
+            
+                第三种 ： 文本格式 ；
+                    设置请求头部为 ： content-type类型是 
+                    text/plain
+                    发送数据格式： 字符串 
+            */
+
+
+
+        // 2.接收数据 ： json转换 ；
+
+        let btn2 = document.querySelector(".btn2");
+        btn2.onclick = function(){
+            let xhr = new XMLHttpRequest();
+            xhr.open("post","/post");
+            // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+            // xhr.setRequestHeader("Content-Type","application/json");
+
+            xhr.setRequestHeader("Content-Type","text/plain");
+            xhr.onload = function(){
+                if(xhr.status>=200 && xhr.status<300){
+                    console.log(xhr.responseText);
+                }
+            }
+            // let data = "name=lisi&age=20";
+            // xhr.send(data);
+
+            // let obj = {
+            //     name:"lisi222",
+            //     age:21
+            // }
+            // xhr.send(JSON.stringify(obj));
+            xhr.send("hello");
+        }
+
+
+        // 小练习 ： ajax发送post数据到 后端 ，输入框 ，姓名一个是年龄 ，利用数据库存储 
+        // 利用get形式的ajax 获取数据通过 ul 和li显示出来 ； 
+
+
+    </script>
+</body>
+
+</html>

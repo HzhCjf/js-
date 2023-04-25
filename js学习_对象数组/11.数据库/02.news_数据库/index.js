@@ -6,8 +6,11 @@ const fs = require("fs");
 const indexRouter = require("./routers/indexRouter.js");
 const adminRouter = require("./routers/adminRouter.js");
 const path = require("path");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+
+// const path = require("path");
+// const mime = require("./data/mime.json");
+
 const static = express.static;
 let app = express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -16,10 +19,5 @@ app.set("view engin","ejs");
 app.use(static("./img"));
 app.use("/index",indexRouter);
 app.use("/admin",adminRouter);
-let newsData = require("./data/news.json");
-// const path = require("path");
-// const mime = require("./data/mime.json");
-
-
 app.listen(8989);
 

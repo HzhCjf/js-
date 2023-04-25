@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>显示用户</h1>
+    <ul>
+
+    </ul>
+
+    <script>
+        // 发送ajax获取数据库里的数据
+        let xhr = new XMLHttpRequest()
+        xhr.open('get','/getdata')
+        xhr.send()
+        xhr.onload = function(){
+            if(xhr.status>=200 && xhr.status<300){
+                // console.log(xhr.responseText);
+                let data = JSON.parse(xhr.responseText)
+                console.log(data);
+                renderDom(data);
+            }
+        }
+
+
+        function renderDom(data) {
+            let ulELe = document.querySelector("ul");
+            ulELe.innerHTML = "";
+            data.forEach(item => {
+                let liEle = document.createElement("li");
+                liEle.innerHTML = `姓名是${item.username} 年龄是${item.age} <button>删除</button>`;
+                ulELe.appendChild(liEle);
+                let delBtn = liEle.querySelector("button");
+                delBtn.onclick = function () {
+                    console.log("点击了删除", item._id);
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("get", `/deluser?_id=${item._id}`);
+                    xhr.send();
+                    xhr.onload = function () {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            // console.log(xhr.responseText);
+                            let { status } = JSON.parse(xhr.responseText);
+                            if (status === 1) {
+                                // renderDom(userdata);
+                                // 删除成功 ,通过ajax获取最新的数据；
+                                let xhr2 = new XMLHttpRequest();
+                                xhr2.open("get", "/getdata");
+                                xhr2.send();
+                                xhr2.onload = function () {
+                                    if (xhr2.status >= 200 && xhr2.status < 300) {
+                                        // console.log(xhr.responseText);
+                                        let data = JSON.parse(xhr2.responseText)
+                                        renderDom(data);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+
+
+
+            })
+        }
+
+    </script>
+</body>
+</html>

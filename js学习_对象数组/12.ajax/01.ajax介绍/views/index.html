@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/get" method="get" onsubmit="return false">
+        姓名： <input type="text" name="uname" class="uname"> <br>
+        密码： <input type="text" name="pwd" id=""><br>
+        <input type="submit" value="提交">
+    </form>
+    <script>
+        // 利用js发送ajax 
+        // ajax 几步 ：
+        /* 
+        第一步 ： 创建一个ajax对象 ，内置的 ；
+        第二步 ： 打开一个请求连接 
+        第三步： 发送http请求到后端 
+        第四步；获取后端返还的结果；
+            获取后端返还的结果  ： xhr.responseText
+        */
+        let unameEle = document.querySelector(".uname");
+        unameEle.onblur = function () {
+            console.log("失去焦点了", this.value);
+            let xhr = new XMLHttpRequest();
+            // 第三个参数 ：是否是异步 ，默认是 true ，是异步发送ajax 
+            // false 就是同步ajax
+            xhr.open("get", `/get?uname=${this.value}`);
+            xhr.send();
+            xhr.onload = function () {
+                console.log(xhr.responseText); // 会接收后端返还的结果，所有后端输出的内容都会在这个对象里
+                console.log(JSON.parse(xhr.responseText));
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
