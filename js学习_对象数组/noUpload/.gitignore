@@ -1,0 +1,3 @@
+# 为了这些包不上传到git里面
+noUpload
+node_modules
