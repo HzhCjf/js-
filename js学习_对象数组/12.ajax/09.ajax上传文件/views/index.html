@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>上传文件</h1>
+    <input type="file" class="img">
+    <button>点击我上传文件</button>
+    <script>
+        // 上传文件
+        // 一.前端上传文件
+        // 只能使用post方式
+        let btn = document.querySelector('button')
+        let fileEle = document.querySelector('.img')
+        btn.onclick =function(){
+            // 1.利用js获取文件对象
+            let imgFile = fileEle.files[0]
+            // 2.利用formdata把文件对象添加到formdata对象里
+            let form = new FormData()
+            form.append('myimg',imgFile)
+            form.append('myname','张三')
+            form.append('age',20)
+
+            let xhr = new XMLHttpRequest()
+            xhr.open('post','/file')
+            xhr.onload = function(){
+                if(xhr.status >= 200 && xhr.status <300){
+                    console.log(xhr.responseText);
+                }
+            }
+
+            // 3.把formdata对象利用ajax发送给后端
+            // form不需要设置请求头部,如果是传json或者字符串需要设置请求头部
+            xhr.send(form)
+        }
+    </script>
+</body>
+</html>

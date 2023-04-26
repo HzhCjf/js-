@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>显示用户</h1>
+    <script>
+        let xhr = new XMLHttpRequest();
+        xhr.open("get","/getuser");
+        xhr.onload = function(){
+            if(xhr.status>=200 && xhr.status<300){
+                // console.log(xhr.responseText)
+                let data = JSON.parse(xhr.responseText);
+                console.log(data);
+                let pEle = document.createElement("p");
+                pEle.innerHTML = `姓名是：${data.myname}年龄是${data.age}<img src="${data.imgurl}" />`
+                document.body.appendChild(pEle);
+            }
+        }
+        xhr.send();
+
+    </script>
+</body>
+</html>

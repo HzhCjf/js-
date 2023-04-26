@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <!-- <script src="./a.js"></script> -->
+    <script src="./ajax.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="title">学生系统</div>
+        <div id="form">
+            <p>姓名<input id="username" type="text" value="张三123" /></p>
+            <p>年龄<input id="age" type="text" value="21" /></p>
+            <p>性别
+                <select id="gender">
+                    <option>男</option>
+                    <option>女</option>
+                    <option>你猜</option>
+                </select>
+            </p>
+            <p>
+                <input type="button" value="添加" id="addBtn" />
+                <input type="button" value="排序" id="sortBtn" />
+            </p>
+        </div>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 1.实现学员的添加功能；
+        // 2.删除功能 
+        var usernameEle = document.querySelector("#username");
+        var ageEle = document.querySelector("#age");
+        var genderEle = document.querySelector("#gender");
+
+        var addBtnEle = document.querySelector("#addBtn");
+        var tbodyEle = document.querySelector("tbody");
+        var sortBtn = document.querySelector("#sortBtn");
+
+
+        addBtnEle.onclick = async function () {
+            // 获取用户名 年龄 性别 
+            var username = usernameEle.value;
+            var age = ageEle.value;
+            var gender = genderEle.value;
+            // console.log(username,age,gender);
+            // 创建一个 tr标签 
+            // 获取数据 通过ajax传递到后端nodejs 在存储起来；
+            // ajax({
+            //     url: "/adduser",
+            //     data: {
+            //         username,
+            //         age,
+            //         gender
+            //     },
+            //     type: "post",
+            //     success(res) {
+            //         // console.log(res);
+            //         if (res.status === 1) {
+            //             // 获取最新的 数据 渲染出来 
+            //             ajax({
+            //                 url: "/getusers",
+            //                 success(res) {
+            //                     // console.log(res);
+            //                     let { data, status } = res;
+            //                     if (status === 1) {
+            //                         renderDom(data);
+            //                     }
+            //                 }
+            //             })
+
+            //         }
+            //     }
+            // })
+
+            let { status } = await ajax({ url: "/adduser", data: { username, age, gender }, type: "post" })
+            if (status === 1) {
+                let { data, status: mystatus } = await ajax({ url: "/getusers" })
+                if (mystatus === 1) {
+                    renderDom(data);
+                }
+            }
+        }
+
+        // var dels = document.querySelectorAll(".del");
+
+
+
+        // 获取用户数据 
+
+        ajax({
+            url: "/getusers",
+            success(res) {
+                // console.log(res);
+                let { data, status } = res;
+                if (status === 1) {
+                    renderDom(data);
+                }
+            }
+        })
+
+
+        function renderDom(data) {
+            tbodyEle.innerHTML = "";
+            data.forEach(item => {
+                var trEle = document.createElement("tr");
+                trEle.innerHTML = "<td>" + item.username + "</td><td>" + item.age + "</td><td>" + item.gender + "</td><td class='del'>删除</td>";
+                tbodyEle.appendChild(trEle);
+                let delBtn = trEle.querySelector(".del");
+                delBtn.onclick = async function () {
+                    // console.log(item._id);
+                    let res = await ajax({ url: "/deluser", data: { _id: item._id } })
+                    console.log(res);
+                    if (res.status === 1) {
+                        let { data, status: mystatus } = await ajax({ url: "/getusers" })
+                        if (mystatus === 1) {
+                            renderDom(data);
+                        }
+                    }
+                }
+            })
+        }
+
+
+        sortBtn.onclick = async function () {
+            let { data, status: mystatus } = await ajax({
+                url: "/getusers",
+                data: {
+                    sort: 1
+                }
+            })
+            if (mystatus === 1) {
+                renderDom(data);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

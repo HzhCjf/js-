@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>点击我发送ajax</button>
+    <button class="btn2">点击我停止ajax请求</button>
+    <script>
+
+        // 一、设置ajax 的请求超时 ： 规定ajax 在一定时间内有效 ，否则就自动取消ajax
+        // 1.设置请求超时时间  ： xhr.timeout
+        // 2.超时之后的事件 ： xhr.ontimeout = function(){}
+        let btn = document.querySelector("button");
+        let xhr;
+        btn.onclick = function () {
+            if(xhr){
+                xhr.abort();
+            }
+            xhr = new XMLHttpRequest();
+            xhr.open("get", "/get");
+            // xhr.timeout = 2000;// 设置请求超时时间为 2s；
+            // xhr.ontimeout = function(){
+            //     // 请求超时之后会触发这个函数 ；
+            //     alert("网络错误");
+            // }
+            xhr.send();
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log(xhr.responseText);
+                }
+            }
+
+        }
+
+
+        // 二、手动停止ajax请求 ；
+        // 停止ajax请求  xhr.abort();
+        // 取消之后的事件 ： xhr.onabort = function(){}
+        // 注意：需要先绑定事件 ，在触发事件 ；
+        let btn2 = document.querySelector(".btn2");
+        btn2.onclick = function () {
+            // 手动停止ajax请求 ；
+            xhr.onabort = function () {
+                alert("请求取消了");
+            }
+            xhr.abort();
+
+        }
+
+
+    </script>
+</body>
+
+</html>
