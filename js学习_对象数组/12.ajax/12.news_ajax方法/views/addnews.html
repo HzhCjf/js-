@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 设置兼容IE浏览器的模式以及自适应屏幕宽度 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 添加新闻页面标题 -->
+    <h1>添加新闻</h1>
+    <!-- 表单区域 -->
+    <!-- 
+        form: 表单元素，用于在前端收集用户输入以及上传文件等操作。
+                action：表单的提交目标URL地址。
+                method: 提交数据的方式。post 用于上传文件和大规模数据，而 get 更适合查询数据。
+                onsubmit: 负责检查表单的所有数据是否符合要求，通常需要返回 false 以避免将表单提交到服务器。
+    -->
+    <form action="/admin/post" method="post" onsubmit="return false" >
+        <!-- 新闻标题部分 -->
+        新闻标题是： <input type="text" name="title" class="title" /><br>
+        <!-- 新闻内容部分 -->
+        新闻内容是 ： <input type="text" class="content" name="content" /><br>
+        <!-- 新闻图片上传部分 -->
+        新闻图片： <input type="file" class="newsimg">
+        <!-- 提交按钮 -->
+        <input type="submit" class="btn" value="提交" />
+    </form>
+
+    <!-- JavaScript 代码区域 -->
+    <script>
+        // 监听按钮点击事件，发送 Ajax POST 请求上传表单
+        let btn = document.querySelector(".btn");
+        let titleEle = document.querySelector(".title")
+        let contentEle = document.querySelector(".content");
+        let newsimgEle = document.querySelector(".newsimg");
+
+        btn.onclick = function(){
+            // 创建一个 FormData 对象用于存储表单数据和文件内容，并添加三个属性值。
+            let form = new FormData();
+            let title = titleEle.value;
+            let content = contentEle.value;
+            let newsimg = newsimgEle.files[0]; // 获取上传的文件对象
+            form.append("title",title);
+            form.append("content",content);
+            form.append("newsimg",newsimg);
+
+            // 创建 XMLHttpRequest 实例并配置 open() 方法中的参数（请求方式，URL）。
+            let xhr = new XMLHttpRequest();
+            xhr.open("post","/admin/post");
+            // 定义当请求服务器的状态发生改变时所执行的操作。在 onload 函数中解析响应结果。
+            xhr.onload = function(){
+                if(xhr.status>=200 && xhr.status<300){
+                    let {status} = JSON.parse(xhr.responseText);
+                    // 如果返回的 JSON 字符串中的 status 属性值为 1（成功），则重新加载网页以便显示新闻列表。
+                    if(status===1){
+                        window.location.href = "/index"
+                    }
+                }
+            }
+            // 发送 Ajax 请求，将表单数据和文件一并传递到服务器。
+            xhr.send(form);
+        }
+    </script>
+</body>
+</html>

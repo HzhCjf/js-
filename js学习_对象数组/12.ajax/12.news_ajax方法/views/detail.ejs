@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 设置网页在不同设备上的呈现方式 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 兼容IE浏览器 -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 样式 -->
+    <style>
+        .text{
+            /* 文本宽度 */
+            width: 640px;
+            /* 居中显示 */
+            margin: 0 auto;
+        }
+        .article-info{
+            color:#999;
+            font-size: 14px;
+        }
+        p{
+            font-size: 16px;
+            /* 行高 */
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 模板视图 -->
+    <div class="text">
+        <!-- 新闻标题 -->
+        <h1 class="title"><%=detail.title %></h1>
+        <!-- 新闻发布信息，包括新闻类型和时间 -->
+        <div class="article-info"> 类型：纵火 时间：2019-6-18</div>
+        <!-- 新闻正文部分 -->
+        <p class="content">
+           <%=detail.content %>
+        </p>
+    </div>
+</body>
+</html>

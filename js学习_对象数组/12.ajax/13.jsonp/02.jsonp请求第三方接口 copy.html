@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="myinput"><button>点击我搜索</button>
+    <ul>
+
+    </ul>
+    <script>
+        //jsonp接口地址： http://api.asilu.com/#geo
+        let btn = document.querySelector('button');
+        let myinput = document.querySelector("#myinput");
+        // btn.onclick = function(){
+        //     let val = myinput.value;
+        //     console.log(val);
+        //     let s = document.createElement("script");
+        //     s.src = `https://suggestion.baidu.com/su?wd=${val}&cb=jsonp_1`;
+        //     document.head.appendChild(s);
+        // }
+        myinput.oninput = function () {
+            let val = this.value;
+            // console.log(val);
+            if (val !== "") {
+                let s = document.createElement("script");
+                s.src = `https://suggestion.baidu.com/su?wd=${val}&cb=jsonp_1`;
+                document.head.appendChild(s);
+            } else {
+                let ulEle = document.querySelector("ul");
+                ulEle.innerHTML = "";
+            }
+
+        }
+
+        function jsonp_1(res) {
+            // console.log(res);
+            let { s } = res;
+            let ulEle = document.querySelector("ul");
+            ulEle.innerHTML = "";
+            s.forEach(item => {
+                let liEle = document.createElement("li");
+                liEle.innerHTML = item;
+                ulEle.appendChild(liEle);
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

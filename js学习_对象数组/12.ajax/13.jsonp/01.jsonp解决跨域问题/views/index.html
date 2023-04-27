@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+</head>
+<body>
+    <h1>我是3000端口下的html</h1>
+    <button class="btn1">点击我发送ajax到3000端口服务器</button>
+    <button class="btn2">点击我发送ajax到4000端口服务器</button>
+    
+    <button class="btn3">点击我发送jsonp请求</button>
+    <!-- <img src="https://img1.baidu.com/it/u=413643897,2296924942&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="" srcset=""> -->
+    
+    <script>
+        // function myfn(res){
+        //     console.log("调用了",res);
+        //     // let data = JSON.parse(res);
+        //     // console.log(data);
+        // }
+
+        // 浏览器 拦截请求 是选择性的拦截请求 ；
+        // link  script  img  iframe  ...
+
+        // jsonp 利用 script标签的不跨域特性 ；
+
+        let btn1 = document.querySelector(".btn1");
+        btn1.onclick = function(){
+            let xhr = new XMLHttpRequest();
+            xhr.open("get","/get");
+            xhr.onload = function(){
+                if(xhr.status===200){
+                    console.log(xhr.responseText);
+                }
+            }
+            xhr.send();
+        }
+
+        let btn2 = document.querySelector(".btn2");
+        btn2.onclick = function(){
+            let xhr = new XMLHttpRequest();
+            xhr.open("get","http://localhost:4000/get");
+            xhr.onload = function(){
+                if(xhr.status===200){
+                    console.log(xhr.responseText);
+                }
+            }
+            xhr.send();
+        }
+
+        let btn3 = document.querySelector(".btn3");
+        function mytest(res){
+            console.log(res);
+        }
+        function jsonp_0(res){
+            console.log(res);
+        }
+
+        btn3.onclick = function(){
+            let s = document.createElement("script");
+            // s.src = "http://localhost:4000/jsonp?cb=mytest";
+            s.src = "https://query.asilu.com/weather/baidu?city=武汉&callback=jsonp_0"
+           
+            document.head.appendChild(s);
+        }
+
+    </script>
+    <!-- <script src="http://localhost:4000/jsonp?name=hello"></script> -->
+
+</body>
+</html>

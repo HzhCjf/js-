@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">我是box</div>
+    <script>
+        // 前端微任务 ：
+        // 1. promise里的then 是 异步 微任务 
+        // 2. MutationObserver : 监听节点变化；
+        console.log(111)
+        setTimeout(() => {
+            console.log(333);
+        });
+
+        let ob = new MutationObserver(function(){
+            console.log("函数被触发 ，这个任务是异步微任务");
+        })
+        // setTimeout(() => {
+        //     console.log("函数被触发 ，这个任务是异步微任务");
+        // });
+
+
+        console.log(222);
+
+
+
+        ob.observe(document.querySelector(".box"),{
+            attributes:true  // 监听 box节点的属性变化 ，一旦box 有属性的变化那么就会触发 MutationObserver 里的函数；
+        })
+
+        document.querySelector(".box").setAttribute("myattr","val");  // 设置属性 ，那么就是属性发生了改变；
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./mypromise.js"></script>
+</head>
+
+<body>
+    <h1>自定义的MyPromise</h1>
+    <script>
+        // 之前 ： 1--2 -- 3 --- settimeout  ---success
+        // 把 then里回调改成 异步微任务之后 ：
+        // 1--2 -- 3   ---success  ----settimeout
+        console.log(111);
+        setTimeout(() => {
+            console.log("settimeout");
+        });
+
+        let p = new MyPromise((resolve, reject) => {
+            console.log(222)
+            resolve("success");
+        })
+        
+
+        p.then(res => {
+            console.log(res);
+        })
+        console.log(333);
+
+
+
+    </script>
+</body>
+
+</html>

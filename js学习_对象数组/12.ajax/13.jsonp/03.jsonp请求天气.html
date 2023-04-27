@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    输入城市 ： <input type="text" name="" id="myinput"> <button>点击搜索</button>
+    <div class="container">
+
+    </div>
+    <script>
+        let btn = document.querySelector("button");
+        let myinputEle = document.querySelector("#myinput");
+        btn.onclick = function () {
+            let val = myinputEle.value;
+            let s = document.createElement("script");
+            s.src = `https://query.asilu.com/weather/baidu?city=${val}&callback=jsonp_13`;
+            document.head.appendChild(s);
+        }
+        function jsonp_13(res) {
+            console.log(res);
+            let containerELe = document.querySelector(".container");
+            containerELe.innerHTML = "";
+            let { weather } = res;
+            weather.forEach(item => {
+                let pEle = document.createElement("p");
+                pEle.innerHTML = `日期： ${item.date}; 天气： ${item.weather} ;温度:${item.temp}`
+                containerELe.appendChild(pEle);
+            })
+
+        }
+
+
+    </script>
+</body>
+
+</html>
