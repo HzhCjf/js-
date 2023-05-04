@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./axios.min.js"></script> -->
+    <!-- <script src="./myaxios.js" ></script> -->
+</head>
+
+<body>
+    <button>点击我发送axios里的get请求</button>
+    <button class="btn2">点击我发送axios里的post请求</button>
+    <script type="module">
+        // 拦截器 ： 所有axios请求 或者返还的时候 可以做拦截处理 
+        import axios from './myaxios.js';
+
+        // 请求拦截器 ：
+        axios.interceptors.request.use(config=>{
+            console.log("请求拦截器1111");
+            return config;
+        },err=>{
+            console.log("请求拦截器错误",err);
+        })
+
+        axios.interceptors.request.use(config=>{
+            console.log("请求拦截器2222");
+            return config;
+        },err=>{
+            console.log("请求拦截器错误",err);
+        })
+
+        // 返还拦截器 ：
+        axios.interceptors.response.use(response=>{
+            console.log("返还拦截器1111")
+            return response
+        },err=>{
+            console.log("返还错误",err);
+        })
+
+        axios.interceptors.response.use(response=>{
+            console.log("返还拦截器222")
+            return response
+        },err=>{
+            console.log("返还错误",err);
+        })
+
+
+
+        let btn = document.querySelector("button");
+        btn.onclick = async function () {
+            let res = await axios({url:"/get",params:{a:1}});
+            console.log(res);
+
+            // let res = await axios.get("/get",{params:{a:1}});
+            // console.log(res);
+        }
+
+
+        let btn2 = document.querySelector(".btn2");
+        btn2.onclick = async function () {
+            let res = await axios.post("/post",{a:2,b:3});
+            console.log(res);
+        }
+
+
+
+    </script>
+</body>
+
+</html>

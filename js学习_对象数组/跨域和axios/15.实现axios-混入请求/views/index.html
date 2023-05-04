@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./axios.min.js"></script> -->
+    <script src="./myaxios.js" ></script>
+</head>
+
+<body>
+    <button>点击我发送axios里的get请求</button>
+    <button class="btn2">点击我发送axios里的post请求</button>
+    <script>
+        // 1.responseType的处理 
+        // 2.发送post请求 
+        let btn = document.querySelector("button");
+        btn.onclick = async function () {
+            // let res = await axios({ url: "/get", params: { a: 1 } ,responseType:"text"})
+            // console.log(res);
+            let res = await axios.get("/get",{params:{a:1}});
+            console.log(res);
+        }
+
+
+        // 发送post数据 ： 1.设置数据对应的头部信息 2.xhr.send(数据)
+
+        let btn2 = document.querySelector(".btn2");
+        btn2.onclick = async function () {
+            // let res = await axios({ method:"post", url: "/post",data:{a:1,b:2},headers:{
+            //     "Content-Type":"application/x-www-form-urlencoded"
+            // }})
+            // console.log(res);
+
+
+
+            // axios(配置项)
+            // 别名： axios.get   axios.post  axios.put ...
+            // 把函数既当成函数使用 ，又当成对象来使用 ；
+            let res = await axios.post("/post",{a:2,b:3});
+            console.log(res);
+        }
+
+
+
+    </script>
+</body>
+
+</html>

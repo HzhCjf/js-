@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <input type="text" name="" id="myinput"><br>
+    <button>点击发送数据</button>
+    <ul>
+        <li>第一条数据</li>
+        <li>第二条数据</li>
+        <li>第三条数据</li>
+    </ul>
+    <script>
+        let myinput = document.querySelector("#myinput");
+        let btn = document.querySelector("button");
+        btn.onclick = async function () {
+            let val = myinput.value;
+            let { data } = await axios.post("/addmessage", { val });
+            let { status } = data;
+            if (status === 1) {
+                getdata();
+            }
+        }
+
+        let ulEle = document.querySelector("ul")
+
+        async function getdata() {
+            let { data } = await axios.get("/getmessage");
+            console.log(data);
+            ulEle.innerHTML = "";
+            data.forEach(item => {
+                let liEle = document.createElement("li");
+                liEle.innerHTML = item.val;
+                ulEle.appendChild(liEle);
+            })
+        }
+        setInterval(()=>{  // ajax 轮询操作；
+            getdata();
+        },1000)
+
+    </script>
+</body>
+
+</html>

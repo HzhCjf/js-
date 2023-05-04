@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        // 导入 ： import {变量1，变量2} from './路径.js';
+        // 导出： export {a};
+                // export let a = 10;
+
+
+        // 导入 export导出的变量必须和 导出的名字一致
+        import myc,{a,b} from './a.js';  // 大括号是固定写法 ，不是解构；
+        console.log(a,b);
+        console.log(myc);
+
+
+    </script>
+</body>
+</html>

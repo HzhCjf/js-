@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <h1>axios ajax库</h1>
+    <button class="btn1">发送get请求</button>
+    <button class="btn2">发送head请求</button>
+    <button class="btn3">发送delete请求</button>
+    <button class="btn4">发送post请求</button>
+    <button class="btn5">发送put请求</button>
+    <button class="btn6">发送patch请求</button>
+    <script>
+        // 发送ajax请求 ：1. axios({配置项})  
+        // 2.通过别名发送ajax
+        /* 
+            一、 两个参数的请求 ，类似get形式的请求 ： get delete head
+            axios.get(url,{配置项})
+            axios.delete(url,{配置项});
+            axios.head(url,{配置项});
+            二、三个参数： 类似post形式的请求 ： post 、put 、patch
+            axios.post(url,{数据},{配置项})
+            axios.put(url,{数据},{配置项})
+            axios.patch(url,{数据},{配置项}) 
+        */
+
+        //1. get 请求 
+        let btn1 = document.querySelector(".btn1");
+        btn1.onclick = async function () {
+            let res = await axios.get("/get",{params:{a:1,b:2},timeout:1000});
+            console.log(res);
+        }
+
+
+        // 2.post请求
+        let btn4 = document.querySelector(".btn4");
+        btn4.onclick = async function () {
+            let res = await axios.post("/post",{a:2,b:3},{
+                // timeout:1000
+            });
+            console.log(res);
+        }
+
+
+
+        // 简易实现 ：把函数当成函数使用 也当成 对象使用 ，混入模式（mixin）
+        function myaxios(config){
+            console.log(config)
+        }
+        myaxios.get = function(url,config){
+            console.log(url,config)
+        }
+        myaxios.post = function(url,data,config){
+            // console.log(url,config)
+            config.url = url;
+            config.data = data;
+            console.log(config);
+        }
+        console.dir(myaxios);
+
+
+        // myaxios({url:"/get",method:"get"})
+        // myaxios.get("/get",{method:"get"});
+        myaxios.post("/post",{a:1,b:2},{method:"get"});
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <button class="btn1">点击我发送请求</button>
+    <button class="btn2">发送ajax2</button>
+    <img style="display: none;"
+        src="https://hbimg.b0.upaiyun.com/f482ee13038d5472f0dbc227491d9c290578a2941228ef-IXuJUT_fw658" class="loading"
+        alt="">
+    <script>
+        // 拦截器 
+        // 1.等待 ajax请求效果 
+        // 2.携带公共凭证 
+
+
+        let loadingEle = document.querySelector(".loading")
+        // 拦截器  
+        // 1.请求拦截器 ： 发送请求之前拦截所有的ajax请求；
+        axios.interceptors.request.use(config => {
+            console.log("请求拦截器");
+            loadingEle.style.display = "block";
+            console.log(config);
+            config.headers.mytoken = "token";
+            return config; // 注意 config需要返还出去；
+        }, err => {
+            console.log("错误", err);
+        })
+
+        // 2.返还拦截器 ： 返还之后需要经过返还拦截器；
+        axios.interceptors.response.use(response => {
+            console.log("返还的拦截器");
+            loadingEle.style.display = "none";
+            return response;
+        },err=>{
+            console.log(err);
+        })
+
+        //let chain =  [请求拦截器 axios执行 返还拦截器]
+
+
+        let btn1 = document.querySelector(".btn1");
+        btn1.onclick = async function () {
+            let { data } = await axios.get("/get1");
+            let p = document.createElement("p");
+            p.innerHTML = data.info;
+            document.body.appendChild(p);
+        }
+
+        let btn2 = document.querySelector(".btn2");
+        btn2.onclick = async function () {
+            let { data } = await axios.get("/get2");
+            console.log(data);
+        }
+
+
+    </script>
+</body>
+
+</html>

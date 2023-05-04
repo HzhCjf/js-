@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <button class="btn1">点击我发送请求</button>
+    <button class="btn2">取消axios请求</button>
+    <script>
+        // 一、axios发送多个请求 ： axios.all();
+        // let btn = document.querySelector("button");
+        // btn.onclick =  function () {
+        //     // 1.控制请求顺序 
+        //     // let { data } = await axios.get('/get1');
+        //     // console.log(data);
+        //     // let { data:data2 } = await axios.get('/get2');
+        //     // console.log(data2);
+        //     // 2.不需要控制ajax顺序
+        //     // axios.get('/get1').then(({data})=>{
+        //     //     console.log(data)
+        //     // })
+
+        //     // axios.get('/get2').then(({data})=>{
+        //     //     console.log(data)
+        //     // })
+
+        //     // 3.一次性发送多个ajax请求
+        //     axios.all([axios.get('/get1'), axios.get('/get2')]).then(res=>{
+        //         console.log(res)
+        //     })
+        // }
+
+
+        // 二 、取消axios请求 
+        // 1.取消请求 通过 执行 cancel函数 
+        // 2.捕捉错误 : 通过 axios.isCancel(err)判断错误是否是一个axios取消错误类型；
+        let btn1 = document.querySelector(".btn1");
+        let cancel;
+        btn1.onclick = async function () {
+            try {
+                // throw new Error("cuole");
+                let { data } = await axios.get("/get1", {
+                    cancelToken: new axios.CancelToken(function (c) {
+                        // c 形参是一个函数，当执行的时候可以取消这个axios请求；
+                        cancel = c;
+                    })
+                });
+                console.log(data);
+            } catch (err) {
+                console.log("错误了",err);
+                // alert("取消axios请求");
+                // 通过一个函数 判断错误是否是一个 axios取消错误 ；
+                // console.log( axios.isCancel(err));
+                if(axios.isCancel(err)){
+                    alert("axios取消了请求");
+                }
+
+
+            }
+
+
+        }
+
+        let btn2 = document.querySelector(".btn2");
+        btn2.onclick = function () {
+            // 调用 c 也就是  cancel函数 ；
+            cancel();
+        }
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function request(){
+            console.log("request");
+        }
+
+        // request.get = function(){
+        //     console.log("get方法");
+        // }
+
+
+        let AxiosPrototype = {};
+        let methodArr = ['get','post','put',"delete","head","patch"];
+        methodArr.forEach(item=>{
+            AxiosPrototype[item] = function(){
+                console.log("函数被调用了");
+            }
+        })
+        console.log(AxiosPrototype);
+
+            
+        // 混入 ： 把 AxiosPrototype 添加到 request函数对象里去；
+
+        function mergeConfig(a,b){
+            // a 是函数 ，b 是对象 ，需要把b里的内容添加到a函数对象里去；
+            for(let key in b){
+                a[key] = b[key];
+            }
+        }
+
+        // 合并对象 ： 1. ...   2.Object.assign   3. 循环一个对象加入到另外一个里面
+
+        mergeConfig(request,AxiosPrototype);  // 把 AxiosPrototype对象里的内容 合并到 request函数里去；
+        console.dir(request);
+
+
+        let axios = request;
+
+
+        axios.get();
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        // ESM : ES6 module ,ES6的模块化 方案 ；
+        // 原生js 使用 ESM 之前需要： 1.通过服务器运行html。 2.需要把使用 ESM 的 script 标签设置成 type="module";
+        // 导入和导出 ： 
+        // 默认导入和导出 ： 1.导入 ： import "路径地址"
+                         // 2. 导出 ： export defalut 变量；
+                                // module.exports
+
+        // 一、直接引入a模块 
+        // import "./a.js";
+        // console.log(a);
+
+        //二、 引入a模块的同时 接收 导出的内容
+        import mya from "./a.js";
+        console.log(mya);
+
+
+        // 练习 ： 有2个模块  c 模块和 d模块 c模块里有一个类 导出到d  ，d 模块在导出到index.html里实例化出对象 ，在打印出来；
+
+    </script>
+</body>
+</html>

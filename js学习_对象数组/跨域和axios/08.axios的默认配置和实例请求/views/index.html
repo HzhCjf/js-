@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <h1>我是3000端口下的html</h1>
+    <button>点击我请求3000端口数据</button>
+    <button class="btn2">点击我请求3000端口数据2</button>
+
+    <script>
+        // 一、axios的默认配置 ：类似全局配置
+        // axios.defaults.timeout = 1000;  // 所有的axios请求都会起作用
+        // axios.defaults.baseURL = "/api";// 给请求加上前缀；
+        // let btn = document.querySelector("button");
+        // btn.onclick = async function () {
+        //     let res = await axios.get("/get")
+        //     console.log(res);
+        // }
+        // let btn2 = document.querySelector(".btn2");
+        // btn2.onclick = async function () {
+        //     let res = await axios.get("/get2")
+        //     console.log(res);
+        // }
+
+
+        // 二 、实例请求  ：创建axios实例发送请求 
+        let instance1 = axios.create({
+            baseURL:"/api",
+            timeout:1000
+        });
+
+        let instance2 = axios.create({
+            baseURL:"",
+            timeout:2000
+        });
+
+
+        let btn = document.querySelector("button");
+
+        btn.onclick = async function () {
+            let res = await instance1.get("/get")
+            console.log(res);
+        }
+
+        let btn2 = document.querySelector(".btn2");
+        btn2.onclick = async function () {
+            let res = await instance2.get("/get2")
+            console.log(res);
+        }
+
+    </script>
+</body>
+
+</html>

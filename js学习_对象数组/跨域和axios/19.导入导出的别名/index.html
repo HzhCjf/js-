@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        // 别名 ： 关键字  as  
+            // 导出起别名 
+                // 特殊 ： as default  等同  export default
+                // as 自定义变量 
+            // 导入起别名 
+                // import {a as 自定变量} from 路径
+                // 导入所有变量起别名  import * as 自定变量 from '路径';
+
+
+
+
+
+        // 接收变量 
+        // import mya from './a.js';
+        // console.log(mya);
+
+        // import {b,d} from './a.js'
+        // console.log(b,d);
+
+        // import mya from "./a.js";
+        // console.log(mya);
+
+        // 接收变量 通过别名接收  
+        // import {a as b,c as d} from './a.js';
+        // // {a:b}
+        // console.log(b);
+        // console.log(d);
+
+        // 接收所有导出的参数 起别名 
+
+        // import myfn,{a,c} from './a.js';
+        // console.log(myfn,a,c);
+        import * as obj from './a.js';
+        console.log(obj);
+        let {a,c,default:mydefault} = obj;
+        console.log(a,c,mydefault);
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>点击我加载模块</button>
+    <script type="module">
+        // import a from './a.js';
+        // 模块的懒加载 通过预定义函数  import(“模块路径”); 这个函数会返还一个promise对象
+        let btn = document.querySelector("button");
+        // btn.onclick = function(){
+        //     import("./a.js").then(res=>{
+        //         // console.log(res)
+        //         let {b,c,default:mydefalut} = res;
+        //         console.log(b,c,mydefalut);
+        //     }).catch(err=>{
+        //         console.log(err);
+        //     })
+        // }
+
+        btn.onclick = async function(){
+            try{
+                let {b,c,default:mydefault} = await import("./a.js");
+                console.log(b,c,mydefault);
+            }catch(err){
+                console.log(err);
+            }
+        }
+
+    </script>
+</body>
+</html>
