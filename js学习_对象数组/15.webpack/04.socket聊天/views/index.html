@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./socket.io.js"></script>
+</head>
+<body>
+    <h1>聊天</h1>
+    <input type="text" class="myinput" /><br>
+    <button class="btn1">发送数据</button>
+    <ul>
+        <li>第一条</li>
+        <li>第二条</li>
+    </ul>
+    <script>
+        // 连接 websocket 服务器 
+        // console.log(io);
+        let socket = io.connect();  // 连接 socket 服务器 
+        let btn1 = document.querySelector(".btn1");
+        let myinput = document.querySelector(".myinput");
+        btn1.onclick = function(){
+            let val = myinput.value;
+            socket.emit("addmessage",{val});  // 触发 myevent 事件 且 传递 hello数据 到后端；
+        }
+
+        socket.on("getdata",data=>{
+            console.log(data);
+            renderDom(data);
+        })
+
+        socket.on("newdata",newdata=>{
+            console.log(newdata);
+            renderDom(newdata);
+        })
+
+
+
+
+        function renderDom(data){
+            let ulEle = document.querySelector("ul");
+            ulEle.innerHTML = "";
+            data.forEach(item=>{
+                let liEle = document.createElement("li");
+                liEle.innerHTML = item.val;
+                ulEle.appendChild(liEle);
+            })
+        }
+
+
+
+
+    </script>
+</body>
+</html>

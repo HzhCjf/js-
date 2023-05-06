@@ -227,11 +227,10 @@
     </div>
     <!-- <script src="./js/game.js"></script> -->
     <script type="module">
-        import Game from './js/game.js';
+        // import Game from './js/game.js';
         /* 
         英雄  技能  皮肤 
         玩家  游戏管理 （组织逻辑的）
-
         // 只有数据
         Game{
             login(){
@@ -252,23 +251,99 @@
             }
             }
         }
-
-
         ----组织视图逻辑
         --- 把数据和视图分开
         */
+        import Game from './js/game.js';
+        let game = new Game()
+        
+
+        // 登录逻辑
+        let subEle = document.querySelector('.sub')
+        let loginEle = document.querySelector('.login')
+        let usernameEle = document.querySelector('.username')
+        let gameEle = document.querySelector('.game')
+        let chioseusernameEle = document.querySelector(".chioseusername");
+        let skinBtnEle = document.querySelector('.skinBtn')
+        let skinContainer = document.querySelector('.skinContainer')
+        let heroContainer = document.querySelector('.heroContainer')
+        let heroBtnEle = document.querySelector('.heroBtn')
+        subEle.onclick = function(){
+            // 登录的时候:1.game登录    2.隐藏登录页面,显示游戏页面
+            let uname = usernameEle.value;
+            game.login(uname)
+            loginEle.style.display = 'none'
+            gameEle.style.display = 'block'
+            chioseusernameEle.innerHTML = uname
+            console.log(game);
+            // 根据数据渲染视图
+            renderHeroes(game.player.heroes)
+        }
+        // 英雄按钮
+        heroBtnEle.onclick = function(){
+            heroContainer.style.display = 'block'
+            skinContainer.style.display = 'none'
+        }
+        // 皮肤按钮
+        skinBtnEle.onclick = function(){
+            heroContainer.style.display = 'none'
+            skinContainer.style.display = 'block'
+            
+        }
+        // 渲染皮肤
+        function renderSkins(skins){
+            let skinView = document.querySelector('.skinView')
+            skinView.innerHTML = ''
+            skins.forEach(skin=>{
+                let divEle = document.createElement('div')
+                divEle.classList.add('skinItem')
+                divEle.innerHTML = `<img src="${skin.ico}" />
+                    <span>${skin.name}</span>`;
+                skinView.appendChild(divEle)
+                divEle.onclick = function(){
+                    let showimg = document.querySelector('.skinShow img')
+                    console.log(showimg,skin.url);
+                    showimg.src = skin.url
+                }
+            })
+            
+        }
+
+
 
 
         
-
-
-
-
-
-
-
-
-
+        // 渲染英雄
+        function renderHeroes(heroes){
+            let heroView = document.querySelector('.heroView')
+            heroView.innerHTML = ''
+            heroes.forEach(hero=>{
+                let divEle = document.createElement('div')
+                divEle.classList.add('heroItem')
+                divEle.innerHTML = `<img src="${hero.ico}" />
+                    <span>${hero.name}</span>`
+                heroView.appendChild(divEle)
+                divEle.onclick = function(){
+                    renderSkills(hero.skills)
+                    renderSkins(hero.skins)
+                    let heroShow = document.querySelector('.heroShow')
+                    heroShow.innerHTML = ''
+                    let imgEle = document.createElement('img')
+                    imgEle.src =  hero.ico
+                    heroShow.appendChild(imgEle)
+                }
+            })
+        }
+        // 英雄技能
+        function renderSkills(skills){
+            let skillsView = document.querySelector('.skillsView')
+            skillsView.innerHTML = ''
+            skills.forEach(skill=>{
+                let imgEle =document.createElement('img')
+                imgEle.src = skill.ico
+                skillsView.appendChild(imgEle)
+            })
+        }
     </script>
 </body>
 

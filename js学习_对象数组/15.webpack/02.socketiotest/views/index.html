@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./socket.io.js"></script>
+</head>
+<body>
+    <h1>socketio 测试</h1>
+    <button class="btn1">点击我发送事件</button>
+    <script>
+        // 连接 websocket 服务器 
+        // console.log(io);
+        let socket = io.connect();  // 连接 socket 服务器 
+        let btn1 = document.querySelector(".btn1");
+        btn1.onclick = function(){
+            socket.emit("myevent","hello");  // 触发 myevent 事件 且 传递 hello数据 到后端；
+            
+
+        }
+
+        socket.on("mymessage",e=>{
+            console.log(e);
+        })
+
+        socket.on("mymessage2",e=>{
+            console.log("广播的内容",e);
+        })
+
+
+
+
+
+    </script>
+</body>
+</html>

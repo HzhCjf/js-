@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./socket.io.js"></script>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+
+    <script>
+        let boxEle = document.querySelector(".box");
+
+        let socket = io.connect();
+
+        socket.on("senddata",data=>{
+            console.log(data);
+            boxEle.style.left = data.disx;
+            boxEle.style.top = data.disy;
+        })
+
+
+        boxEle.onmousedown = function(e){
+            let x = e.clientX - this.offsetLeft;
+            let y = e.clientY - this.offsetTop;
+            this.onmousemove = function(e){
+                let xx = e.clientX;
+                let yy = e.clientY;
+                let disx =  xx - x + "px";
+                let disy = yy - y + "px"
+                socket.emit("myevent",{disx,disy});
+                this.style.left = disx;
+                this.style.top = disy;
+            }
+            this.onmouseup = function(){
+                this.onmousemove = "";
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

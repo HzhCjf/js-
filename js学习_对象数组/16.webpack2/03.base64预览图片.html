@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" class="myimg">
+    <script>
+        // 把上传的图片转成 base64 字符串，然后显示出来 
+        let  myimgEle = document.querySelector(".myimg");
+        myimgEle.onchange = function(){
+            // console.log("改了");
+            let imgfile = this.files[0];
+            console.log(imgfile);
+            // 把文件对象 转成 base64格式 
+            // 利用一个 预定义类 ；
+            let fr = new FileReader();
+            fr.readAsDataURL(imgfile)
+            fr.onload = function(){  // 转换完成了
+                // 获取转成base64的结果 
+                console.log(this.result);
+                let imgEle = document.createElement("img");
+                imgEle.src = this.result;
+                document.body.appendChild(imgEle);
+            }
+
+        }
+
+
+    </script>
+</body>
+</html>

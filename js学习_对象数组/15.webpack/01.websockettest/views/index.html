@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>websocket测试</h1>
+    <button class="btn1">点击我发送数据给 websocket服务器</button>
+    <script>
+
+        // 连接websocket 服务器 
+        let socket = new WebSocket("ws://localhost:8181");
+        socket.onopen = function(){
+            console.log("连接成功");
+        }
+        socket.onmessage = function(e){  // 监听后端发送过来的事件
+            console.log("后端发送的事件",e.data);
+        }
+
+
+        let btn1 = document.querySelector(".btn1");
+        btn1.onclick = function(){
+            socket.send("hello")  // 通过 websocket 发送数据给后端socket服务器
+        }
+
+
+
+    </script>
+</body>
+</html>

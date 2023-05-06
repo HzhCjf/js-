@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./socket.io.js"></script>
+    <style>
+        /* div{
+            position: absolute;
+        } */
+    </style>
+</head>
+
+<body>
+    <h1>弹幕</h1>
+    输入内容 ： <input type="text" name="" id="myinput"> <button>发送</button>
+    <script>
+        let myinputEle = document.querySelector("#myinput");
+        let btn = document.querySelector("button");
+
+        // 通过 socketio 建立连接 
+        let socket = io.connect();
+
+        socket.on("sendval",val=>{
+            console.log("输入的val值是",val);
+            renderDom(val);
+        })
+
+
+        btn.onclick = function () {
+            let val = myinputEle.value;
+            socket.emit("sendval",val);
+            renderDom(val);
+        }
+
+
+
+        function renderDom(val){
+            let divEle = document.createElement("div");
+            divEle.innerHTML = val;
+            divEle.style.position = "absolute";
+            divEle.style.left = "0px";
+            divEle.style.top = "0px";
+            document.body.appendChild(divEle);
+
+            // 利用定时器 让 div 动起来 
+            var timer = setInterval(() => {
+                let leftNum = parseInt(divEle.style.left);
+                divEle.style.left = leftNum + 5 + "px"
+                if (leftNum > window.innerWidth) {
+                    clearInterval(timer);
+                    divEle.remove();
+                }
+            }, 20);
+        }
+
+    </script>
+</body>
+
+</html>

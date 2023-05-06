@@ -1,0 +1,1 @@
+(()=>{var o={85:o=>{console.log("我是a模块"),o.exports={name:"我是a模块导出的内容"}}},e={};function r(t){var s=e[t];if(void 0!==s)return s.exports;var n=e[t]={exports:{}};return o[t](n,n.exports,r),n.exports}(()=>{"use strict";console.log("我是b模块");let o=r(85);console.log(o,"我是b模块里的内容",30,50)})()})();

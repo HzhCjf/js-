@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <h1>SSE 测试</h1>
+    <input type="text" name="" id="myinput"><br>
+    <button>点击发送数据</button>
+    <ul>
+        <li>第一条数据</li>
+        <li>第二条数据</li>
+        <li>第三条数据</li>
+    </ul>
+    <script>
+
+        let myinput = document.querySelector("#myinput");
+        let btn = document.querySelector("button");
+        btn.onclick = async function () {
+            let val = myinput.value;
+            console.log(11);
+            // let { data } = axios.get("/addmessage",{params:{ val }});
+            let { data } = await axios.post("/addmessage", { val });
+            console.log(data);
+        }
+
+
+
+        // 生成一个 资源的连接 
+        let source = new EventSource("/sendata");
+        source.onopen = function () {
+            console.log("连接 sse成功");
+        }
+        // 监听 sse 发送过来的数据
+        let ulEle = document.querySelector("ul")
+
+        source.onmessage = function (e) {
+            // console.log("发送的数据是",e.data);
+            let messagedata = JSON.parse(e.data);
+            console.log(messagedata);
+            ulEle.innerHTML = "";
+            messagedata.forEach(item => {
+                let liEle = document.createElement("li");
+                liEle.innerHTML = item.val;
+                ulEle.appendChild(liEle);
+            })
+        }
+
+        // 监听连接的错误 
+        // source.onerror = function (err) {
+        //     console.log("错误了", err)
+        // }
+
+
+    </script>
+</body>
+
+</html>

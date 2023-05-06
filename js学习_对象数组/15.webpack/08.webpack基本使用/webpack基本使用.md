@@ -1,0 +1,14 @@
+## webpack : 自动构建工具 ，是很多工具的集合 
+- 安装 webpack ：局部安装 `npm i webpack webpack-cli -D`
+- webpack默认功能 
+    - 使用 commonjs 语法 
+    - 使用 ESM 语法 
+    - 压缩代码 
+- 编译代码 
+    - 输入 ：`webpack `指令的时候会自动查找 目录下的src 里的index.js 输出到 dist 目录里；
+- 使用webpack指令 
+    - 方式一： 进入到 `./node_modules/.bin` 在输入  webpack 指令 
+    - 方式二 ： npx webpack
+    - 方式三 ： 可以在 package.json 里的 scripts选项里配置指令 
+        - npm run  指令名称 
+        - 有几个简写指令可以省略 run ： test、start、restart、stop  
