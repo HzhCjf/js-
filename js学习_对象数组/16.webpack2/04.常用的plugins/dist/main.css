@@ -1,6 +1,3 @@
-/*!*******************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/mystyle.css ***!
-  \*******************************************************************/
-body{
-    background-color: pink;
-}
+/*!***********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/mycss.css ***!
+  \***********************************************************************************************************/.box{-webkit-box-pack:center;-ms-flex-pack:center;background-color:red;display:-webkit-box;display:-ms-flexbox;display:flex;height:300px;justify-content:center;width:300px}

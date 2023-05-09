@@ -1,4 +1,4 @@
-console.log("aaaa");
+console.log("aaa");
 module.exports = {
-    name:"wo shi a模块"
+    name:"我是a模块"
 }
