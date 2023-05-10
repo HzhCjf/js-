@@ -183,14 +183,16 @@
                     <td><%=user.uname %></td>
                     <td><%=user.addTime %></td>
                     <td><img width="140px" height='100px' src="<%=data.baseURL %>/<%=user.newFilename %>" /></td>
-                    <td><span class="delBtn">删除</span></td>
+                    <td><span class="delBtn" myid="<%= user._id %>" newFilename="<%= user.newFilename %>" >删除</span></td>
                 </tr>
             <% }) %>
 
 
 
         </table>
-        <a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
+        <% for(let i=1;i<=data.totalPage;i++){ %>
+            <a href="javascript:;" class="page" style="color:<%= data.nowpage==i?'red':'' %>" ><%= i %></a> 
+         <%  }  %>
     </div>
 </body>
 

@@ -191,11 +191,11 @@
     <div class="container">
         <div class="menu-left">
             <div class="menu-title">
-                张三 欢迎你！
+                <%=data.uname %> 欢迎你！
             </div>
             <ul>
-                <li style="color: <%=data.url==='/admin/users'?'rgb(255,208,75)':''%>">用户管理</li>
-                <li style="color: <%=data.url==='/admin/adv'?'rgb(255,208,75)':''%>">广告管理</li>
+                <li style="color:<%=data.url==='/admin/users'?'rgb(255, 208, 75)':'' %>">用户管理</li>
+                <li style="color:<%=data.url==='/admin/adv'?'rgb(255, 208, 75)':'' %>">广告管理</li>
             </ul>
         </div>
         <!-- 二级路由渲染的内容 显示出来  -->

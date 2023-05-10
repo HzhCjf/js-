@@ -27,6 +27,10 @@ module.exports = {
                 options: {
                     variable: 'data', // 可以在模块当中使用data进行数据处理
                 }
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader","css-loader"]
             }
         ]
     },

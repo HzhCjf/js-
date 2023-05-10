@@ -1,23 +1,35 @@
+// 和admin有关的路由
 import admin from '@/views/admin.ejs';
+
 export default function(router){
     router.route("/admin",(req,res,next)=>{
+        console.log(req.url);
         // res.render(admin());
         // res.subRoute()  ： 可以获取二级路由渲染的内容 
-        next(admin({
-            subrouter:res.subRoute(),
-            url:req.url
+        next(admin({  // 渲染模板
+            subrouter:res.subRoute() ,
+            url:req.url,
+            uname:localStorage.getItem("uname")
+
         }))
 
-
-        let lis = document.querySelectorAll('.menu-left li')
+        let lis = document.querySelectorAll(".menu-left li");
+        // console.log(lis);
         lis.forEach((li,key)=>{
             li.onclick = function(){
-                if(key === 0){
-                    res.go('/admin/users')
+                // console.log("点击了按钮",key);
+                if(key===0){
+                    // console.log(li);
+                    res.go("/admin/users");
                 }else{
-                    res.go('/admin/adv')
+                    // console.log(li);
+                    // li.style.color = "red";  // 设置无效，会重新渲染页面
+                    res.go("/admin/adv");
                 }
             }
         })
+
+
+
     })
 }

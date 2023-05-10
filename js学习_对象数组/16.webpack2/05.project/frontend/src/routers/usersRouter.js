@@ -2,20 +2,34 @@
 import users from '@/views/users.ejs';
 import axios from '@/api/index.js';
 // 获取最新数据 ： 1.页面加载需要获取最新数据 2.添加成功之后获取最新数据；  3.删除之后获取最新数据；
-async function getusers(res) {
-    let { data:usersdata } = await axios.get("/admin/getusers");
+async function getusers(res,p) {  // p 是当前页码 
+    let nowpage = 1;
+    if(sessionStorage.getItem("p")){
+        nowpage= sessionStorage.getItem("p");
+        p = nowpage;
+    } 
+    let { data:{users:usersdata,totalPage} } = await axios.get("/admin/getusers",{params:{p}});
     // console.log(data);
+    // console.log("??",totalPage);
     console.log(axios.defaults.baseURL);
+   
+
     res.render(users({
         usersdata,
-        baseURL:axios.defaults.baseURL
+        baseURL:axios.defaults.baseURL,
+        totalPage,
+        nowpage,
     }));
-    addEvent();
+    addEvent(res);
 
 }
 
+// 全局变量 ： 保存 p 的数字 ；
+// let p;
 
-function addEvent() {
+
+
+function addEvent(res) {
 
 
     let btn = document.querySelector(".adduer");
@@ -83,7 +97,13 @@ function addEvent() {
                 adduermodel.style.display = "none";
                 mask.style.display = "none";
                 // 添加数据成功
-
+                // 需要更新最新的数据 ；
+                if(sessionStorage.getItem("p")){
+                    getusers(res,sessionStorage.getItem("p"));
+                }else {
+                    getusers(res);
+                }
+                
 
 
             } else {
@@ -94,10 +114,54 @@ function addEvent() {
         } else {
             alert("两次输入密码不同");
         }
-
-
-
     }
+
+
+    // 点击删除逻辑 
+    // 获取删除按钮 
+    let delbtns = document.querySelectorAll(".delBtn");
+    delbtns.forEach(btn=>{
+        btn.onclick = async function(){
+            // console.log("点击了");
+            let result = confirm("你确定要删除吗?");
+            if(result){
+                // console.log("确定要删除了");
+                // 获取用户数据的id 在通过ajax传入给后端删除 ；
+                let _id = this.getAttribute("myid");
+                let newFilename = this.getAttribute("newFilename")
+                console.log(_id);
+                let {data:{status,info}} = await axios.delete("/admin/deluser",{params:{_id,newFilename}});
+                // console.log(data);
+                if(status===1){
+                    if(sessionStorage.getItem("p")){
+                        getusers(res,sessionStorage.getItem("p"));
+                    }else {
+                        getusers(res);
+                    }
+                }else{
+                    alert(info);
+                }
+                // get delete head
+                // post put patch 
+            }
+        }
+    })
+
+
+
+
+    // 获取页码的a标签
+    let pageEles = document.querySelectorAll(".page");
+    pageEles.forEach(page=>{
+        page.onclick = function(){
+            console.log("点击了页码",this.innerHTML);
+            // p = this.innerHTML;
+            sessionStorage.setItem("p",this.innerHTML);
+            getusers(res,this.innerHTML);
+        }
+    })
+
+
 
 
 }
