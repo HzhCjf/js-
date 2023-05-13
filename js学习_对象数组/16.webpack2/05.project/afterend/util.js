@@ -15,9 +15,16 @@ module.exports = {
                     return console.log(err);
                 }
                 // console.log(fileds, file);
-                let obj = {
-                    ...fileds,
-                    newFilename: file.img.newFilename
+                let obj;
+                if(Object.keys(file).length===0){
+                    // 没有文件上传
+                    obj = fileds;
+                }else{
+                    // 有文件上传
+                    obj = {
+                        ...fileds,
+                        newFilename: file.img.newFilename
+                    }
                 }
                 resolve(obj);
             })

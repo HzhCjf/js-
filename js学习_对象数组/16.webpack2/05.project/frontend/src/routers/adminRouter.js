@@ -3,12 +3,14 @@ import admin from '@/views/admin.ejs';
 
 export default function(router){
     router.route("/admin",(req,res,next)=>{
-        console.log(req.url);
+        let url = req.url.split("?")[0];
+        console.log("req.url:",url);
+
         // res.render(admin());
         // res.subRoute()  ： 可以获取二级路由渲染的内容 
         next(admin({  // 渲染模板
             subrouter:res.subRoute() ,
-            url:req.url,
+            url,
             uname:localStorage.getItem("uname")
 
         }))

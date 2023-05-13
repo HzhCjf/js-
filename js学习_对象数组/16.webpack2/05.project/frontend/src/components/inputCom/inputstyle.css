@@ -1,0 +1,30 @@
+/* 存放组件css有关的内容 */
+.mask {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(62, 62, 62, .8);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    display: none;
+}
+
+.adduermodel {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    border: 1px solid;
+    position: absolute;
+    background: white;
+    left: 50%;
+    transform: translate(-50%);
+    display: none;
+}
+
+.adduermodel h3 {
+    text-align: center;
+}
+
+.adduermodel div {
+    margin: 10px;
+}

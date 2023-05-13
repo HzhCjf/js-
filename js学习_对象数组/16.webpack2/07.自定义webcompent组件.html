@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 调用my-com组件 -->
+    <!-- <my-com></my-com>   -->
+
+
+
+    <!-- <img src="" /> -->
+    <!-- <my-img></my-img> -->
+    <img is="my-img"  src="" alt="">
+
+    <script>
+        // 一、自定义原生组件 ，webcomponent 组件
+        // 定义组件配置
+        // class MyCom extends HTMLElement{
+        //     constructor(){
+        //         super();
+        //         console.log(this); // 利用标签进行调用，this就会指向 元素标签；
+        //         this.innerHTML = "<h2>我是my-com组件</h2>"
+        //     }
+        //     setTitle(title){
+        //         this.querySelector("h2").innerHTML = title;
+        //     }
+        // }
+        // // 设置标签名称 
+        // customElements.define("my-com",MyCom);
+
+        // // 利用标签调用 ；
+
+        // let mycom = document.querySelector("my-com");
+        // // console.log(mycom);
+        // mycom.setTitle("设置的标题");
+
+
+        // 二、继承组件 ，修改原本的html组件
+
+        class MyImg extends HTMLImageElement{
+            constructor(){
+                super();
+                console.log("指向标签的调用",this)
+                setTimeout(() => {
+                    this.src = "https://img0.baidu.com/it/u=4162443464,2854908495&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500";
+                }, 2000);
+            }
+        }
+
+        customElements.define("my-img",MyImg,{
+            extends:"img"  // 继承的预定义组件名称
+        })
+
+
+
+    </script>
+</body>
+</html>
